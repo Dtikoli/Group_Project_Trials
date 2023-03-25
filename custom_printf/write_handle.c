@@ -11,7 +11,7 @@
  * @size: Size specifier
  * Return: 1 or 2;
  */
-int wirte_handle(const char *format, int *index, va_list list, char buffer[],
+int write_handle(const char *format, int *index, va_list list, char buffer[],
 			int flags, int width, int precision, int size)
 {
 	int i, un_len = 0, pr_chars = -1;
