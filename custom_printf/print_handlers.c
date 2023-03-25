@@ -107,8 +107,8 @@ int write_num(int index, char buffer[],
 		}
 		else if (!(flags & F_MINUS) && pad == ' ')
 		{
-			if (extra_c)
-				buffer[--ind] = add_c;
+			if (add_c)
+				buffer[--index] = add_c;
 			return (write(1, &buffer[1], i - 1) + write(1, &buffer[index], length));
 		}
 		else if (!(flags & F_MINUS) && pad == '0')
@@ -139,7 +139,7 @@ int write_unsgned(int is_negative, int index,
 			char buffer[],
 				int flags, int width, int precision, int size)
 {
-	int length = BUFF_SIZE - ind - 1, i = 0;
+	int length = BUFF_SIZE - index - 1, i = 0;
 	char pad = ' ';
 
 	(void) is_negative;
@@ -169,7 +169,7 @@ int write_unsgned(int is_negative, int index,
 }
 
 /**
- * write_pointer - Write a memory address
+ * write_add - Write a memory address
  * @buffer: Arrays of chars
  * @index: Index at which the number starts in the buffer
  * @length: Length of number
@@ -180,7 +180,7 @@ int write_unsgned(int is_negative, int index,
  * @pad_start: Index at which padding should start
  * Return: Number of written chars.
  */
-int write_pointer(char buffer[], int index, int length,
+int write_add(char buffer[], int index, int length,
 			int width, int flags, char pad, char add_c, int pad_start)
 {
 	int i;
