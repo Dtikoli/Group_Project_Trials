@@ -93,7 +93,7 @@ int write_num(int index, char buffer[], int flags, int width, int precision,
 int write_add(char buffer[], int index, int length,
 			int width, int flags, char pad, char add_c, int pad_start);
 
-int write_unsigned(int is_negative, int index,
+int write_unsgned(int is_negative, int index,
 		char buffer[],
 			int flags, int width, int precision, int size);
 
