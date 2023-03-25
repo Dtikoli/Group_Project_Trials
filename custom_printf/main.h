@@ -19,9 +19,9 @@
 #define S_SHORT 1
 
 /**
- * struct fmt - Struct op
+ * struct f_print - data Struct
  *
- * @fmt: The format.
+ * @opts: The format options.
  * @fn: The function associated.
  */
 typedef struct f_print
@@ -32,7 +32,7 @@ typedef struct f_print
 
 
 int _printf(const char *format, ...);
-int write_handle(const char *format, int *i,
+int write_handle(const char *format, int *index,
 		va_list list, char buffer[], int flags, int width, int precision, int size);
 void buff_handle(char buffer[], int *buff_ind);
 
@@ -105,4 +105,4 @@ int is_digit(char);
 long int convert_len_num(long int num, int size);
 long int convert_size_num(unsigned long int num, int size);
 
-#endif /* _MAIN_H_ */
+#endif /* #ifndef _MAIN_H_ */
