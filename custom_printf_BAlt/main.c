@@ -40,9 +40,9 @@ int main(void)
     printf("Len:[%d]\n", len2);
     _printf("rot13:[%R]\n", "kofi");
     _printf("reverse:[%r]\n", "kofi");
-    _printf("Unknown:[%K]\n");
-    printf("Unknown:[%K]\n");
-    _printf("Unknown:[%B]\n");
-    printf("Unknown:[%B]\n");
+     _printf("%S\n", "Best\nSchool");
+     _printf("%b\n", 98);
+     _printf("%#x\n", 98);
+     _printf("%#o\n", 98);
     return (0);
 }
