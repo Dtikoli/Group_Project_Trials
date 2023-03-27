@@ -8,5 +8,5 @@ In essence, you can print any character, string, integer, or decimal number, rev
 transform any number to binary and octal bases, and encrypt your string with rot13 encryption.
 
 AUTHORS
-## David T
-## Maxwell A
+# David T
+# Maxwell A
