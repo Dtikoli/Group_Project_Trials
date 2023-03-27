@@ -6,3 +6,7 @@ Unique to this are:
 2. R rot13 conversion. 
 In essence, you can print any character, string, integer, or decimal number, reverse your strings,
 transform any number to binary and octal bases, and encrypt your string with rot13 encryption.
+
+AUTHORS:
+@David T
+@Maxwell A
