@@ -139,7 +139,7 @@ char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
 char **strtowk(char *, char *);
-char **_strtowk(char *, char);
+char **_strtow(char *, char);
 
 /* memory functions */
 char *_memset(char *, char, unsigned int);
@@ -167,12 +167,19 @@ int _myhelp(info_t *);
 int _myhistory(info_t *);
 int _myalias(info_t *);
 
+/* module for alias */
+int _unset_alias(info_t *, char *);
+int _set_alias(info_t *, char *);
+int _print_alias(list_t *);
+
 /* module for getline */
 ssize_t _get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
 void _sigint_handle(int);
+ssize_t _input_buff(info_t *, char **, size_t *);
+ssize_t _read_buff(info_t *, char *, size_t *);
 
-/* modue for info */
+/* module for info */
 void _clear_info(info_t *);
 void _set_info(info_t *, char **);
 void _free_info(info_t *, int);
