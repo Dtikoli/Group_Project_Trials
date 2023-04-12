@@ -109,18 +109,16 @@ typedef struct built_in
 
 
 /* hsh functions */
-int hsh(info_t *, char **);
-int find_builtin(info_t *);
-void find_cmd(info_t *);
-void fork_cmd(info_t *);
+int _hsh(info_t *, char **);
+int _find_builtin(info_t *);
+void _find_cmd(info_t *);
+void _fork_cmd(info_t *);
+int _loophsh(char **);
 
 /* path functions*/
-int is_cmd(info_t *, char *);
-char *dup_chars(char *, int, int);
-char *find_path(info_t *, char *, char *);
-
-/* loophsh function */
-int loophsh(char **);
+int _is_cmd(info_t *, char *);
+char *_dup_chars(char *, int, int);
+char *_find_path(info_t *, char *, char *);
 
 /* error functions */
 void _err_puts(char *);
@@ -170,14 +168,14 @@ int _myhistory(info_t *);
 int _myalias(info_t *);
 
 /* module for getline */
-ssize_t get_input(info_t *);
+ssize_t _get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
-void sigintHandler(int);
+void _sigint_handle(int);
 
 /* modue for info */
-void clear_info(info_t *);
-void set_info(info_t *, char **);
-void free_info(info_t *, int);
+void _clear_info(info_t *);
+void _set_info(info_t *, char **);
+void _free_info(info_t *, int);
 
 /*module for env */
 char *_getenv(info_t *, const char *);
@@ -190,11 +188,11 @@ int _unsetenv(info_t *, char *);
 int _setenv(info_t *, char *, char *);
 
 /* module for chain */
-int is_chain(info_t *, char *, size_t *);
-void check_chain(info_t *, char *, size_t *, size_t, size_t);
-int replace_alias(info_t *);
-int replace_vars(info_t *);
-int replace_string(char **, char *);
+int _is_chain(info_t *, char *, size_t *);
+void _check_chain(info_t *, char *, size_t *, size_t, size_t);
+int _replace_alias(info_t *);
+int _replace_vars(info_t *);
+int _replace_string(char **, char *);
 
 /* file input/output_functions */
 char *_get_hist_file(info_t *info);
