@@ -1,86 +1,145 @@
 #include "main.h"
 
 /**
- * _strlen - return the length of the string
- * @s: char type pointer
- * Return: length of string
- */
-int _strlen(char *s)
-{
-	int ch;
-
-	for (ch = 0; s[ch]; ch++)
-		;
-
-	return (ch);
-}
-
-/**
- * _strcmp - Compare two strings
- * @s1: string
- * @s2: string
- * Return: negative int if s1 < s2, 0 if matching, and positive int if s1 > s2
+ * _strcmp - performs lexicogarphic comparison of two strangs.
+ * @s1: the first strang
+ * @s2: the second strang
+ *
+ * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
  */
 int _strcmp(char *s1, char *s2)
 {
-	int i;
-
-	for (i = 0; s1[i] && s2[i] && s1[i] == s2[i]; i++)
-		;
-	return (s1[i] - s2[i]);
+	while (*s1 && *s2)
+	{
+		if (*s1 != *s2)
+			return (*s1 - *s2);
+		s1++;
+		s2++;
+	}
+	if (*s1 == *s2)
+		return (0);
+	else
+		return (*s1 < *s2 ? -1 : 1);
 }
 
 /**
  **_strncpy - copies a string
- *@dest: destination string
- *@str: source string
- *@n: number of chars to be copied
- *Return: a pointer to the destination string
+ *@dest: the destination string to be copied to
+ *@src: the source string
+ *@n: the amount of characters to be copied
+ *Return: the concatenated string
  */
-char *_strncpy(char *dest, char *str, int n)
+char *_strncpy(char *dest, char *src, int n)
 {
-	int i;
+	int i, j;
+	char *s = dest;
 
-	for (i = 0; str[i] && i < n; i++)
-		dest[i] = str[i];
-	for ( ; i < n; i++)
-		dest[i] = '\0';
-	return (dest);
+	i = 0;
+	while (src[i] != '\0' && i < n - 1)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	if (i < n)
+	{
+		j = i;
+		while (j < n)
+		{
+			dest[j] = '\0';
+			j++;
+		}
+	}
+	return (s);
 }
 
 /**
  **_strncat - concatenates two strings
- *@dest: destination string
- *@src: source string
- *@n: number of bytes to be used
+ *@dest: the first string
+ *@src: the second string
+ *@n: the amount of bytes to be maximally used
  *Return: the concatenated string
  */
 char *_strncat(char *dest, char *src, int n)
 {
 	int i, j;
+	char *s = dest;
 
-	for (i = 0; dest[i]; i++)
-		;
-	for (j = 0; src[j] && j < n; j++)
-		dest[i + j] = src[j];
-	dest[i + j] = '\0';
-	return (dest);
+	i = 0;
+	j = 0;
+	while (dest[i] != '\0')
+		i++;
+	while (src[j] != '\0' && j < n)
+	{
+		dest[i] = src[j];
+		i++;
+		j++;
+	}
+	if (j < n)
+		dest[i] = '\0';
+	return (s);
 }
 
 /**
- * _strchr - locate 1st occurrence of char in string and returns pointer there
- * @s: string to search
- * @c: target characer
- * Return: pointer to that character in string
+ **_strchr - locates a character in a string
+ *@s: the string to be parsed
+ *@c: the character to look for
+ *Return: (s) a pointer to the memory area s
  */
 char *_strchr(char *s, char c)
 {
-	int i = 0;
+	do {
+		if (*s == c)
+			return (s);
+	} while (*s++ != '\0');
 
-	for (; s[i] && s[i] != c; i++) /* find match */
-		;
-	if (s[i] == c) /* if match, assign to address */
-		return (s + i);
-	else
-		return (0);
+	return (NULL);
 }
+
+/**
+ * **strtow - splits a string into words. Repeat delimiters are ignored
+ * @str: the input string
+ * @d: the delimeter string
+ * Return: a pointer to an array of strings, or NULL on failure
+ */
+
+char **strtow(char *str, char *d)
+{
+	int i, j, k, m, numwords = 0;
+	char **s;
+
+	if (str == NULL || str[0] == 0)
+		return (NULL);
+	if (!d)
+		d = " ";
+	for (i = 0; str[i] != '\0'; i++)
+		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
+			numwords++;
+
+	if (numwords == 0)
+		return (NULL);
+	s = malloc((1 + numwords) * sizeof(char *));
+	if (!s)
+		return (NULL);
+	for (i = 0, j = 0; j < numwords; j++)
+	{
+		while (is_delim(str[i], d))
+			i++;
+		k = 0;
+		while (!is_delim(str[i + k], d) && str[i + k])
+			k++;
+		s[j] = malloc((k + 1) * sizeof(char));
+		if (!s[j])
+		{
+			for (k = 0; k < j; k++)
+				free(s[k]);
+			free(s);
+			return (NULL);
+		}
+		for (m = 0; m < k; m++)
+			s[j][m] = str[i++];
+		s[j][m] = 0;
+	}
+	s[j] = NULL;
+	return (s);
+}
+

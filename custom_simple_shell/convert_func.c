@@ -1,88 +1,84 @@
 #include "main.h"
 
 /**
- *_atoi - converts a string to an integer
- *@str: the string to be converted
- *Return: 0 if no numbers in string, converted number otherwise
+ * _erratoi - converts a string to an integer
+ * @s: the string to be converted
+ * Return: 0 if no numbers in string, converted number otherwise
+ *       -1 on error
  */
-int _atoi(char *str)
+int _erratoi(char *s)
 {
-	int i, sign = 1, flag = 0, num;
-	unsigned int ret = 0;
+	int i = 0;
+	unsigned long int result = 0;
 
-	for (i = 0;  str[i] && flag != 2; i++)
+	if (*s == '+')
+		s++;  /* TODO: why does this make main return 255? */
+	for (i = 0;  s[i] != '\0'; i++)
 	{
-		if (str[i] == '-')
-			sign *= -1;
-
-		if (str[i] >= '0' && str[i] <= '9')
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			flag = 1;
-			ret *= 10;
-			ret += (str[i] - '0');
+			result *= 10;
+			result += (s[i] - '0');
+			if (result > INT_MAX)
+				return (-1);
 		}
-		else if (flag == 1)
-			flag = 2;
+		else
+			return (-1);
 	}
-
-	if (sign == -1)
-		num = -ret;
-	else
-		num = ret;
-
-	return (num);
+	return (result);
 }
 
 /**
- * _print_decimal - prints an integer
- * @input: integer
- * @fd: the file descriptor to write to
+ * print_d - function prints a decimal (integer) number (base 10)
+ * @input: the input
+ * @fd: the filedescriptor to write to
+ *
  * Return: number of characters printed
  */
-int _print_decimal(int input, int fd)
+int print_d(int input, int fd)
 {
-	int (*_put_char)(char) = _putchar;
-	int i, ret = 0;
-	unsigned int _abs_, cur;
+	int (*__putchar)(char) = _putchar;
+	int i, count = 0;
+	unsigned int _abs_, current;
 
 	if (fd == STDERR_FILENO)
-		_put_char = _err_putc;
+		__putchar = _eputchar;
 	if (input < 0)
 	{
 		_abs_ = -input;
-		_put_char('-');
-		ret++;
+		__putchar('-');
+		count++;
 	}
 	else
 		_abs_ = input;
-	cur = _abs_;
+	current = _abs_;
 	for (i = 1000000000; i > 1; i /= 10)
 	{
 		if (_abs_ / i)
 		{
-			_put_char('0' + cur / i);
-
-			ret++;
+			__putchar('0' + current / i);
+			count++;
 		}
-		cur %= i;
+		current %= i;
 	}
-	_put_char('0' + cur);
-	ret++;
+	__putchar('0' + current);
+	count++;
 
-	return (ret);
+	return (count);
 }
 
 /**
- * convert_num - base converter function
+ * convert_number - converter function, a clone of itoa
  * @num: number
  * @base: base
  * @flags: argument flags
+ *
  * Return: string
  */
-char *convert_num(long int num, int base, int flags)
+char *convert_number(long int num, int base, int flags)
 {
-	static char *str;
-	static char buff[50];
+	static char *array;
+	static char buffer[50];
 	char sign = 0;
 	char *ptr;
 	unsigned long n = num;
@@ -93,12 +89,12 @@ char *convert_num(long int num, int base, int flags)
 		sign = '-';
 
 	}
-	str = flags & CONVERT_LOWER ? "0123456789abcdef" : "0123456789ABCDEF";
-	ptr = &buff[49];
+	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
+	ptr = &buffer[49];
 	*ptr = '\0';
 
 	do	{
-		*--ptr = str[n % base];
+		*--ptr = array[n % base];
 		n /= base;
 	} while (n != 0);
 
@@ -108,19 +104,46 @@ char *convert_num(long int num, int base, int flags)
 }
 
 /**
- * _remove_comments - function replaces first instance of '#' with '\0'
- * @buff: address of the string to modify
- * Return: Always 0
+ *_atoi - converts a string to an integer
+ *@s: the string to be converted
+ *Return: 0 if no numbers in string, converted number otherwise
  */
-void _remove_comments(char *buff)
-{
-	int i;
 
-	for (i = 0; buff[i]; i++)
-		if (buff[i] == '#' && (!i || buff[i - 1] == ' '))
+int _atoi(char *s)
+{
+	int i, sign = 1, flag = 0, output;
+	unsigned int result = 0;
+
+	for (i = 0;  s[i] != '\0' && flag != 2; i++)
+	{
+		if (s[i] == '-')
+			sign *= -1;
+
+		if (s[i] >= '0' && s[i] <= '9')
 		{
-			buff[i] = '\0';
-			break;
+			flag = 1;
+			result *= 10;
+			result += (s[i] - '0');
 		}
+		else if (flag == 1)
+			flag = 2;
+	}
+
+	if (sign == -1)
+		output = -result;
+	else
+		output = result;
+
+	return (output);
 }
 
+/**
+ * interactive - returns true if shell is interactive mode
+ * @info: struct address
+ *
+ * Return: 1 if interactive mode, 0 otherwise
+ */
+int interactive(info_t *info)
+{
+	return (isatty(STDIN_FILENO) && info->readfd <= 2);
+}

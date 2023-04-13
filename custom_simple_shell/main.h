@@ -1,5 +1,5 @@
-#ifndef _MAIN_H_
-#define _MAIN_H_
+#ifndef _MAIN_H
+#define _MAIN_H
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -12,21 +12,22 @@
 #include <fcntl.h>
 #include <errno.h>
 
-/*  buffer size */
-#define BUFF_SIZE 1024
+/* for read/write buffers */
+#define READ_BUF_SIZE 1024
+#define WRITE_BUF_SIZE 1024
 #define BUF_FLUSH -1
 
-/* command chaining */
+/* for command chaining */
 #define CMD_NORM	0
 #define CMD_OR		1
 #define CMD_AND		2
 #define CMD_CHAIN	3
 
-/* number conversion */
-#define CONVERT_LOWER		1
+/* for convert_number() */
+#define CONVERT_LOWERCASE	1
 #define CONVERT_UNSIGNED	2
 
-/* system getline */
+/* 1 if using system getline() */
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
@@ -38,9 +39,9 @@ extern char **environ;
 
 /**
  * struct liststr - singly linked list
- * @num: the number fields
+ * @num: the number field
  * @str: a string
- * @next: a pointer to the next node
+ * @next: points to the next node
  */
 typedef struct liststr
 {
@@ -50,27 +51,28 @@ typedef struct liststr
 } list_t;
 
 /**
- *struct pass_info - contains pseudo-arguements to pass into a function
- *@arg: a string generated from getline containing CL arguements
- *@argv: array of strings from CL arguments
+ *struct passinfo - contains pseudo-arguements to pass into a function,
+ *					allowing uniform prototype for function pointer struct
+ *@arg: a string generated from getline containing arguements
+ *@argv: an array of strings generated from arg
  *@path: a string path for the current command
- *@argc: number of CL arguments
+ *@argc: the argument count
  *@line_count: the error count
- *@err_num: the error code for exit function
- *@linecount_flag: if on, count this line of input
- *@fname: filename of the program
+ *@err_num: the error code for exit()s
+ *@linecount_flag: if on count this line of input
+ *@fname: the program filename
  *@env: linked list local copy of environ
  *@environ: custom modified copy of environ from LL env
  *@history: the history node
  *@alias: the alias node
- *@env_changed: on if, environ was changed
- *@status: return status of the last executed command
+ *@env_changed: on if environ was changed
+ *@status: the return status of the last exec'd command
  *@cmd_buf: address of pointer to cmd_buf, on if chaining
  *@cmd_buf_type: CMD_type ||, &&, ;
  *@readfd: the fd from which to read line input
  *@histcount: the history line number count
  */
-typedef struct pass_info
+typedef struct passinfo
 {
 	char *arg;
 	char **argv;
@@ -98,67 +100,65 @@ typedef struct pass_info
 	0, 0, 0}
 
 /**
- *struct built_in - contains a builtin string and related functions
+ *struct builtin - contains a builtin string and related function
  *@type: the builtin command flag
- *@func: the function pointers
+ *@func: the function
  */
-typedef struct built_in
+typedef struct builtin
 {
 	char *type;
 	int (*func)(info_t *);
-} builtin_t;
-
+} builtin_table;
 
 /* hsh functions */
-int _hsh(info_t *, char **);
-int _find_builtin(info_t *);
-void _find_cmd(info_t *);
-void _fork_cmd(info_t *);
+int hsh(info_t *, char **);
+int find_builtin(info_t *);
+void find_cmd(info_t *);
+void fork_cmd(info_t *);
 
 /* path functions*/
-int _is_cmd(info_t *, char *);
-char *_dup_chars(char *, int, int);
-char *_find_path(info_t *, char *, char *);
+int is_cmd(info_t *, char *);
+char *dup_chars(char *, int, int);
+char *find_path(info_t *, char *, char *);
 
 /* error functions */
-void _err_puts(char *);
-void _print_err(info_t *, char *);
-int _err_atoi(char *);
-int _err_putc(char);
-int _putc_fd(char c, int fd);
-int _puts_fd(char *str, int fd);
+void _eputs(char *);
+void print_error(info_t *, char *);
+int _eputchar(char);
+int _putfd(char c, int fd);
+int _putsfd(char *str, int fd);
 
 /* string functions.c */
 int _strlen(char *);
 int _strcmp(char *, char *);
-char *_starts_with(const char *, const char *);
+char *starts_with(const char *, const char *);
 char *_strcat(char *, char *);
 char *_strcpy(char *, char *);
 char *_strdup(const char *);
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
 char *_strchr(char *, char);
-char **strtowk(char *, char *);
-char **_strtow(char *, char);
+char **strtow(char *, char *);
 
 /* memory functions */
 char *_memset(char *, char, unsigned int);
-void _ffree(char **);
+void ffree(char **);
 void *_realloc(void *, unsigned int, unsigned int);
-int _bfree(void **);
+int bfree(void **);
 
 /* helper functions */
-int _interact(info_t *);
 void _puts(char *);
 int _putchar(char);
-int _is_delim(char, char *);
+int is_delim(char, char *);
 int _isalpha(int);
+void remove_comments(char *);
 
 /* conversion functions */
-int _print_decimal(int, int);
+int print_d(int, int);
+int interactive(info_t *);
 int _atoi(char *);
-char *convert_num(long int, int, int);
-void _remove_comments(char *);
+char *convert_number(long int, int, int);
+int _erratoi(char *);
 
 /* builtin emulators */
 int _myexit(info_t *);
@@ -168,51 +168,51 @@ int _myhistory(info_t *);
 int _myalias(info_t *);
 
 /* module for alias */
-int _unset_alias(info_t *, char *);
-int _set_alias(info_t *, char *);
-int _print_alias(list_t *);
+int unset_alias(info_t *, char *);
+int set_alias(info_t *, char *);
+int print_alias(list_t *);
 
 /* module for getline */
-ssize_t _get_input(info_t *);
+ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
-void _sigint_handle(int);
-ssize_t _input_buff(info_t *, char **, size_t *);
-ssize_t _read_buff(info_t *, char *, size_t *);
+void sigintHandler(int);
+ssize_t input_buf(info_t *, char **, size_t *);
+ssize_t read_buf(info_t *, char *, size_t *);
 
 /* module for info */
-void _clear_info(info_t *);
-void _set_info(info_t *, char **);
-void _free_info(info_t *, int);
+void clear_info(info_t *);
+void set_info(info_t *, char **);
+void free_info(info_t *, int);
 
 /*module for env */
 char *_getenv(info_t *, const char *);
 int _myenv(info_t *);
 int _mysetenv(info_t *);
 int _myunsetenv(info_t *);
-int _push_env_list(info_t *);
-char **_get_environ(info_t *);
+int populate_env_list(info_t *);
+char **get_environ(info_t *);
 int _unsetenv(info_t *, char *);
 int _setenv(info_t *, char *, char *);
 
 /* module for chain */
-int _is_chain(info_t *, char *, size_t *);
-void _check_chain(info_t *, char *, size_t *, size_t, size_t);
-int _replace_alias(info_t *);
-int _replace_vars(info_t *);
-int _replace_string(char **, char *);
+int is_chain(info_t *, char *, size_t *);
+void check_chain(info_t *, char *, size_t *, size_t, size_t);
+int replace_alias(info_t *);
+int replace_vars(info_t *);
+int replace_string(char **, char *);
 
 /* file input/output_functions */
-char *_get_hist_file(info_t *info);
-int _write_hist(info_t *info);
-int _read_hist(info_t *info);
-int _build_hist_list(info_t *info, char *, int);
-int _renum_hist(info_t *info);
+char *get_history_file(info_t *info);
+int write_history(info_t *info);
+int read_history(info_t *info);
+int build_history_list(info_t *info, char *, int);
+int renumber_history(info_t *info);
 
 /* lists_t functions */
 list_t *add_node(list_t **, const char *, int);
 list_t *add_node_end(list_t **, const char *, int);
 size_t print_list_str(const list_t *);
-int delete_node_index(list_t **, unsigned int);
+int delete_node_at_index(list_t **, unsigned int);
 void free_list(list_t **);
 size_t list_len(const list_t *);
 char **list_to_strings(list_t *);

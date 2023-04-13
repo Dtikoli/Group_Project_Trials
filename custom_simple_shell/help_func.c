@@ -1,60 +1,12 @@
 #include "main.h"
 
 /**
- *_puts - prints an input string
- *@str: the string to be printed
- * Return: Nothing
- */
-void _puts(char *str)
-{
-	int i = 0;
-
-	if (!str)
-		return;
-	while (str[i])
-	{
-		_putchar(str[i]);
-		i++;
-	}
-}
-
-/**
- * _putchar - writes the chars to STDOUT
- * @c: char to print
- * Return: On success 1, on error, -1.
- */
-int _putchar(char c)
-{
-	static int len;
-	static char buff[BUFF_SIZE];
-
-	if (c == BUF_FLUSH || len >= BUFF_SIZE)
-	{
-		write(STDOUT_FILENO, buff, len);
-		len = 0;
-	}
-	if (c != BUF_FLUSH)
-		buff[len++] = c;
-	return (1);
-}
-
-/**
- * _interact - checks shell's interactive mode
- * @info: struct address
- * Return: 1 if interactive mode, 0 otherwise
- */
-int _interact(info_t *info)
-{
-	return (isatty(STDIN_FILENO) && info->readfd <= 2);
-}
-
-/**
- * _is_delim - checks a delimiter character
- * @c: char to check
- * @delim: delimeter string
+ * is_delim - checks if character is a delimeter
+ * @c: the char to check
+ * @delim: the delimeter string
  * Return: 1 if true, 0 if false
  */
-int _is_delim(char c, char *delim)
+int is_delim(char c, char *delim)
 {
 	while (*delim)
 		if (*delim++ == c)
@@ -64,8 +16,8 @@ int _is_delim(char c, char *delim)
 
 /**
  *_isalpha - checks for alphabetic character
- *@c: char to input
- *Return: 1 if c is an alphabet, 0 otherwise
+ *@c: The character to input
+ *Return: 1 if c is alphabetic, 0 otherwise
  */
 
 int _isalpha(int c)
@@ -74,5 +26,64 @@ int _isalpha(int c)
 		return (1);
 	else
 		return (0);
+}
+
+/**
+ * remove_comments - function replaces first instance of '#' with '\0'
+ * @buf: address of the string to modify
+ *
+ * Return: Always 0;
+ */
+void remove_comments(char *buf)
+{
+	int i;
+
+	for (i = 0; buf[i] != '\0'; i++)
+		if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
+		{
+			buf[i] = '\0';
+			break;
+		}
+}
+
+/**
+ *_puts - prints an input string
+ *@str: the string to be printed
+ *
+ * Return: Nothing
+ */
+void _puts(char *str)
+{
+	int i = 0;
+
+	if (!str)
+		return;
+	while (str[i] != '\0')
+	{
+		_putchar(str[i]);
+		i++;
+	}
+}
+
+/**
+ * _putchar - writes the character c to stdout
+ * @c: The character to print
+ *
+ * Return: On success 1.
+ * On error, -1 is returned, and errno is set appropriately.
+ */
+int _putchar(char c)
+{
+	static int i;
+	static char buf[WRITE_BUF_SIZE];
+
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
+	{
+		write(1, buf, i);
+		i = 0;
+	}
+	if (c != BUF_FLUSH)
+		buf[i++] = c;
+	return (1);
 }
 

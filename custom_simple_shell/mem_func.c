@@ -1,11 +1,12 @@
 #include "main.h"
 
 /**
- * _bfree - frees a pointer and points it to NULL.
+ * bfree - frees a pointer and NULLs the address
  * @ptr: address of the pointer to free
- * Return: 1 if successful, otherwise 0.
+ *
+ * Return: 1 if freed, otherwise 0.
  */
-int _bfree(void **ptr)
+int bfree(void **ptr)
 {
 	if (ptr && *ptr)
 	{
@@ -15,6 +16,7 @@ int _bfree(void **ptr)
 	}
 	return (0);
 }
+
 
 /**
  **_memset - fills memory with a constant byte
@@ -33,18 +35,18 @@ char *_memset(char *s, char b, unsigned int n)
 }
 
 /**
- * _ffree - frees a string of strings
- * @ptr: array of strings
+ * ffree - frees a string of strings
+ * @pp: string of strings
  */
-void _ffree(char **ptr)
+void ffree(char **pp)
 {
-	char **p = ptr;
+	char **a = pp;
 
-	if (!ptr)
+	if (!pp)
 		return;
-	while (*ptr)
-		free(*ptr++);
-	free(p);
+	while (*pp)
+		free(*pp++);
+	free(a);
 }
 
 /**
@@ -52,25 +54,27 @@ void _ffree(char **ptr)
  * @ptr: pointer to previous malloc'ated block
  * @old_size: byte size of previous block
  * @new_size: byte size of new block
+ *
  * Return: pointer to da ol'block nameen.
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	if (new_size == 0 && ptr != NULL)
-	{
-		free(ptr);
-		return (NULL);
-	}
-	if (ptr == NULL)
-		ptr = malloc(new_size);
+	char *p;
+
+	if (!ptr)
+		return (malloc(new_size));
+	if (!new_size)
+		return (free(ptr), NULL);
 	if (new_size == old_size)
 		return (ptr);
-	free(ptr);
-	ptr = malloc(new_size);
-	if (ptr == NULL)
-	{
-		free(ptr);
+
+	p = malloc(new_size);
+	if (!p)
 		return (NULL);
-	}
-	return (ptr);
+
+	old_size = old_size < new_size ? old_size : new_size;
+	while (old_size--)
+		p[old_size] = ((char *)ptr)[old_size];
+	free(ptr);
+	return (p);
 }

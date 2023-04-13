@@ -1,44 +1,73 @@
 #include "main.h"
 
 /**
-  * _strdup - returns a pointer to a new string
-  * which is a duplicate of the string str
-  * @str: a pointer to a string
-  * Return: a pointer to a duplicate string,
-  * NULL if str == NULL.
-  */
-char *_strdup(const char *str)
+ * _strlen - returns the length of a string
+ * @s: the string whose length to check
+ *
+ * Return: integer length of string
+ */
+int _strlen(char *s)
 {
-	char *p;
-	int i, j;
+	int i = 0;
 
-	if (str == NULL)
-		return (NULL);
-	for (j = 0; str[j]; j++)
-		;
-	p = malloc(sizeof(*p) * (j + 1));
-	if (p == NULL)
-		return (NULL);
-	for (i = 0; str[i]; i++)
-		p[i] = str[i];
-	return (p);
+	if (!s)
+		return (0);
+
+	while (*s++)
+		i++;
+	return (i);
+}
+
+/**
+ * starts_with - checks if needle starts with haystack
+ * @haystack: string to search
+ * @needle: the substring to find
+ *
+ * Return: address of next char of haystack or NULL
+ */
+char *starts_with(const char *haystack, const char *needle)
+{
+	while (*needle)
+		if (*needle++ != *haystack++)
+			return (NULL);
+	return ((char *)haystack);
+}
+
+/**
+ * _strcat - concatenates two strings
+ * @dest: the destination buffer
+ * @src: the source buffer
+ *
+ * Return: pointer to destination buffer
+ */
+char *_strcat(char *dest, char *src)
+{
+	char *ret = dest;
+
+	while (*dest)
+		dest++;
+	while (*src)
+		*dest++ = *src++;
+	*dest = *src;
+	return (ret);
 }
 
 /**
  * _strcpy - copies a string
  * @dest: the destination
- * @str: the source
+ * @src: the source
+ *
  * Return: pointer to destination
  */
-char *_strcpy(char *dest, char *str)
+char *_strcpy(char *dest, char *src)
 {
 	int i = 0;
 
-	if (dest == str || str == 0)
+	if (dest == src || src == 0)
 		return (dest);
-	while (str[i])
+	while (src[i])
 	{
-		dest[i] = str[i];
+		dest[i] = src[i];
 		i++;
 	}
 	dest[i] = 0;
@@ -46,92 +75,25 @@ char *_strcpy(char *dest, char *str)
 }
 
 /**
- * **strtowk - splits a string into words. Ignores repeated delimiters
- * @str: input string
- * @del: the delimeter string
- * Return: a pointer to an array of strings, or NULL on failure
+ * _strdup - duplicates a string
+ * @str: the string to duplicate
+ *
+ * Return: pointer to the duplicated string
  */
-char **strtowk(char *str, char *del)
+char *_strdup(const char *str)
 {
-	int i, j, k, m, words = 0;
-	char **ptr;
+	int length = 0;
+	char *ret;
 
-	if (str == NULL || str[0] == 0)
+	if (str == NULL)
 		return (NULL);
-	if (!del)
-		del = " ";
-	for (i = 0; str[i] != '\0'; i++)
-		if (!_is_delim(str[i], del) && (_is_delim(str[i + 1], del) || !str[i + 1]))
-			words++;
-	if (words == 0)
+	while (*str++)
+		length++;
+	ret = malloc(sizeof(char) * (length + 1));
+	if (!ret)
 		return (NULL);
-	ptr = malloc((1 + words) * sizeof(char *));
-	if (ptr == NULL)
-		return (NULL);
-	for (i = 0, j = 0; j < words; j++)
-	{
-		while (_is_delim(str[i], del))
-			i++;
-		k = 0;
-		while (!_is_delim(str[i + k], del) && str[i + k])
-			k++;
-		ptr[j] = malloc((k + 1) * sizeof(char));
-		if (ptr[j] == NULL)
-		{
-			for (k = 0; k < j; k++)
-				free(ptr[k]);
-			free(ptr);
-			return (NULL);
-		}
-		for (m = 0; m < k; m++)
-			ptr[j][m] = str[i++];
-		ptr[j][m] = '\0';
-	}
-	ptr[j] = NULL;
-	return (ptr);
+	for (length++; length--;)
+		ret[length] = *--str;
+	return (ret);
 }
 
-/**
- * **_strtow - splits a string into words
- * @str: input string
- * @delim: delimeter char
- * Return: a pointer to an array of strings, or NULL on failure
- */
-char **_strtow(char *str, char delim)
-{
-	int i, j, k, m, words = 0;
-	char **ptr;
-
-	if (str == NULL || str[0] == 0)
-		return (NULL);
-	for (i = 0; str[i] != '\0'; i++)
-		if ((str[i] != delim && str[i + 1] == delim) ||
-		    (str[i] != delim && !str[i + 1]) || str[i + 1] == delim)
-			words++;
-	if (words == 0)
-		return (NULL);
-	ptr = malloc((1 + words) * sizeof(char *));
-	if (ptr == NULL)
-		return (NULL);
-	for (i = 0, j = 0; j < words; j++)
-	{
-		while (str[i] == delim && str[i] != delim)
-			i++;
-		k = 0;
-		while (str[i + k] != delim && str[i + k] && str[i + k] != delim)
-			k++;
-		ptr[j] = malloc((k + 1) * sizeof(char));
-		if (ptr[j] == NULL)
-		{
-			for (k = 0; k < j; k++)
-				free(ptr[k]);
-			free(ptr);
-			return (NULL);
-		}
-		for (m = 0; m < k; m++)
-			ptr[j][m] = str[i++];
-		ptr[j][m] = '\0';
-	}
-	ptr[j] = NULL;
-	return (ptr);
-}

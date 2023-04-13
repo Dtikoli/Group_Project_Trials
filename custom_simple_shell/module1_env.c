@@ -1,27 +1,25 @@
 #include "main.h"
 
 /**
- * _push_env_list - populates env linked list
- * @info: Structure containing potential argumements
+ * _myenv - prints the current environment
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
  * Return: Always 0
  */
-int _push_env_list(info_t *info)
+int _myenv(info_t *info)
 {
-	list_t *node = NULL;
-	size_t i;
-
-	for (i = 0; environ[i]; i++)
-		add_node_end(&node, environ[i], 0);
-	info->env = node;
+	print_list_str(info->env);
 	return (0);
 }
 
+
 /**
- * _get_environ - returns the string array copy of shell's environ
- * @info: Structure containing potential arguments.
+ * get_environ - returns the string array copy of our environ
+ * @info: Structure containing potential arguments. Used to maintain
+ *          constant function prototype.
  * Return: Always 0
  */
-char **_get_environ(info_t *info)
+char **get_environ(info_t *info)
 {
 	if (!info->environ || info->env_changed)
 	{
@@ -33,26 +31,27 @@ char **_get_environ(info_t *info)
 }
 
 /**
- * _unsetenv - Removes an environment variable
- * @info: Structure containing potential arguments.
- * Return: 1 successful, 0 otherwise
+ * _unsetenv - Remove an environment variable
+ * @info: Structure containing potential arguments. Used to maintain
+ *        constant function prototype.
+ *  Return: 1 on delete, 0 otherwise
  * @var: the string env var property
  */
 int _unsetenv(info_t *info, char *var)
 {
 	list_t *node = info->env;
 	size_t i = 0;
-	char *ptr;
+	char *p;
 
 	if (!node || !var)
 		return (0);
 
 	while (node)
 	{
-		ptr = _starts_with(node->str, var);
-		if (ptr && *ptr == '=')
+		p = starts_with(node->str, var);
+		if (p && *p == '=')
 		{
-			info->env_changed = delete_node_index(&(info->env), i);
+			info->env_changed = delete_node_at_index(&(info->env), i);
 			i = 0;
 			node = info->env;
 			continue;
@@ -64,42 +63,44 @@ int _unsetenv(info_t *info, char *var)
 }
 
 /**
- * _setenv - Initialize a new environ var or modify an existing one
- * @info: Structure containing potential arguments.
+ * _setenv - Initialize a new environment variable,
+ *             or modify an existing one
+ * @info: Structure containing potential arguments. Used to maintain
+ *        constant function prototype.
  * @var: the string env var property
  * @value: the string env var value
  *  Return: Always 0
  */
 int _setenv(info_t *info, char *var, char *value)
 {
-	char *buff = NULL;
+	char *buf = NULL;
 	list_t *node;
-	char *ptr;
+	char *p;
 
 	if (!var || !value)
 		return (0);
 
-	buff = malloc(_strlen(var) + _strlen(value) + 2);
-	if (!buff)
+	buf = malloc(_strlen(var) + _strlen(value) + 2);
+	if (!buf)
 		return (1);
-	_strcpy(buff, var);
-	_strcat(buff, "=");
-	_strcat(buff, value);
+	_strcpy(buf, var);
+	_strcat(buf, "=");
+	_strcat(buf, value);
 	node = info->env;
 	while (node)
 	{
-		ptr = _starts_with(node->str, var);
-		if (ptr && *ptr == '=')
+		p = starts_with(node->str, var);
+		if (p && *p == '=')
 		{
 			free(node->str);
-			node->str = buff;
+			node->str = buf;
 			info->env_changed = 1;
 			return (0);
 		}
 		node = node->next;
 	}
-	add_node_end(&(info->env), buff, 0);
-	free(buff);
+	add_node_end(&(info->env), buf, 0);
+	free(buf);
 	info->env_changed = 1;
 	return (0);
 }
