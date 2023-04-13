@@ -30,10 +30,6 @@
 #define USE_GETLINE 0
 #define USE_STRTOK 0
 
-#define INFO_INIT \
-{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
-	0, 0, 0}
-
 #define HIST_FILE	".simple_shell_history"
 #define HIST_MAX	4096
 
@@ -90,11 +86,16 @@ typedef struct pass_info
 	char **environ;
 	int env_changed;
 	int status;
+
 	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
 	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
 	int histcount;
 } info_t;
+
+#define INFO_INIT \
+{NULL, NULL, NULL, 0, 0, 0, 0, NULL, NULL, NULL, NULL, NULL, 0, 0, NULL, \
+	0, 0, 0}
 
 /**
  *struct built_in - contains a builtin string and related functions
@@ -113,7 +114,6 @@ int _hsh(info_t *, char **);
 int _find_builtin(info_t *);
 void _find_cmd(info_t *);
 void _fork_cmd(info_t *);
-int _loophsh(char **);
 
 /* path functions*/
 int _is_cmd(info_t *, char *);
@@ -220,5 +220,5 @@ size_t print_list(const list_t *);
 list_t *node_starts_with(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
 
-#endif / #ifndef _MAIN_H_
+#endif /* #ifndef _MAIN_H_ */
 
