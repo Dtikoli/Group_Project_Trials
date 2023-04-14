@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * _erratoi - converts a string to an integer
- * @s: the string to be converted
- * Return: 0 if no numbers in string, converted number otherwise
- *       -1 on error
+ * _erratoi - converts an string to decimal
+ * @s: error string
+ * Return: converted number, -1 on error
  */
 int _erratoi(char *s)
 {
@@ -12,7 +11,7 @@ int _erratoi(char *s)
 	unsigned long int result = 0;
 
 	if (*s == '+')
-		s++;  /* TODO: why does this make main return 255? */
+		s++;
 	for (i = 0;  s[i] != '\0'; i++)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
@@ -29,11 +28,10 @@ int _erratoi(char *s)
 }
 
 /**
- * print_d - function prints a decimal (integer) number (base 10)
- * @input: the input
- * @fd: the filedescriptor to write to
- *
- * Return: number of characters printed
+ * print_d - prints an integer
+ * @input: input number
+ * @fd: filedescriptor
+ * Return: count of printed chars
  */
 int print_d(int input, int fd)
 {
@@ -68,11 +66,10 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_number - converter function, a clone of itoa
- * @num: number
- * @base: base
+ * convert_number - converts a hexadecimal number
+ * @num: input number
+ * @base: input base
  * @flags: argument flags
- *
  * Return: string
  */
 char *convert_number(long int num, int base, int flags)
@@ -104,9 +101,9 @@ char *convert_number(long int num, int base, int flags)
 }
 
 /**
- *_atoi - converts a string to an integer
- *@s: the string to be converted
- *Return: 0 if no numbers in string, converted number otherwise
+ *_atoi - converts a string to a decimal number
+ *@s: string to be converted
+ *Return: converted number
  */
 
 int _atoi(char *s)
@@ -138,10 +135,9 @@ int _atoi(char *s)
 }
 
 /**
- * interactive - returns true if shell is interactive mode
- * @info: struct address
- *
- * Return: 1 if interactive mode, 0 otherwise
+ * interactive - controls shell's interactive mode
+ * @info: struct containing potential arguments
+ * Return: 1 for interactive mode
  */
 int interactive(info_t *info)
 {

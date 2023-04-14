@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * is_delim - checks if character is a delimeter
- * @c: the char to check
- * @delim: the delimeter string
- * Return: 1 if true, 0 if false
+ * is_delim - checks for delim chars
+ * @c: char to check
+ * @delim: delimeter string
+ * Return: 1 if true, otherwise 0
  */
 int is_delim(char c, char *delim)
 {
@@ -15,9 +15,9 @@ int is_delim(char c, char *delim)
 }
 
 /**
- *_isalpha - checks for alphabetic character
- *@c: The character to input
- *Return: 1 if c is alphabetic, 0 otherwise
+ *_isalpha - checks for alphabets
+ *@c: char to check
+ *Return: 1 if true, 0 otherwise
  */
 
 int _isalpha(int c)
@@ -29,10 +29,9 @@ int _isalpha(int c)
 }
 
 /**
- * remove_comments - function replaces first instance of '#' with '\0'
- * @buf: address of the string to modify
- *
- * Return: Always 0;
+ * remove_comments - checks and removes comments
+ * @buf: string to modify
+ * Return: Always 0
  */
 void remove_comments(char *buf)
 {
@@ -47,9 +46,8 @@ void remove_comments(char *buf)
 }
 
 /**
- *_puts - prints an input string
- *@str: the string to be printed
- *
+ *_puts - for printing a string to STDOUT
+ *@str: string to be printed
  * Return: Nothing
  */
 void _puts(char *str)
@@ -66,11 +64,9 @@ void _puts(char *str)
 }
 
 /**
- * _putchar - writes the character c to stdout
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _putchar - for writing chars to STDOUT
+ * @c: chars to print
+ * Return: On success 1, on error, -1.
  */
 int _putchar(char c)
 {

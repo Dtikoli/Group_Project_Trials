@@ -1,11 +1,9 @@
 #include "main.h"
 
 /**
- * print_error - prints an error message
- * @info: the parameter & return info struct
- * @estr: string containing specified error type
- * Return: 0 if no numbers in string, converted number otherwise
- *        -1 on error
+ * print_error - controls printing of error messages
+ * @info: struct containing potential arguments
+ * @estr: string containing error type
  */
 void print_error(info_t *info, char *estr)
 {
@@ -19,9 +17,8 @@ void print_error(info_t *info, char *estr)
 }
 
 /**
- *_eputs - prints an input string
- * @str: the string to be printed
- *
+ *_eputs - for printing error string
+ * @str: string to be printed
  * Return: Nothing
  */
 void _eputs(char *str)
@@ -38,11 +35,9 @@ void _eputs(char *str)
 }
 
 /**
- * _eputchar - writes the character c to stderr
- * @c: The character to print
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _eputchar - for writing error chars
+ * @c: char to be print
+ * Return: On success 1, on error, -1.
  */
 int _eputchar(char c)
 {
@@ -60,12 +55,10 @@ int _eputchar(char c)
 }
 
 /**
- * _putfd - writes the character c to given fd
- * @c: The character to print
- * @fd: The filedescriptor to write to
- *
- * Return: On success 1.
- * On error, -1 is returned, and errno is set appropriately.
+ * _putfd - for writing chars to a specified fd
+ * @c: char to print
+ * @fd: file descriptor
+ * Return: On success 1, on error, -1.
  */
 int _putfd(char c, int fd)
 {
@@ -83,11 +76,10 @@ int _putfd(char c, int fd)
 }
 
 /**
- *_putsfd - prints an input string
- * @str: the string to be printed
- * @fd: the filedescriptor to write to
- *
- * Return: the number of chars put
+ *_putsfd - for printing a string to a given fd
+ * @str: string to be printed
+ * @fd: file descriptor
+ * Return: number of printed chars
  */
 int _putsfd(char *str, int fd)
 {
