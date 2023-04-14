@@ -18,7 +18,7 @@ int check_fd(int fd, char **ptr)
 			_eputs(": 0: Can't open ");
 			_eputs(ptr[1]);
 			_eputchar('\n');
-			_eputchar(BUF_FLUSH);
+			_eputchar(BUFF_FLUSH);
 			exit(127);
 		}
 		return (1);
