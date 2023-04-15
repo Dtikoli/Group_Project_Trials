@@ -16,7 +16,7 @@ int loop_hsh(info_t *info, char **av)
 		clear_info(info);
 		if (interactive(info))
 			_puts("$ ");
-		_eputchar(BUFF_FLUSH);
+		err_putc(BUFF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
 		{
@@ -108,7 +108,7 @@ void _trace_cmd(info_t *info)
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			print_error(info, "not found\n");
+			err_print(info, "not found\n");
 		}
 	}
 }
@@ -145,7 +145,7 @@ void _forkcmd(info_t *info)
 		{
 			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
-				print_error(info, "Permission denied\n");
+				err_print(info, "Permission denied\n");
 		}
 	}
 }

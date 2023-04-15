@@ -1,27 +1,27 @@
 #include "main.h"
 
 /**
- * print_error - controls printing of error messages
+ * err_print - controls printing of error messages
  * @info: struct containing potential arguments
  * @estr: string containing error type
  */
-void print_error(info_t *info, char *estr)
+void err_print(info_t *info, char *estr)
 {
-	_eputs(info->fname);
-	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
-	_eputs(": ");
-	_eputs(info->argv[0]);
-	_eputs(": ");
-	_eputs(estr);
+	err_puts(info->fname);
+	err_puts(": ");
+	dec_print(info->line_count, STDERR_FILENO);
+	err_puts(": ");
+	err_puts(info->argv[0]);
+	err_puts(": ");
+	err_puts(estr);
 }
 
 /**
- *_eputs - for printing error string
+ * err_puts - for printing error string
  * @str: string to be printed
  * Return: Nothing
  */
-void _eputs(char *str)
+void err_puts(char *str)
 {
 	int i = 0;
 
@@ -29,17 +29,17 @@ void _eputs(char *str)
 		return;
 	while (str[i] != '\0')
 	{
-		_eputchar(str[i]);
+		err_putc(str[i]);
 		i++;
 	}
 }
 
 /**
- * _eputchar - for writing error chars
+ * err_putc - for writing error chars
  * @c: char to be print
  * Return: On success 1, on error, -1.
  */
-int _eputchar(char c)
+int err_putc(char c)
 {
 	static int i;
 	static char buf[BUFF_SIZE];
@@ -55,12 +55,12 @@ int _eputchar(char c)
 }
 
 /**
- * _putfd - for writing chars to a specified fd
+ * fd_putc - for writing chars to a specified fd
  * @c: char to print
  * @fd: file descriptor
  * Return: On success 1, on error, -1.
  */
-int _putfd(char c, int fd)
+int fd_putc(char c, int fd)
 {
 	static int i;
 	static char buf[BUFF_SIZE];
@@ -76,12 +76,12 @@ int _putfd(char c, int fd)
 }
 
 /**
- *_putsfd - for printing a string to a given fd
+ * fd_puts - for printing a string to a given fd
  * @str: string to be printed
  * @fd: file descriptor
  * Return: number of printed chars
  */
-int _putsfd(char *str, int fd)
+int fd_puts(char *str, int fd)
 {
 	int i = 0;
 
@@ -89,7 +89,7 @@ int _putsfd(char *str, int fd)
 		return (0);
 	while (*str)
 	{
-		i += _putfd(*str++, fd);
+		i += fd_putc(*str++, fd);
 	}
 	return (i);
 }

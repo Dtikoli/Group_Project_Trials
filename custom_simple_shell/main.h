@@ -23,7 +23,7 @@
 #define CMD_CHAIN	3
 
 /* for number conversion */
-#define CONVERT_LOWERCASE	1
+#define CONVERT_HEX		1
 #define CONVERT_UNSIGNED	2
 
 /* for custom getline function */
@@ -118,11 +118,11 @@ char *dup_chars(char *, int, int);
 char *find_path(info_t *, char *, char *);
 
 /* error functions */
-void _eputs(char *);
-void print_error(info_t *, char *);
-int _eputchar(char);
-int _putfd(char c, int fd);
-int _putsfd(char *str, int fd);
+void err_puts(char *);
+void err_print(info_t *, char *);
+int err_putc(char);
+int fd_putc(char c, int fd);
+int fd_puts(char *str, int fd);
 
 /* string functions.c */
 int _strlen(char *);
@@ -150,11 +150,11 @@ int _isalpha(int);
 void remove_comments(char *);
 
 /* conversion functions */
-int print_d(int, int);
+int dec_print(int, int);
 int interactive(info_t *);
 int _atoi(char *);
-char *convert_number(long int, int, int);
-int _erratoi(char *);
+char *_convert_num(long int, int, int);
+int err_atoi(char *);
 
 /* builtin emulators */
 int _myexit(info_t *);

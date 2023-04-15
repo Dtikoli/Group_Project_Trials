@@ -14,11 +14,11 @@ int check_fd(int fd, char **ptr)
 			exit(126);
 		if (errno == ENOENT)
 		{
-			_eputs(ptr[0]);
-			_eputs(": 0: Can't open ");
-			_eputs(ptr[1]);
-			_eputchar('\n');
-			_eputchar(BUFF_FLUSH);
+			err_puts(ptr[0]);
+			err_puts(": 0: Can't open ");
+			err_puts(ptr[1]);
+			err_putc('\n');
+			err_putc(BUFF_FLUSH);
 			exit(127);
 		}
 		return (1);
