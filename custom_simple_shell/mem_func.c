@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * bfree - frees a pointer and NULLs the address
- * @ptr: address of the pointer to free
- *
- * Return: 1 if freed, otherwise 0.
+ * bfree - frees a pointer and set it to NULLs
+ * @ptr: address of pointer
+ * Return: 1 on success, otherwise 0.
  */
 int bfree(void **ptr)
 {
@@ -19,11 +18,11 @@ int bfree(void **ptr)
 
 
 /**
- **_memset - fills memory with a constant byte
+ **_memset - initialises memory space with a constant byte
  *@s: the pointer to the memory area
- *@b: the byte to fill *s with
+ *@b: the byte for initialisation
  *@n: the amount of bytes to be filled
- *Return: (s) a pointer to the memory area s
+ *Return: a pointer to the string
  */
 char *_memset(char *s, char b, unsigned int n)
 {
@@ -35,8 +34,8 @@ char *_memset(char *s, char b, unsigned int n)
 }
 
 /**
- * ffree - frees a string of strings
- * @pp: string of strings
+ * ffree - frees an array of strings
+ * @pp: an of strings
  */
 void ffree(char **pp)
 {
@@ -54,8 +53,7 @@ void ffree(char **pp)
  * @ptr: pointer to previous malloc'ated block
  * @old_size: byte size of previous block
  * @new_size: byte size of new block
- *
- * Return: pointer to da ol'block nameen.
+ * Return: pointer to the new memory block.
  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {

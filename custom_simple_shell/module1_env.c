@@ -1,9 +1,8 @@
 #include "main.h"
 
 /**
- * _myenv - prints the current environment
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
+ * _myenv - prints contents of the current environment
+ * @info: Struct containing potential arguments.
  * Return: Always 0
  */
 int _myenv(info_t *info)
@@ -14,9 +13,8 @@ int _myenv(info_t *info)
 
 
 /**
- * get_environ - returns the string array copy of our environ
- * @info: Structure containing potential arguments. Used to maintain
- *          constant function prototype.
+ * get_environ - returns a string array copy of hsh environment.
+ * @info: Struct containing potential arguments.
  * Return: Always 0
  */
 char **get_environ(info_t *info)
@@ -31,11 +29,10 @@ char **get_environ(info_t *info)
 }
 
 /**
- * _unsetenv - Remove an environment variable
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- *  Return: 1 on delete, 0 otherwise
- * @var: the string env var property
+ * _unsetenv - unsets an environment variable
+ * @info: Struct containing potential arguments.
+ *  Return: 1 on success, 0 otherwise
+ * @var: string property of environmental variable
  */
 int _unsetenv(info_t *info, char *var)
 {
@@ -63,12 +60,10 @@ int _unsetenv(info_t *info, char *var)
 }
 
 /**
- * _setenv - Initialize a new environment variable,
- *             or modify an existing one
- * @info: Structure containing potential arguments. Used to maintain
- *        constant function prototype.
- * @var: the string env var property
- * @value: the string env var value
+ * _setenv - sets an environmental variable
+ * @info: Struct containing potential arguments.
+ * @var: string property of environmental variable
+ * @value: string value of environmental  variable
  *  Return: Always 0
  */
 int _setenv(info_t *info, char *var, char *value)

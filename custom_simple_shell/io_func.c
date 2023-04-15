@@ -1,12 +1,10 @@
 #include "main.h"
 
 /**
- * get_history_file - gets the history file
- * @info: parameter struct
- *
- * Return: allocated string containg history file
+ * get_history_file - for retrieving the history file
+ * @info: struct containing potential arguments
+ * Return: malloc'd string of history file
  */
-
 char *get_history_file(info_t *info)
 {
 	char *buf, *dir;
@@ -25,10 +23,9 @@ char *get_history_file(info_t *info)
 }
 
 /**
- * write_history - creates a file, or appends to an existing file
- * @info: the parameter struct
- *
- * Return: 1 on success, else -1
+ * write_history - for writing or appending contents to a history file
+ * @info: struct containing potential arguments
+ * Return: 1 on success, -1 otherwise
  */
 int write_history(info_t *info)
 {
@@ -54,10 +51,9 @@ int write_history(info_t *info)
 }
 
 /**
- * read_history - reads history from file
- * @info: the parameter struct
- *
- * Return: histcount on success, 0 otherwise
+ * read_history - for reading history file
+ * @info: struct containing potential arguments
+ * Return: history line number count
  */
 int read_history(info_t *info)
 {
@@ -103,11 +99,10 @@ int read_history(info_t *info)
 }
 
 /**
- * build_history_list - adds entry to a history linked list
- * @info: Structure containing potential arguments. Used to maintain
- * @buf: buffer
- * @linecount: the history linecount, histcount
- *
+ * build_history_list - for adding new entries to history list
+ * @info: Struct containing potential arguments.
+ * @buf: history buffer
+ * @linecount: history line count
  * Return: Always 0
  */
 int build_history_list(info_t *info, char *buf, int linecount)
@@ -125,9 +120,8 @@ int build_history_list(info_t *info, char *buf, int linecount)
 
 /**
  * renumber_history - renumbers the history linked list after changes
- * @info: Structure containing potential arguments. Used to maintain
- *
- * Return: the new histcount
+ * @info: Struct containing potential arguments.
+ * Return: history line count
  */
 int renumber_history(info_t *info)
 {

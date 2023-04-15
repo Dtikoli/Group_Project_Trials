@@ -1,11 +1,10 @@
 #include "main.h"
 
 /**
- * unset_alias - sets alias to string
- * @info: parameter struct
- * @str: the string alias
- *
- * Return: Always 0 on success, 1 on error
+ * unset_alias - unsets alias to string
+ * @info: struct containing potential arguments
+ * @str: string alias
+ * Return: 0 on success, 1 otherwise
  */
 int unset_alias(info_t *info, char *str)
 {
@@ -25,10 +24,9 @@ int unset_alias(info_t *info, char *str)
 
 /**
  * set_alias - sets alias to string
- * @info: parameter struct
- * @str: the string alias
- *
- * Return: Always 0 on success, 1 on error
+ * @info: struct containing potential arguments
+ * @str: string alias
+ * Return: 0 on success, 1 otherwise
  */
 int set_alias(info_t *info, char *str)
 {
@@ -47,7 +45,6 @@ int set_alias(info_t *info, char *str)
 /**
  * print_alias - prints an alias string
  * @node: the alias node
- *
  * Return: Always 0 on success, 1 on error
  */
 int print_alias(list_t *node)
