@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * _myenv - prints contents of the current environment
+ * _hshenv - prints contents of the current environment
  * @info: Struct containing potential arguments.
  * Return: Always 0
  */
-int _myenv(info_t *info)
+int _hshenv(info_t *info)
 {
 	print_list_str(info->env);
 	return (0);
@@ -13,11 +13,11 @@ int _myenv(info_t *info)
 
 
 /**
- * get_environ - returns a string array copy of hsh environment.
+ * _get_hshenv - returns a string array copy of hsh environment.
  * @info: Struct containing potential arguments.
  * Return: Always 0
  */
-char **get_environ(info_t *info)
+char **_get_hshenv(info_t *info)
 {
 	if (!info->environ || info->env_changed)
 	{

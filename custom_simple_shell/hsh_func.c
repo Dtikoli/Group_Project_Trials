@@ -51,14 +51,14 @@ int search_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
 	builtin_t builtintable[] = {
-		{"exit", _myexit},
-		{"env", _myenv},
-		{"help", _myhelp},
-		{"history", _myhistory},
-		{"setenv", _mysetenv},
-		{"unsetenv", _myunsetenv},
-		{"cd", _mycd},
-		{"alias", _myalias},
+		{"exit", _hshexit},
+		{"env", _hshenv},
+		{"help", _hshhelp},
+		{"history", _hshhistory},
+		{"setenv", _hshsetenv},
+		{"unsetenv", _hshunsetenv},
+		{"cd", _hshcd},
+		{"alias", _hshalias},
 		{NULL, NULL}
 	};
 
@@ -94,7 +94,7 @@ void _trace_cmd(info_t *info)
 	if (!k)
 		return;
 
-	path = find_path(info, _getenv(info, "PATH="), info->argv[0]);
+	path = find_path(info, get_env(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -102,7 +102,7 @@ void _trace_cmd(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || _getenv(info, "PATH=")
+		if ((interactive(info) || get_env(info, "PATH=")
 			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
 			_forkcmd(info);
 		else if (*(info->arg) != '\n')
@@ -130,7 +130,7 @@ void _forkcmd(info_t *info)
 	}
 	if (child_pid == 0)
 	{
-		if (execve(info->path, info->argv, get_environ(info)) == -1)
+		if (execve(info->path, info->argv, _get_hshenv(info)) == -1)
 		{
 			free_info(info, 1);
 			if (errno == EACCES)

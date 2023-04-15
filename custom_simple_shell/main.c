@@ -48,7 +48,7 @@ int main(int ac, char **av)
 		if (check_fd(fd, av))
 			return (EXIT_FAILURE);
 	}
-	populate_env_list(info);
+	fill_env_list(info);
 	read_history(info);
 	loop_hsh(info, av);
 	return (EXIT_SUCCESS);

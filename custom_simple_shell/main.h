@@ -157,11 +157,11 @@ char *_convert_num(long int, int, int);
 int err_atoi(char *);
 
 /* builtin emulators */
-int _myexit(info_t *);
-int _mycd(info_t *);
-int _myhelp(info_t *);
-int _myhistory(info_t *);
-int _myalias(info_t *);
+int _hshexit(info_t *);
+int _hshcd(info_t *);
+int _hshhelp(info_t *);
+int _hshhistory(info_t *);
+int _hshalias(info_t *);
 
 /* module for alias */
 int unset_alias(info_t *, char *);
@@ -181,12 +181,12 @@ void set_info(info_t *, char **);
 void free_info(info_t *, int);
 
 /*module for env */
-char *_getenv(info_t *, const char *);
-int _myenv(info_t *);
-int _mysetenv(info_t *);
-int _myunsetenv(info_t *);
-int populate_env_list(info_t *);
-char **get_environ(info_t *);
+char *get_env(info_t *, const char *);
+int _hshenv(info_t *);
+int _hshsetenv(info_t *);
+int _hshunsetenv(info_t *);
+int fill_env_list(info_t *);
+char **_get_hshenv(info_t *);
 int _unsetenv(info_t *, char *);
 int _setenv(info_t *, char *, char *);
 

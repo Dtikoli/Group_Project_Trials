@@ -1,22 +1,22 @@
 #include "main.h"
 
 /**
- * _myhistory - displays history list.
+ * _hshhistory - displays history list.
  * @info: Struct containing potential arguments.
  * Return: Always 0
  */
-int _myhistory(info_t *info)
+int _hshhistory(info_t *info)
 {
 	print_list(info->history);
 	return (0);
 }
 
 /**
- * _myalias - mimics alias builtin
+ * _hshalias - mimics alias builtin
  * @info: Struct containing potential arguments.
  * Return: Always 0
  */
-int _myalias(info_t *info)
+int _hshalias(info_t *info)
 {
 	int i = 0;
 	char *p = NULL;
@@ -46,11 +46,11 @@ int _myalias(info_t *info)
 
 
 /**
- * _myexit - shell exit builtin
+ * _hshexit - shell exit builtin
  * @info: Struct containing potential arguments.
  *  Return: exits with the specified exit status
  */
-int _myexit(info_t *info)
+int _hshexit(info_t *info)
 {
 	int exitcheck;
 
@@ -73,11 +73,11 @@ int _myexit(info_t *info)
 }
 
 /**
- * _mycd - controls changes of directories
+ * _hshcd - controls changes of directories
  * @info: Struct containing potential arguments.
  * Return: Always 0
  */
-int _mycd(info_t *info)
+int _hshcd(info_t *info)
 {
 	char *s, *dir, buffer[1024];
 	int chdir_ret;
@@ -87,22 +87,22 @@ int _mycd(info_t *info)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
 	if (!info->argv[1])
 	{
-		dir = _getenv(info, "HOME=");
+		dir = get_env(info, "HOME=");
 		if (!dir)
-			chdir_ret = chdir((dir = _getenv(info, "PWD=")) ? dir : "/");
+			chdir_ret = chdir((dir = get_env(info, "PWD=")) ? dir : "/");
 		else
 			chdir_ret = chdir(dir);
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
-		if (!_getenv(info, "OLDPWD="))
+		if (!get_env(info, "OLDPWD="))
 		{
 			_puts(s);
 			_putchar('\n');
 			return (1);
 		}
-		_puts(_getenv(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = chdir((dir = _getenv(info, "OLDPWD=")) ? dir : "/");
+		_puts(get_env(info, "OLDPWD=")), _putchar('\n');
+		chdir_ret = chdir((dir = get_env(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
 		chdir_ret = chdir(info->argv[1]);
@@ -113,18 +113,18 @@ int _mycd(info_t *info)
 	}
 	else
 	{
-		_setenv(info, "OLDPWD", _getenv(info, "PWD="));
+		_setenv(info, "OLDPWD", get_env(info, "PWD="));
 		_setenv(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }
 
 /**
- * _myhelp - controls help calls
+ * _hshhelp - controls help calls
  * @info: Struct containing potential arguments.
  * Return: Always 0
  */
-int _myhelp(info_t *info)
+int _hshhelp(info_t *info)
 {
 	char **arg_array;
 

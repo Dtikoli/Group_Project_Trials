@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * _getenv - returns the value of an environmental variable
+ * get_env - returns the value of an environmental variable
  * @info: Struct containing potential arguments.
  * @name: name of environmental variable
  * Return: value of environmental variable
  */
-char *_getenv(info_t *info, const char *name)
+char *get_env(info_t *info, const char *name)
 {
 	list_t *node = info->env;
 	char *p;
@@ -22,11 +22,11 @@ char *_getenv(info_t *info, const char *name)
 }
 
 /**
- * _mysetenv - sets environmental variable on hsh
+ * _hshsetenv - sets environmental variable on hsh
  * @info: Struct containing potential arguments.
  *  Return: Always 0
  */
-int _mysetenv(info_t *info)
+int _hshsetenv(info_t *info)
 {
 	if (info->argc != 3)
 	{
@@ -39,11 +39,11 @@ int _mysetenv(info_t *info)
 }
 
 /**
- * _myunsetenv - unsets an environmental variable on hsh
+ * _hshunsetenv - unsets an environmental variable on hsh
  * @info: Struct containing potential arguments.
  *  Return: Always 0
  */
-int _myunsetenv(info_t *info)
+int _hshunsetenv(info_t *info)
 {
 	int i;
 
@@ -59,11 +59,11 @@ int _myunsetenv(info_t *info)
 }
 
 /**
- * populate_env_list - populates the new environment
+ * fill_env_list - populates the new environment
  * @info: Struct containing potential arguments.
  * Return: Always 0
  */
-int populate_env_list(info_t *info)
+int fill_env_list(info_t *info)
 {
 	list_t *node = NULL;
 	size_t i;
