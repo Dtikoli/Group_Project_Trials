@@ -1,10 +1,9 @@
 #include "main.h"
 
 /**
- * _strlen - returns the length of a string
- * @s: the string whose length to check
- *
- * Return: integer length of string
+ * _strlen - finds the length of a string
+ * @s: string
+ * Return: length of the string
  */
 int _strlen(char *s)
 {
@@ -19,11 +18,10 @@ int _strlen(char *s)
 }
 
 /**
- * starts_with - checks if needle starts with haystack
+ * starts_with - checks if a string starts with a prefix string
  * @haystack: string to search
- * @needle: the substring to find
- *
- * Return: address of next char of haystack or NULL
+ * @needle: prefix string
+ * Return: pointer to the next char of string or NULL
  */
 char *starts_with(const char *haystack, const char *needle)
 {
@@ -35,10 +33,9 @@ char *starts_with(const char *haystack, const char *needle)
 
 /**
  * _strcat - concatenates two strings
- * @dest: the destination buffer
- * @src: the source buffer
- *
- * Return: pointer to destination buffer
+ * @dest: destination string
+ * @src: source string
+ * Return: pointer to destination string
  */
 char *_strcat(char *dest, char *src)
 {
@@ -54,10 +51,9 @@ char *_strcat(char *dest, char *src)
 
 /**
  * _strcpy - copies a string
- * @dest: the destination
- * @src: the source
- *
- * Return: pointer to destination
+ * @dest: destination string
+ * @src: source string
+ * Return: pointer to destination string
  */
 char *_strcpy(char *dest, char *src)
 {
@@ -76,9 +72,8 @@ char *_strcpy(char *dest, char *src)
 
 /**
  * _strdup - duplicates a string
- * @str: the string to duplicate
- *
- * Return: pointer to the duplicated string
+ * @str: string to duplicate
+ * Return: pointer to the duplicate string
  */
 char *_strdup(const char *str)
 {

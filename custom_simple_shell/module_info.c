@@ -1,8 +1,8 @@
 #include "main.h"
 
 /**
- * clear_info - initializes info_t struct
- * @info: struct address
+ * clear_info - cleans linked list
+ * @info: struct containing potential arguments
  */
 void clear_info(info_t *info)
 {
@@ -13,9 +13,9 @@ void clear_info(info_t *info)
 }
 
 /**
- * set_info - initializes info_t struct
- * @info: struct address
- * @av: argument vector
+ * set_info - initializes linked list
+ * @info: struct containing potential arguments
+ * @av: array of strings
  */
 void set_info(info_t *info, char **av)
 {
@@ -45,9 +45,9 @@ void set_info(info_t *info, char **av)
 }
 
 /**
- * free_info - frees info_t struct fields
- * @info: struct address
- * @all: true if freeing all fields
+ * free_info - frees linked list
+ * @info: struct containing potental arguments
+ * @all: true if freeing fields
  */
 void free_info(info_t *info, int all)
 {

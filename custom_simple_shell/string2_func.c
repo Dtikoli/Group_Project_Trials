@@ -1,11 +1,10 @@
 #include "main.h"
 
 /**
- * _strcmp - performs lexicogarphic comparison of two strangs.
- * @s1: the first strang
- * @s2: the second strang
- *
- * Return: negative if s1 < s2, positive if s1 > s2, zero if s1 == s2
+ * _strcmp - compares two strangs and check if they are same.
+ * @s1: string 1
+ * @s2: string 2
+ * Return: 0 is strings are same, other a negative or postive integer.
  */
 int _strcmp(char *s1, char *s2)
 {
@@ -24,10 +23,10 @@ int _strcmp(char *s1, char *s2)
 
 /**
  **_strncpy - copies a string
- *@dest: the destination string to be copied to
- *@src: the source string
- *@n: the amount of characters to be copied
- *Return: the concatenated string
+ *@dest: destination string
+ *@src: source string
+ *@n: number of bytes to copy
+ *Return: a pointer to the destination string
  */
 char *_strncpy(char *dest, char *src, int n)
 {
@@ -54,10 +53,10 @@ char *_strncpy(char *dest, char *src, int n)
 
 /**
  **_strncat - concatenates two strings
- *@dest: the first string
- *@src: the second string
- *@n: the amount of bytes to be maximally used
- *Return: the concatenated string
+ *@dest: destination string
+ *@src: source string
+ *@n: number of bytes to concatenate
+ *Return: a pointer to the destination string
  */
 char *_strncat(char *dest, char *src, int n)
 {
@@ -80,10 +79,10 @@ char *_strncat(char *dest, char *src, int n)
 }
 
 /**
- **_strchr - locates a character in a string
- *@s: the string to be parsed
- *@c: the character to look for
- *Return: (s) a pointer to the memory area s
+ **_strchr - locates a char in a string
+ *@s: string to be parsed
+ *@c: char to look for
+ *Return: a pointer to the located char
  */
 char *_strchr(char *s, char c)
 {
@@ -96,10 +95,10 @@ char *_strchr(char *s, char c)
 }
 
 /**
- * **strtow - splits a string into words. Repeat delimiters are ignored
- * @str: the input string
- * @d: the delimeter string
- * Return: a pointer to an array of strings, or NULL on failure
+ * **strtow - splits a string into words. Ingores repeated delims.
+ * @str: parsed string
+ * @d: delim string
+ * Return: a pointer to an array of strings, NULL on failure
  */
 
 char **strtow(char *str, char *d)
