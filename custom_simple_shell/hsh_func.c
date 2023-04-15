@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * hsh - Custom shell loop
+ * loop_hsh - Custom shell loop
  * @info: struct containing potential arguments
  * @av: string array of command line arguments
  * Return: 0 on success, appropriate exit code on error
  */
-int hsh(info_t *info, char **av)
+int loop_hsh(info_t *info, char **av)
 {
 	ssize_t r = 0;
 	int builtin_ret = 0;
@@ -21,9 +21,9 @@ int hsh(info_t *info, char **av)
 		if (r != -1)
 		{
 			set_info(info, av);
-			builtin_ret = find_builtin(info);
+			builtin_ret = search_builtin(info);
 			if (builtin_ret == -1)
-				find_cmd(info);
+				_trace_cmd(info);
 		}
 		else if (interactive(info))
 			_putchar('\n');
@@ -43,14 +43,14 @@ int hsh(info_t *info, char **av)
 }
 
 /**
- * find_builtin - looks for a builtin command
+ * search_builtin - looks for a builtin command
  * @info: struct containing potential arguments
  * Return: the appropriate exit code
  */
-int find_builtin(info_t *info)
+int search_builtin(info_t *info)
 {
 	int i, built_in_ret = -1;
-	builtin_table builtintbl[] = {
+	builtin_t builtintable[] = {
 		{"exit", _myexit},
 		{"env", _myenv},
 		{"help", _myhelp},
@@ -62,22 +62,22 @@ int find_builtin(info_t *info)
 		{NULL, NULL}
 	};
 
-	for (i = 0; builtintbl[i].type; i++)
-		if (_strcmp(info->argv[0], builtintbl[i].type) == 0)
+	for (i = 0; builtintable[i].type; i++)
+		if (_strcmp(info->argv[0], builtintable[i].type) == 0)
 		{
 			info->line_count++;
-			built_in_ret = builtintbl[i].func(info);
+			built_in_ret = builtintable[i].func(info);
 			break;
 		}
 	return (built_in_ret);
 }
 
 /**
- * find_cmd - trace the command in PATH
+ * _trace_cmd - trace the command in PATH
  * @info: struct containing potential arguments
  * Return: Nothing
  */
-void find_cmd(info_t *info)
+void _trace_cmd(info_t *info)
 {
 	char *path = NULL;
 	int i, k;
@@ -98,13 +98,13 @@ void find_cmd(info_t *info)
 	if (path)
 	{
 		info->path = path;
-		fork_cmd(info);
+		_forkcmd(info);
 	}
 	else
 	{
 		if ((interactive(info) || _getenv(info, "PATH=")
 			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
-			fork_cmd(info);
+			_forkcmd(info);
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
@@ -114,11 +114,11 @@ void find_cmd(info_t *info)
 }
 
 /**
- * fork_cmd - forks a an executed thread to run cmd
+ * _forkcmd - forks a an executed thread to run cmd
  * @info: struct containing potential arguments
  * Return: Nothing
  */
-void fork_cmd(info_t *info)
+void _forkcmd(info_t *info)
 {
 	pid_t child_pid;
 

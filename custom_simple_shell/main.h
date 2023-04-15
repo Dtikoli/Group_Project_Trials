@@ -104,13 +104,13 @@ typedef struct _builtin
 {
 	char *type;
 	int (*func)(info_t *);
-} builtin_table;
+} builtin_t;
 
 /* hsh functions */
-int hsh(info_t *, char **);
-int find_builtin(info_t *);
-void find_cmd(info_t *);
-void fork_cmd(info_t *);
+int loop_hsh(info_t *, char **);
+int search_builtin(info_t *);
+void _trace_cmd(info_t *);
+void _forkcmd(info_t *);
 
 /* path functions*/
 int is_cmd(info_t *, char *);
