@@ -1,10 +1,10 @@
 #include "main.h"
 
 /**
- * clear_info - cleans linked list
+ * _info_unset - unsets linked list
  * @info: struct containing potential arguments
  */
-void clear_info(info_t *info)
+void _info_unset(info_t *info)
 {
 	info->arg = NULL;
 	info->argv = NULL;
@@ -13,11 +13,11 @@ void clear_info(info_t *info)
 }
 
 /**
- * set_info - initializes linked list
+ * _info_set - initializes linked list
  * @info: struct containing potential arguments
  * @av: array of strings
  */
-void set_info(info_t *info, char **av)
+void _info_set(info_t *info, char **av)
 {
 	int i = 0;
 
@@ -45,11 +45,11 @@ void set_info(info_t *info, char **av)
 }
 
 /**
- * free_info - frees linked list
+ * _info_free - frees linked list
  * @info: struct containing potental arguments
  * @all: true if freeing fields
  */
-void free_info(info_t *info, int all)
+void _info_free(info_t *info, int all)
 {
 	free_str(info->argv);
 	info->argv = NULL;

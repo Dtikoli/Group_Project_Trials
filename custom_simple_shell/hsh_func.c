@@ -13,24 +13,24 @@ int loop_hsh(info_t *info, char **av)
 
 	while (r != -1 && builtin_ret != -2)
 	{
-		clear_info(info);
+		_info_unset(info);
 		if (interactive(info))
 			_puts("$ ");
 		err_putc(BUFF_FLUSH);
 		r = get_input(info);
 		if (r != -1)
 		{
-			set_info(info, av);
+			_info_set(info, av);
 			builtin_ret = search_builtin(info);
 			if (builtin_ret == -1)
 				_trace_cmd(info);
 		}
 		else if (interactive(info))
 			_putchar('\n');
-		free_info(info, 0);
+		_info_free(info, 0);
 	}
 	write_history(info);
-	free_info(info, 1);
+	_info_free(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
 	if (builtin_ret == -2)
@@ -132,7 +132,7 @@ void _forkcmd(info_t *info)
 	{
 		if (execve(info->path, info->argv, _get_hshenv(info)) == -1)
 		{
-			free_info(info, 1);
+			_info_free(info, 1);
 			if (errno == EACCES)
 				exit(126);
 			exit(1);

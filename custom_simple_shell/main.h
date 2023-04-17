@@ -176,9 +176,9 @@ ssize_t input_buf(info_t *, char **, size_t *);
 ssize_t read_buf(info_t *, char *, size_t *);
 
 /* module for info */
-void clear_info(info_t *);
-void set_info(info_t *, char **);
-void free_info(info_t *, int);
+void _info_unset(info_t *);
+void _info_set(info_t *, char **);
+void _info_free(info_t *, int);
 
 /*module for env */
 char *get_env(info_t *, const char *);
