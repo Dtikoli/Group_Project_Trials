@@ -138,9 +138,9 @@ char **strtow(char *, char *);
 
 /* memory functions */
 char *_memset(char *, char, unsigned int);
-void ffree(char **);
+void free_str(char **);
 void *_realloc(void *, unsigned int, unsigned int);
-int bfree(void **);
+int free_buff(void **);
 
 /* helper functions */
 void _puts(char *);

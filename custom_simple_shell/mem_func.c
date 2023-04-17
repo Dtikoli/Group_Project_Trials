@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * bfree - frees a pointer and set it to NULLs
- * @ptr: address of pointer
+ * free_buff - frees a buffer pointer and set it to NULLs
+ * @ptr: address of buffer pointer
  * Return: 1 on success, otherwise 0.
  */
-int bfree(void **ptr)
+int free_buff(void **ptr)
 {
 	if (ptr && *ptr)
 	{
@@ -34,10 +34,10 @@ char *_memset(char *s, char b, unsigned int n)
 }
 
 /**
- * ffree - frees an array of strings
+ * free_str - frees an array of strings
  * @pp: an of strings
  */
-void ffree(char **pp)
+void free_str(char **pp)
 {
 	char **a = pp;
 
