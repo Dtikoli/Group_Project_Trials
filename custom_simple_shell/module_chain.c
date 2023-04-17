@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * is_chain - checks for chain delim in current char in buffer
+ * _ischain - checks for chain delim in buffer
  * @info: struct containing potential arguments
  * @buf: char buffer
  * @p: address of current position in buf
  * Return: 1 if success, 0 otherwise
  */
-int is_chain(info_t *info, char *buf, size_t *p)
+int _ischain(info_t *info, char *buf, size_t *p)
 {
 	size_t j = *p;
 
@@ -35,7 +35,7 @@ int is_chain(info_t *info, char *buf, size_t *p)
 }
 
 /**
- * check_chain - check for chaining continuation based on last status
+ * _chain_check - check for chaining continuation based on last status
  * @info: struct containing potential arguments
  * @buf: char buffer
  * @p: pointer to current buffer position
@@ -43,7 +43,7 @@ int is_chain(info_t *info, char *buf, size_t *p)
  * @len: buffer length
  * Return: Void
  */
-void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
+void _chain_check(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 {
 	size_t j = *p;
 
@@ -68,11 +68,11 @@ void check_chain(info_t *info, char *buf, size_t *p, size_t i, size_t len)
 }
 
 /**
- * replace_alias - replaces aliases in tokenized string
+ * _alias_tr - replaces aliases in tokenized string
  * @info: struct containing potential arguments
  * Return: 1 if successful, 0 otherwise
  */
-int replace_alias(info_t *info)
+int _alias_tr(info_t *info)
 {
 	int i;
 	list_t *node;
@@ -96,11 +96,11 @@ int replace_alias(info_t *info)
 }
 
 /**
- * replace_vars - replaces variables in the tokenized string
+ * _var_tr - replaces variables in the tokenized string
  * @info: struct containing potential arguments
  * Return: 1 if successful, 0 otherwise
  */
-int replace_vars(info_t *info)
+int _var_tr(info_t *info)
 {
 	int i = 0;
 	list_t *node;
@@ -112,36 +112,36 @@ int replace_vars(info_t *info)
 
 		if (!_strcmp(info->argv[i], "$?"))
 		{
-			replace_string(&(info->argv[i]),
+			_str_tr(&(info->argv[i]),
 				_strdup(_convert_num(info->status, 10, 0)));
 			continue;
 		}
 		if (!_strcmp(info->argv[i], "$$"))
 		{
-			replace_string(&(info->argv[i]),
+			_str_tr(&(info->argv[i]),
 				_strdup(_convert_num(getpid(), 10, 0)));
 			continue;
 		}
 		node = node_starts_with(info->env, &info->argv[i][1], '=');
 		if (node)
 		{
-			replace_string(&(info->argv[i]),
+			_str_tr(&(info->argv[i]),
 				_strdup(_strchr(node->str, '=') + 1));
 			continue;
 		}
-		replace_string(&info->argv[i], _strdup(""));
+		_str_tr(&info->argv[i], _strdup(""));
 
 	}
 	return (0);
 }
 
 /**
- * replace_string - replaces an old string
+ * _str_tr - replaces an old string
  * @old: pointer to old string
  * @new: new string
  * Return: 1 if succesful, 0 otherwise
  */
-int replace_string(char **old, char *new)
+int _str_tr(char **old, char *new)
 {
 	free(*old);
 	*old = new;

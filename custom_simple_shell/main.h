@@ -191,11 +191,11 @@ int _unsetenv(info_t *, char *);
 int _setenv(info_t *, char *, char *);
 
 /* module for chain */
-int is_chain(info_t *, char *, size_t *);
-void check_chain(info_t *, char *, size_t *, size_t, size_t);
-int replace_alias(info_t *);
-int replace_vars(info_t *);
-int replace_string(char **, char *);
+int _ischain(info_t *, char *, size_t *);
+void _chain_check(info_t *, char *, size_t *, size_t, size_t);
+int _alias_tr(info_t *);
+int _var_tr(info_t *);
+int _str_tr(char **, char *);
 
 /* file input/output_functions */
 char *get_history_file(info_t *info);
