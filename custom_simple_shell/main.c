@@ -49,7 +49,7 @@ int main(int ac, char **av)
 			return (EXIT_FAILURE);
 	}
 	fill_env_list(info);
-	read_history(info);
+	hist_read(info);
 	loop_hsh(info, av);
 	return (EXIT_SUCCESS);
 }

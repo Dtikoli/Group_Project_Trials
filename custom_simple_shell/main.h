@@ -198,11 +198,11 @@ int _var_tr(info_t *);
 int _str_tr(char **, char *);
 
 /* file input/output_functions */
-char *get_history_file(info_t *info);
-int write_history(info_t *info);
-int read_history(info_t *info);
-int build_history_list(info_t *info, char *, int);
-int renumber_history(info_t *info);
+char *hist_get(info_t *info);
+int hist_write(info_t *info);
+int hist_read(info_t *info);
+int hist_build(info_t *info, char *, int);
+int hist_renum(info_t *info);
 
 /* lists_t functions */
 list_t *add_node(list_t **, const char *, int);

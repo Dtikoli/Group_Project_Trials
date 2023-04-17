@@ -29,7 +29,7 @@ int loop_hsh(info_t *info, char **av)
 			_putchar('\n');
 		_info_free(info, 0);
 	}
-	write_history(info);
+	hist_write(info);
 	_info_free(info, 1);
 	if (!interactive(info) && info->status)
 		exit(info->status);
