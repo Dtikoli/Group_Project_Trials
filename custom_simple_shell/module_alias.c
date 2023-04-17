@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * unset_alias - unsets alias to string
+ * _alias_unset - unsets the alias
  * @info: struct containing potential arguments
  * @str: string alias
  * Return: 0 on success, 1 otherwise
  */
-int unset_alias(info_t *info, char *str)
+int _alias_unset(info_t *info, char *str)
 {
 	char *p, c;
 	int ret;
@@ -23,12 +23,12 @@ int unset_alias(info_t *info, char *str)
 }
 
 /**
- * set_alias - sets alias to string
+ * _alias_set - sets alias to string
  * @info: struct containing potential arguments
  * @str: string alias
  * Return: 0 on success, 1 otherwise
  */
-int set_alias(info_t *info, char *str)
+int _alias_set(info_t *info, char *str)
 {
 	char *p;
 
@@ -36,18 +36,18 @@ int set_alias(info_t *info, char *str)
 	if (!p)
 		return (1);
 	if (!*++p)
-		return (unset_alias(info, str));
+		return (_alias_unset(info, str));
 
-	unset_alias(info, str);
+	_alias_unset(info, str);
 	return (add_node_end(&(info->alias), str, 0) == NULL);
 }
 
 /**
- * print_alias - prints an alias string
+ * _alias_print - prints an alias string
  * @node: the alias node
  * Return: Always 0 on success, 1 on error
  */
-int print_alias(list_t *node)
+int _alias_print(list_t *node)
 {
 	char *p = NULL, *a = NULL;
 

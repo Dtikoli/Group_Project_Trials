@@ -164,9 +164,9 @@ int _hshhistory(info_t *);
 int _hshalias(info_t *);
 
 /* module for alias */
-int unset_alias(info_t *, char *);
-int set_alias(info_t *, char *);
-int print_alias(list_t *);
+int _alias_unset(info_t *, char *);
+int _alias_set(info_t *, char *);
+int _alias_print(list_t *);
 
 /* module for getline */
 ssize_t get_input(info_t *);

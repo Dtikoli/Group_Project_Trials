@@ -27,7 +27,7 @@ int _hshalias(info_t *info)
 		node = info->alias;
 		while (node)
 		{
-			print_alias(node);
+			_alias_print(node);
 			node = node->next;
 		}
 		return (0);
@@ -36,9 +36,9 @@ int _hshalias(info_t *info)
 	{
 		p = _strchr(info->argv[i], '=');
 		if (p)
-			set_alias(info, info->argv[i]);
+			_alias_set(info, info->argv[i]);
 		else
-			print_alias(node_starts_with(info->alias, info->argv[i], '='));
+			_alias_print(node_starts_with(info->alias, info->argv[i], '='));
 	}
 
 	return (0);
