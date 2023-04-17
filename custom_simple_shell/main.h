@@ -147,7 +147,7 @@ void _puts(char *);
 int _putchar(char);
 int is_delim(char, char *);
 int _isalpha(int);
-void remove_comments(char *);
+void handle_comments(char *);
 
 /* conversion functions */
 int dec_print(int, int);

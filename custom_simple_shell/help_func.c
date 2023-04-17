@@ -29,11 +29,11 @@ int _isalpha(int c)
 }
 
 /**
- * remove_comments - checks and removes comments
+ * handle_comments - checks and removes comments
  * @buf: string to modify
  * Return: Always 0
  */
-void remove_comments(char *buf)
+void handle_comments(char *buf)
 {
 	int i;
 
