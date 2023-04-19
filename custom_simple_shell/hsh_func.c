@@ -94,7 +94,7 @@ void _trace_cmd(info_t *info)
 	if (!k)
 		return;
 
-	path = find_path(info, get_env(info, "PATH="), info->argv[0]);
+	path = _path_trace(info, get_env(info, "PATH="), info->argv[0]);
 	if (path)
 	{
 		info->path = path;
@@ -103,7 +103,7 @@ void _trace_cmd(info_t *info)
 	else
 	{
 		if ((interactive(info) || get_env(info, "PATH=")
-			|| info->argv[0][0] == '/') && is_cmd(info, info->argv[0]))
+			|| info->argv[0][0] == '/') && _iscmd(info, info->argv[0]))
 			_forkcmd(info);
 		else if (*(info->arg) != '\n')
 		{

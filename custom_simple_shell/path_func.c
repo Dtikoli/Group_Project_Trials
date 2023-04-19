@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * is_cmd - checks if file is executable command
+ * _iscmd - checks if file is executable command
  * @info: struct containibg potential arguments
  * @path: file file
  * Return: 1 if true, 0 otherwise
  */
-int is_cmd(info_t *info, char *path)
+int _iscmd(info_t *info, char *path)
 {
 	struct stat st;
 
@@ -22,13 +22,13 @@ int is_cmd(info_t *info, char *path)
 }
 
 /**
- * dup_chars - duplicates chars
+ * _chars_dup - duplicates chars
  * @pathstr: PATH list
  * @start: start index
  * @stop: stop index
  * Return: pointer to duplicated chars
  */
-char *dup_chars(char *pathstr, int start, int stop)
+char *_chars_dup(char *pathstr, int start, int stop)
 {
 	static char buf[1024];
 	int i = 0, k = 0;
@@ -41,13 +41,13 @@ char *dup_chars(char *pathstr, int start, int stop)
 }
 
 /**
- * find_path - searches for cmd in the PATH list
+ * _path_trace - searches for cmd in the PATH list
  * @info: struct containing potential arguments
  * @pathstr: PATH list
  * @cmd: command to find
  * Return: path of cmd if found, NULL otherwise
  */
-char *find_path(info_t *info, char *pathstr, char *cmd)
+char *_path_trace(info_t *info, char *pathstr, char *cmd)
 {
 	int i = 0, curr_pos = 0;
 	char *path;
@@ -56,14 +56,14 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 		return (NULL);
 	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
 	{
-		if (is_cmd(info, cmd))
+		if (_iscmd(info, cmd))
 			return (cmd);
 	}
 	while (1)
 	{
 		if (!pathstr[i] || pathstr[i] == ':')
 		{
-			path = dup_chars(pathstr, curr_pos, i);
+			path = _chars_dup(pathstr, curr_pos, i);
 			if (!*path)
 				_strcat(path, cmd);
 			else
@@ -71,7 +71,7 @@ char *find_path(info_t *info, char *pathstr, char *cmd)
 				_strcat(path, "/");
 				_strcat(path, cmd);
 			}
-			if (is_cmd(info, path))
+			if (_iscmd(info, path))
 				return (path);
 			if (!pathstr[i])
 				break;

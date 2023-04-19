@@ -61,7 +61,7 @@ typedef struct list_s
  *@line_count: error count
  *@err_num: error code for exit function
  *@linecount_flag: count this line of input when on
- *@fname: tprogram filename
+ *@fname: program filename
  *@env: linked list local copy of environ
  *@environ: custom modified copy of environ from local env
  *@history: command history
@@ -113,9 +113,9 @@ void _trace_cmd(info_t *);
 void _forkcmd(info_t *);
 
 /* path functions*/
-int is_cmd(info_t *, char *);
-char *dup_chars(char *, int, int);
-char *find_path(info_t *, char *, char *);
+int _iscmd(info_t *, char *);
+char *_chars_dup(char *, int, int);
+char *_path_trace(info_t *, char *, char *);
 
 /* error functions */
 void err_puts(char *);
