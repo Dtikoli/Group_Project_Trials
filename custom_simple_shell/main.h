@@ -133,8 +133,8 @@ char *_strcpy(char *, char *);
 char *_strdup(const char *);
 char *_strncpy(char *, char *, int);
 char *_strncat(char *, char *, int);
+char *_strstr(char *, char *);
 char *_strchr(char *, char);
-char **strtow(char *, char *);
 
 /* memory functions */
 char *_memset(char *, char, unsigned int);
@@ -151,10 +151,10 @@ void handle_comments(char *);
 
 /* conversion functions */
 int dec_print(int, int);
-int interactive(info_t *);
 int _atoi(char *);
 char *_convert_num(long int, int, int);
 int err_atoi(char *);
+char **strtow(char *, char *);
 
 /* builtin emulators */
 int _hshexit(info_t *);
@@ -179,6 +179,7 @@ ssize_t read_buf(info_t *, char *, size_t *);
 void _info_unset(info_t *);
 void _info_set(info_t *, char **);
 void _info_free(info_t *, int);
+int interactive(info_t *);
 
 /*module for env */
 char *get_env(info_t *, const char *);
