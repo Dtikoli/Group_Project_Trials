@@ -95,50 +95,22 @@ char *_strchr(char *s, char c)
 }
 
 /**
- * **strtow - splits a string into words. Ingores repeated delims.
- * @str: parsed string
- * @d: delim string
- * Return: a pointer to an array of strings, NULL on failure
- */
-
-char **strtow(char *str, char *d)
+ * _strstr - locates a substring
+ * @haystack: string to be scanned
+ * @needle: string containing the sequence of characters to match
+ * Return: pointer to the beginning of the located substring, or NULL if the
+*/
+char *_strstr(char *haystack, char *needle)
 {
-	int i, j, k, m, numwords = 0;
-	char **s;
+	int i, j;
 
-	if (str == NULL || str[0] == 0)
-		return (NULL);
-	if (!d)
-		d = " ";
-	for (i = 0; str[i] != '\0'; i++)
-		if (!is_delim(str[i], d) && (is_delim(str[i + 1], d) || !str[i + 1]))
-			numwords++;
-
-	if (numwords == 0)
-		return (NULL);
-	s = malloc((1 + numwords) * sizeof(char *));
-	if (!s)
-		return (NULL);
-	for (i = 0, j = 0; j < numwords; j++)
+	for (i = 0; haystack[i]; i++)
 	{
-		while (is_delim(str[i], d))
-			i++;
-		k = 0;
-		while (!is_delim(str[i + k], d) && str[i + k])
-			k++;
-		s[j] = malloc((k + 1) * sizeof(char));
-		if (!s[j])
-		{
-			for (k = 0; k < j; k++)
-				free(s[k]);
-			free(s);
-			return (NULL);
-		}
-		for (m = 0; m < k; m++)
-			s[j][m] = str[i++];
-		s[j][m] = 0;
+		for (j = 0; needle[j] && haystack[i + j]; j++)
+			if (haystack[i + j] != needle[j])
+				break;
+		if (!needle[j])
+			return (haystack + i);
 	}
-	s[j] = NULL;
-	return (s);
+	return (NULL);
 }
-
