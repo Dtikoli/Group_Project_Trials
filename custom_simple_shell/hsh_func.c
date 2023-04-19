@@ -14,7 +14,7 @@ int loop_hsh(info_t *info, char **av)
 	while (r != -1 && builtin_ret != -2)
 	{
 		_info_unset(info);
-		if (interactive(info))
+		if (mode_interact(info))
 			_puts("$ ");
 		err_putc(BUFF_FLUSH);
 		r = _getinput(info);
@@ -25,13 +25,13 @@ int loop_hsh(info_t *info, char **av)
 			if (builtin_ret == -1)
 				_trace_cmd(info);
 		}
-		else if (interactive(info))
+		else if (mode_interact(info))
 			_putchar('\n');
 		_info_free(info, 0);
 	}
 	hist_write(info);
 	_info_free(info, 1);
-	if (!interactive(info) && info->status)
+	if (!mode_interact(info) && info->status)
 		exit(info->status);
 	if (builtin_ret == -2)
 	{
@@ -89,7 +89,7 @@ void _trace_cmd(info_t *info)
 		info->linecount_flag = 0;
 	}
 	for (i = 0, k = 0; info->arg[i]; i++)
-		if (!is_delim(info->arg[i], " \t\n"))
+		if (!_isdelim(info->arg[i], " \t\n"))
 			k++;
 	if (!k)
 		return;
@@ -102,7 +102,7 @@ void _trace_cmd(info_t *info)
 	}
 	else
 	{
-		if ((interactive(info) || get_env(info, "PATH=")
+		if ((mode_interact(info) || get_env(info, "PATH=")
 			|| info->argv[0][0] == '/') && _iscmd(info, info->argv[0]))
 			_forkcmd(info);
 		else if (*(info->arg) != '\n')

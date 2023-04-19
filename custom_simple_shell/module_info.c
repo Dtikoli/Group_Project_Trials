@@ -74,11 +74,11 @@ void _info_free(info_t *info, int all)
 }
 
 /**
- * interactive - controls shell's interactive mode
+ * mode_interact - controls shell's interactive mode
  * @info: struct containing potential arguments
  * Return: 1 for interactive mode
  */
-int interactive(info_t *info)
+int mode_interact(info_t *info)
 {
 	return (isatty(STDIN_FILENO) && info->readfd <= 2);
 }

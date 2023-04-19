@@ -145,7 +145,7 @@ int free_buff(void **);
 /* helper functions */
 void _puts(char *);
 int _putchar(char);
-int is_delim(char, char *);
+int _isdelim(char, char *);
 int _isalpha(int);
 void handle_comments(char *);
 
@@ -171,7 +171,7 @@ int _alias_print(list_t *);
 /* module for getline */
 ssize_t _getinput(info_t *);
 int get_line(info_t *, char **, size_t *);
-void sigintHandler(int);
+void _sigint_handle(int);
 ssize_t _buff_input(info_t *, char **, size_t *);
 ssize_t _buff_read(info_t *, char *, size_t *);
 
@@ -179,7 +179,7 @@ ssize_t _buff_read(info_t *, char *, size_t *);
 void _info_unset(info_t *);
 void _info_set(info_t *, char **);
 void _info_free(info_t *, int);
-int interactive(info_t *);
+int mode_interact(info_t *);
 
 /*module for env */
 char *get_env(info_t *, const char *);

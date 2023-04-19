@@ -16,7 +16,7 @@ ssize_t _buff_input(info_t *info, char **buf, size_t *len)
 	{
 		free(*buf);
 		*buf = NULL;
-		signal(SIGINT, sigintHandler);
+		signal(SIGINT, _sigint_handle);
 #if USE_GETLINE
 		r = getline(buf, &len_p, stdin);
 #else
@@ -153,11 +153,11 @@ int get_line(info_t *info, char **ptr, size_t *length)
 }
 
 /**
- * sigintHandler - blocks CTRL-C
+ * _sigint_handle - blocks CTRL-C
  * @sig_num: signal inumber
  * Return: Nothing
  */
-void sigintHandler(__attribute__((unused))int sig_num)
+void _sigint_handle(__attribute__((unused))int sig_num)
 {
 	_puts("\n");
 	_puts("$ ");

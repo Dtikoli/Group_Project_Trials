@@ -1,12 +1,12 @@
 #include "main.h"
 
 /**
- * is_delim - checks for delim chars
+ * _isdelim - checks for delim chars
  * @c: char to check
  * @delim: delimeter string
  * Return: 1 if true, otherwise 0
  */
-int is_delim(char c, char *delim)
+int _isdelim(char c, char *delim)
 {
 	while (*delim)
 		if (*delim++ == c)
