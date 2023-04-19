@@ -169,11 +169,11 @@ int _alias_set(info_t *, char *);
 int _alias_print(list_t *);
 
 /* module for getline */
-ssize_t get_input(info_t *);
-int _getline(info_t *, char **, size_t *);
+ssize_t _getinput(info_t *);
+int get_line(info_t *, char **, size_t *);
 void sigintHandler(int);
-ssize_t input_buf(info_t *, char **, size_t *);
-ssize_t read_buf(info_t *, char *, size_t *);
+ssize_t _buff_input(info_t *, char **, size_t *);
+ssize_t _buff_read(info_t *, char *, size_t *);
 
 /* module for info */
 void _info_unset(info_t *);

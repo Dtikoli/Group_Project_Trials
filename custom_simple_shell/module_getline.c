@@ -1,13 +1,13 @@
 #include "main.h"
 
 /**
- * input_buf - buffers chained commands
+ * _buff_input - buffer's chained commands
  * @info: parameter struct
  * @buf: address of buffer
  * @len: address of len var
  * Return: bytes read
  */
-ssize_t input_buf(info_t *info, char **buf, size_t *len)
+ssize_t _buff_input(info_t *info, char **buf, size_t *len)
 {
 	ssize_t r = 0;
 	size_t len_p = 0;
@@ -20,7 +20,7 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 #if USE_GETLINE
 		r = getline(buf, &len_p, stdin);
 #else
-		r = _getline(info, buf, &len_p);
+		r = get_line(info, buf, &len_p);
 #endif
 		if (r > 0)
 		{
@@ -44,11 +44,11 @@ ssize_t input_buf(info_t *info, char **buf, size_t *len)
 }
 
 /**
- * get_input - gets a line minus the newline
+ * _getinput - gets a line minus the newline
  * @info: parameter struct
  * Return: bytes read
  */
-ssize_t get_input(info_t *info)
+ssize_t _getinput(info_t *info)
 {
 	static char *buf; /* ';' command chain buffer */
 	static size_t i, j, len;
@@ -56,7 +56,7 @@ ssize_t get_input(info_t *info)
 	char **buf_p = &(info->arg), *p;
 
 	_putchar(BUFF_FLUSH);
-	r = input_buf(info, &buf, &len);
+	r = _buff_input(info, &buf, &len);
 	if (r == -1) /* EOF */
 		return (-1);
 	if (len)	/* there are commands left in the chain buffer */
@@ -88,13 +88,13 @@ ssize_t get_input(info_t *info)
 }
 
 /**
- * read_buf - reads the buffer
+ * _buff_read - reads the buffer
  * @info: struct containing potential arguments
  * @buf: buffer
  * @i: size
  * Return: r
  */
-ssize_t read_buf(info_t *info, char *buf, size_t *i)
+ssize_t _buff_read(info_t *info, char *buf, size_t *i)
 {
 	ssize_t r = 0;
 
@@ -107,13 +107,13 @@ ssize_t read_buf(info_t *info, char *buf, size_t *i)
 }
 
 /**
- * _getline - retrieves the next line of input from STDIN
+ * get_line - retrieves the next line of input from STDIN
  * @info: struct containing potential arguments
  * @ptr: double pointer to buffer
  * @length: size of malloc'd buffer if not NULL
  * Return: length of next line
  */
-int _getline(info_t *info, char **ptr, size_t *length)
+int get_line(info_t *info, char **ptr, size_t *length)
 {
 	static char buf[BUFF_SIZE];
 	static size_t i, len;
@@ -127,7 +127,7 @@ int _getline(info_t *info, char **ptr, size_t *length)
 	if (i == len)
 		i = len = 0;
 
-	r = read_buf(info, buf, &len);
+	r = _buff_read(info, buf, &len);
 	if (r == -1 || (r == 0 && len == 0))
 		return (-1);
 
