@@ -73,11 +73,11 @@ list_t *add_node_end(list_t **head, const char *str, int num)
 }
 
 /**
- * print_list_str - prints the string data of a linked list
+ * print_liststr - prints the string data of a linked list
  * @h: linked list
  * Return: number of elements
  */
-size_t print_list_str(const list_t *h)
+size_t print_liststr(const list_t *h)
 {
 	size_t i = 0;
 
@@ -92,12 +92,12 @@ size_t print_list_str(const list_t *h)
 }
 
 /**
- * delete_node_at_index - deletes a node at an index
+ * delete_node_index - deletes a node at an index
  * @head: head pointer
  * @index: index of node
  * Return: 1 on success, 0 otherwise
  */
-int delete_node_at_index(list_t **head, unsigned int index)
+int delete_node_index(list_t **head, unsigned int index)
 {
 	list_t *node, *prev_node;
 	unsigned int i = 0;

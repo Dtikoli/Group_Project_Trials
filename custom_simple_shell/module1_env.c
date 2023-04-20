@@ -7,7 +7,7 @@
  */
 int _hshenv(info_t *info)
 {
-	print_list_str(info->env);
+	print_liststr(info->env);
 	return (0);
 }
 
@@ -48,7 +48,7 @@ int _unsetenv(info_t *info, char *var)
 		p = _strstart(node->str, var);
 		if (p && *p == '=')
 		{
-			info->env_changed = delete_node_at_index(&(info->env), i);
+			info->env_changed = delete_node_index(&(info->env), i);
 			i = 0;
 			node = info->env;
 			continue;
