@@ -3,9 +3,9 @@
 /**
  * err_print - controls printing of error messages
  * @info: struct containing potential arguments
- * @estr: string containing error type
+ * @str: string containing error type
  */
-void err_print(info_t *info, char *estr)
+void err_print(info_t *info, char *str)
 {
 	err_puts(info->fname);
 	err_puts(": ");
@@ -13,7 +13,7 @@ void err_print(info_t *info, char *estr)
 	err_puts(": ");
 	err_puts(info->argv[0]);
 	err_puts(": ");
-	err_puts(estr);
+	err_puts(str);
 }
 
 /**
@@ -23,14 +23,10 @@ void err_print(info_t *info, char *estr)
  */
 void err_puts(char *str)
 {
-	int i = 0;
-
-	if (!str)
-		return;
-	while (str[i] != '\0')
+	while (*str)
 	{
-		err_putc(str[i]);
-		i++;
+		err_putc(*str);
+		str++;
 	}
 }
 
@@ -41,16 +37,16 @@ void err_puts(char *str)
  */
 int err_putc(char c)
 {
-	static int i;
-	static char buf[BUFF_SIZE];
+	static int len;
+	static char buff[BUFF_SIZE];
 
-	if (c == BUFF_FLUSH || i >= BUFF_SIZE)
+	if (c == BUFF_FLUSH || len >= BUFF_SIZE)
 	{
-		write(2, buf, i);
-		i = 0;
+		write(2, buff, len);
+		len = 0;
 	}
 	if (c != BUFF_FLUSH)
-		buf[i++] = c;
+		buff[len++] = c;
 	return (1);
 }
 
@@ -62,16 +58,16 @@ int err_putc(char c)
  */
 int fd_putc(char c, int fd)
 {
-	static int i;
-	static char buf[BUFF_SIZE];
+	static int len;
+	static char buff[BUFF_SIZE];
 
-	if (c == BUFF_FLUSH || i >= BUFF_SIZE)
+	if (c == BUFF_FLUSH || len >= BUFF_SIZE)
 	{
-		write(fd, buf, i);
-		i = 0;
+		write(fd, buff, len);
+		len = 0;
 	}
 	if (c != BUFF_FLUSH)
-		buf[i++] = c;
+		buff[len++] = c;
 	return (1);
 }
 
@@ -83,13 +79,14 @@ int fd_putc(char c, int fd)
  */
 int fd_puts(char *str, int fd)
 {
-	int i = 0;
+	int len = 0;
 
 	if (!str)
 		return (0);
 	while (*str)
 	{
-		i += fd_putc(*str++, fd);
+		len += fd_putc(*str, fd);
+		str++;
 	}
-	return (i);
+	return (len);
 }
