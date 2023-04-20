@@ -8,21 +8,21 @@
  */
 int loop_hsh(info_t *info, char **av)
 {
-	ssize_t r = 0;
-	int builtin_ret = 0;
+	ssize_t len = 0;
+	int ret = 0;
 
-	while (r != -1 && builtin_ret != -2)
+	while (len != -1 && ret != -2)
 	{
 		_info_unset(info);
 		if (mode_interact(info))
 			_puts("$ ");
 		err_putc(BUFF_FLUSH);
-		r = _getinput(info);
-		if (r != -1)
+		len = _getinput(info);
+		if (len != -1)
 		{
 			_info_set(info, av);
-			builtin_ret = search_builtin(info);
-			if (builtin_ret == -1)
+			ret = search_builtin(info);
+			if (ret == -1)
 				_trace_cmd(info);
 		}
 		else if (mode_interact(info))
@@ -33,13 +33,13 @@ int loop_hsh(info_t *info, char **av)
 	_info_free(info, 1);
 	if (!mode_interact(info) && info->status)
 		exit(info->status);
-	if (builtin_ret == -2)
+	if (ret == -2)
 	{
 		if (info->err_num == -1)
 			exit(info->status);
 		exit(info->err_num);
 	}
-	return (builtin_ret);
+	return (ret);
 }
 
 /**
@@ -49,7 +49,7 @@ int loop_hsh(info_t *info, char **av)
  */
 int search_builtin(info_t *info)
 {
-	int i, built_in_ret = -1;
+	int i, ret = -1;
 	builtin_t builtintable[] = {
 		{"exit", _hshexit},
 		{"env", _hshenv},
@@ -66,10 +66,10 @@ int search_builtin(info_t *info)
 		if (_strcmp(info->argv[0], builtintable[i].type) == 0)
 		{
 			info->line_count++;
-			built_in_ret = builtintable[i].func(info);
+			ret = builtintable[i].func(info);
 			break;
 		}
-	return (built_in_ret);
+	return (ret);
 }
 
 /**
@@ -80,7 +80,7 @@ int search_builtin(info_t *info)
 void _trace_cmd(info_t *info)
 {
 	char *path = NULL;
-	int i, k;
+	int i, count;
 
 	info->path = info->argv[0];
 	if (info->linecount_flag == 1)
@@ -88,10 +88,10 @@ void _trace_cmd(info_t *info)
 		info->line_count++;
 		info->linecount_flag = 0;
 	}
-	for (i = 0, k = 0; info->arg[i]; i++)
+	for (i = 0, count = 0; info->arg[i]; i++)
 		if (!_isdelim(info->arg[i], " \t\n"))
-			k++;
-	if (!k)
+			count++;
+	if (!count)
 		return;
 
 	path = _path_trace(info, get_env(info, "PATH="), info->argv[0]);
@@ -120,15 +120,15 @@ void _trace_cmd(info_t *info)
  */
 void _forkcmd(info_t *info)
 {
-	pid_t child_pid;
+	pid_t _chpid;
 
-	child_pid = fork();
-	if (child_pid == -1)
+	_chpid = fork();
+	if (_chpid == -1)
 	{
 		perror("Error:");
 		return;
 	}
-	if (child_pid == 0)
+	if (_chpid == 0)
 	{
 		if (execve(info->path, info->argv, _get_hshenv(info)) == -1)
 		{
