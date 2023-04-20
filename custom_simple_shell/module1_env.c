@@ -21,7 +21,7 @@ char **_get_hshenv(info_t *info)
 {
 	if (!info->environ || info->env_changed)
 	{
-		info->environ = list_to_strings(info->env);
+		info->environ = str_from_list(info->env);
 		info->env_changed = 0;
 	}
 

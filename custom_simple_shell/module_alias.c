@@ -17,7 +17,7 @@ int _alias_unset(info_t *info, char *str)
 	c = *p;
 	*p = 0;
 	ret = delete_node_index(&(info->alias),
-		get_node_index(info->alias, node_starts_with(info->alias, str, -1)));
+		get_node_index(info->alias, node_strstart(info->alias, str, -1)));
 	*p = c;
 	return (ret);
 }

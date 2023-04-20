@@ -80,7 +80,7 @@ int _alias_tr(info_t *info)
 
 	for (i = 0; i < 10; i++)
 	{
-		node = node_starts_with(info->alias, info->argv[0], '=');
+		node = node_strstart(info->alias, info->argv[0], '=');
 		if (!node)
 			return (0);
 		free(info->argv[0]);
@@ -122,7 +122,7 @@ int _var_tr(info_t *info)
 				_strdup(_convert_num(getpid(), 10, 0)));
 			continue;
 		}
-		node = node_starts_with(info->env, &info->argv[i][1], '=');
+		node = node_strstart(info->env, &info->argv[i][1], '=');
 		if (node)
 		{
 			_str_tr(&(info->argv[i]),

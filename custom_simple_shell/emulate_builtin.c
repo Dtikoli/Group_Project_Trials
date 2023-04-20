@@ -38,7 +38,7 @@ int _hshalias(info_t *info)
 		if (p)
 			_alias_set(info, info->argv[i]);
 		else
-			_alias_print(node_starts_with(info->alias, info->argv[i], '='));
+			_alias_print(node_strstart(info->alias, info->argv[i], '='));
 	}
 
 	return (0);

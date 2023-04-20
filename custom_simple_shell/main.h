@@ -121,8 +121,8 @@ char *_path_trace(info_t *, char *, char *);
 void err_puts(char *);
 void err_print(info_t *, char *);
 int err_putc(char);
-int fd_putc(char c, int fd);
-int fd_puts(char *str, int fd);
+int fd_putc(char, int);
+int fd_puts(char *, int);
 
 /* string functions.c */
 int _strlen(char *);
@@ -199,11 +199,11 @@ int _var_tr(info_t *);
 int _str_tr(char **, char *);
 
 /* file input/output_functions */
-char *hist_get(info_t *info);
-int hist_write(info_t *info);
-int hist_read(info_t *info);
-int hist_build(info_t *info, char *, int);
-int hist_renum(info_t *info);
+char *hist_get(info_t *);
+int hist_write(info_t *);
+int hist_read(info_t *);
+int hist_build(info_t *, char *, int);
+int hist_renum(info_t *);
 
 /* lists_t functions */
 list_t *add_node(list_t **, const char *, int);
@@ -212,9 +212,9 @@ size_t print_liststr(const list_t *);
 int delete_node_index(list_t **, unsigned int);
 void free_list(list_t **);
 size_t list_len(const list_t *);
-char **list_to_strings(list_t *);
+char **str_from_list(list_t *);
 size_t print_list(const list_t *);
-list_t *node_starts_with(list_t *, char *, char);
+list_t *node_strstart(list_t *, char *, char);
 ssize_t get_node_index(list_t *, list_t *);
 
 #endif /* #ifndef _MAIN_H_ */

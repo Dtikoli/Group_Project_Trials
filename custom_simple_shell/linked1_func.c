@@ -18,11 +18,11 @@ size_t list_len(const list_t *h)
 }
 
 /**
- * list_to_strings - returns the string data of a linked list
+ * str_from_list - returns the string data of a linked list
  * @head: linked list
  * Return: string data
  */
-char **list_to_strings(list_t *head)
+char **str_from_list(list_t *head)
 {
 	list_t *node = head;
 	size_t i = list_len(head), j;
@@ -76,13 +76,13 @@ size_t print_list(const list_t *h)
 }
 
 /**
- * node_starts_with - returns node starting with a prefix string
+ * node_strstart - returns node starting with a prefix string
  * @node: linked list
  * @prefix: prefix string
  * @c: next char after prefix string
  * Return: matched node or null
  */
-list_t *node_starts_with(list_t *node, char *prefix, char c)
+list_t *node_strstart(list_t *node, char *prefix, char c)
 {
 	char *p = NULL;
 
