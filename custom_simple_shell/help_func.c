@@ -3,14 +3,17 @@
 /**
  * _isdelim - checks for delim chars
  * @c: char to check
- * @delim: delimeter string
+ * @d: delimeter string
  * Return: 1 if true, otherwise 0
  */
-int _isdelim(char c, char *delim)
+int _isdelim(char c, char *d)
 {
-	while (*delim)
-		if (*delim++ == c)
+	while (*d)
+	{
+		if (*d == c)
 			return (1);
+		d++;
+	}
 	return (0);
 }
 
@@ -30,17 +33,17 @@ int _isalpha(int c)
 
 /**
  * handle_comments - checks and removes comments
- * @buf: string to modify
+ * @buff: string to modify
  * Return: Always 0
  */
-void handle_comments(char *buf)
+void handle_comments(char *buff)
 {
-	int i;
+	int j;
 
-	for (i = 0; buf[i] != '\0'; i++)
-		if (buf[i] == '#' && (!i || buf[i - 1] == ' '))
+	for (j = 0; buff[j]; j++)
+		if (buff[j] == '#' && (!j || buff[j - 1] == ' '))
 		{
-			buf[i] = '\0';
+			buff[j] = '\0';
 			break;
 		}
 }
