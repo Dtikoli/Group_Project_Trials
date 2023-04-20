@@ -1,137 +1,130 @@
 #include "main.h"
 
 /**
- * err_atoi - converts an string to decimal
- * @s: error string
+ * err_atoi - converts a string to decimal
+ * @str: error string
  * Return: converted number, -1 on error
  */
-int err_atoi(char *s)
+int err_atoi(char *str)
 {
 	int i = 0;
-	unsigned long int result = 0;
+	unsigned long int num = 0;
 
-	if (*s == '+')
-		s++;
-	for (i = 0;  s[i] != '\0'; i++)
+	if (*str == '+')
+		str++;
+	for (i = 0;  str[i]; i++)
 	{
-		if (s[i] >= '0' && s[i] <= '9')
+		if (str[i] >= '0' && str[i] <= '9')
 		{
-			result *= 10;
-			result += (s[i] - '0');
-			if (result > INT_MAX)
+			num = num * 10 + (str[i] - '0');
+			if (num > INT_MAX)
 				return (-1);
 		}
 		else
 			return (-1);
 	}
-	return (result);
+	return (num);
 }
 
 /**
  * dec_print - prints an integer
- * @input: input integer number
+ * @num: input integer number
  * @fd: filedescriptor
  * Return: count of printed chars
  */
-int dec_print(int input, int fd)
+int dec_print(int num, int fd)
 {
-	int (*__putchar)(char) = _putchar;
-	int i, count = 0;
-	unsigned int _abs_, current;
+	int (*_putc)(char) = _putchar;
+	int j, ret = 0;
+	unsigned int abs_num, cur;
 
 	if (fd == STDERR_FILENO)
-		__putchar = err_putc;
-	if (input < 0)
+		_putc = err_putc;
+	if (num < 0)
 	{
-		_abs_ = -input;
-		__putchar('-');
-		count++;
+		abs_num = -num;
+		_putc('-');
+		ret++;
 	}
 	else
-		_abs_ = input;
-	current = _abs_;
-	for (i = 1000000000; i > 1; i /= 10)
+		abs_num = num;
+	cur = abs_num;
+	for (j = 1000000000; j > 1; j /= 10)
 	{
-		if (_abs_ / i)
+		if (abs_num / j)
 		{
-			__putchar('0' + current / i);
-			count++;
+			_putc('0' + cur / j);
+			ret++;
 		}
-		current %= i;
+		cur %= j;
 	}
-	__putchar('0' + current);
-	count++;
+	_putc('0' + cur);
+	ret++;
 
-	return (count);
+	return (ret);
 }
 
 /**
  * _convert_num- converts a hexadecimal number
  * @num: input number
  * @base: input base
- * @flags: argument flags
+ * @flag: argument flags
  * Return: string
  */
-char *_convert_num(long int num, int base, int flags)
+char *_convert_num(long int num, int base, int flag)
 {
-	static char *array;
-	static char buffer[50];
-	char sign = 0;
-	char *ptr;
+	static char *str;
+	static char buff[50];
+	char sign;
+	char *p;
 	unsigned long n = num;
 
-	if (!(flags & CONVERT_UNSIGNED) && num < 0)
+	if (!(flag & CONVERT_UNSIGNED) && num < 0)
 	{
 		n = -num;
 		sign = '-';
 
 	}
-	array = flags & CONVERT_HEX ? "0123456789abcdef" : "0123456789ABCDEF";
-	ptr = &buffer[49];
-	*ptr = '\0';
+	str = flag & CONVERT_HEX ? "0123456789abcdef" : "0123456789ABCDEF";
+	p = &buff[49];
+	*p = '\0';
 
 	do	{
-		*--ptr = array[n % base];
+		*--p = str[n % base];
 		n /= base;
 	} while (n != 0);
 
 	if (sign)
-		*--ptr = sign;
-	return (ptr);
+		*--p = sign;
+	return (p);
 }
 
 /**
  *_atoi - converts a string to a decimal number
- *@s: string to be converted
+ *@str: string to be converted
  *Return: converted number
  */
 
-int _atoi(char *s)
+int _atoi(char *str)
 {
-	int i, sign = 1, flag = 0, output;
-	unsigned int result = 0;
+	int j, sign = 1, flag = 0;
+	unsigned int num = 0;
 
-	for (i = 0;  s[i] != '\0' && flag != 2; i++)
+	for (j = 0;  str[j] && flag != 2; j++)
 	{
-		if (s[i] == '-')
+		if (str[j] == '-')
 			sign *= -1;
 
-		if (s[i] >= '0' && s[i] <= '9')
+		if (str[j] >= '0' && str[j] <= '9')
 		{
 			flag = 1;
-			result *= 10;
-			result += (s[i] - '0');
+			num = num * 10 + (str[j] - '0');
 		}
 		else if (flag == 1)
 			flag = 2;
 	}
 
-	if (sign == -1)
-		output = -result;
-	else
-		output = result;
-
-	return (output);
+	return (num * sign);
 }
 
 /**
@@ -143,8 +136,8 @@ int _atoi(char *s)
 
 char **strtow(char *str, char *d)
 {
-	int i, j, k, m, numwords = 0;
-	char **s;
+	int i, j, k, m, words = 0;
+	char **ptr;
 
 	if (str == NULL || str[0] == 0)
 		return (NULL);
@@ -152,33 +145,33 @@ char **strtow(char *str, char *d)
 		d = " ";
 	for (i = 0; str[i] != '\0'; i++)
 		if (!_isdelim(str[i], d) && (_isdelim(str[i + 1], d) || !str[i + 1]))
-			numwords++;
+			words++;
 
-	if (numwords == 0)
+	if (words == 0)
 		return (NULL);
-	s = malloc((1 + numwords) * sizeof(char *));
-	if (!s)
+	ptr = malloc((1 + words) * sizeof(char *));
+	if (!ptr)
 		return (NULL);
-	for (i = 0, j = 0; j < numwords; j++)
+	for (i = 0, j = 0; j < words; j++)
 	{
 		while (_isdelim(str[i], d))
 			i++;
 		k = 0;
 		while (!_isdelim(str[i + k], d) && str[i + k])
 			k++;
-		s[j] = malloc((k + 1) * sizeof(char));
-		if (!s[j])
+		ptr[j] = malloc((k + 1) * sizeof(char));
+		if (!ptr[j])
 		{
 			for (k = 0; k < j; k++)
-				free(s[k]);
-			free(s);
+				free(ptr[k]);
+			free(ptr);
 			return (NULL);
 		}
 		for (m = 0; m < k; m++)
-			s[j][m] = str[i++];
-		s[j][m] = 0;
+			ptr[j][m] = str[i++];
+		ptr[j][m] = 0;
 	}
-	s[j] = NULL;
-	return (s);
+	ptr[j] = NULL;
+	return (ptr);
 }
 
