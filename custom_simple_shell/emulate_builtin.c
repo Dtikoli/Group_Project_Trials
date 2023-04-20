@@ -18,27 +18,27 @@ int _hshhistory(info_t *info)
  */
 int _hshalias(info_t *info)
 {
-	int i = 0;
-	char *p = NULL;
-	list_t *node = NULL;
+	int j;
+	char *ptr = NULL;
+	list_t *current = NULL;
 
 	if (info->argc == 1)
 	{
-		node = info->alias;
-		while (node)
+		current = info->alias;
+		while (current)
 		{
-			_alias_print(node);
-			node = node->next;
+			_alias_print(current);
+			current = current->next;
 		}
 		return (0);
 	}
-	for (i = 1; info->argv[i]; i++)
+	for (j = 1; info->argv[j]; j++)
 	{
-		p = _strchr(info->argv[i], '=');
-		if (p)
-			_alias_set(info, info->argv[i]);
+		ptr = _strchr(info->argv[j], '=');
+		if (ptr)
+			_alias_set(info, info->argv[j]);
 		else
-			_alias_print(node_strstart(info->alias, info->argv[i], '='));
+			_alias_print(node_strstart(info->alias, info->argv[j], '='));
 	}
 
 	return (0);
@@ -52,12 +52,12 @@ int _hshalias(info_t *info)
  */
 int _hshexit(info_t *info)
 {
-	int exitcheck;
+	int check_exit;
 
 	if (info->argv[1])
 	{
-		exitcheck = err_atoi(info->argv[1]);
-		if (exitcheck == -1)
+		check_exit = err_atoi(info->argv[1]);
+		if (check_exit == -1)
 		{
 			info->status = 2;
 			err_print(info, "Illegal number: ");
@@ -79,34 +79,34 @@ int _hshexit(info_t *info)
  */
 int _hshcd(info_t *info)
 {
-	char *s, *dir, buffer[1024];
-	int chdir_ret;
+	char *str, *dir, buff[1024];
+	int ret;
 
-	s = getcwd(buffer, 1024);
-	if (!s)
+	str = getcwd(buff, 1024);
+	if (!str)
 		_puts("TODO: >>getcwd failure emsg here<<\n");
 	if (!info->argv[1])
 	{
 		dir = get_env(info, "HOME=");
 		if (!dir)
-			chdir_ret = chdir((dir = get_env(info, "PWD=")) ? dir : "/");
+			ret = chdir((dir = get_env(info, "PWD=")) ? dir : "/");
 		else
-			chdir_ret = chdir(dir);
+			ret = chdir(dir);
 	}
 	else if (_strcmp(info->argv[1], "-") == 0)
 	{
 		if (!get_env(info, "OLDPWD="))
 		{
-			_puts(s);
+			_puts(str);
 			_putchar('\n');
 			return (1);
 		}
 		_puts(get_env(info, "OLDPWD=")), _putchar('\n');
-		chdir_ret = chdir((dir = get_env(info, "OLDPWD=")) ? dir : "/");
+		ret = chdir((dir = get_env(info, "OLDPWD=")) ? dir : "/");
 	}
 	else
-		chdir_ret = chdir(info->argv[1]);
-	if (chdir_ret == -1)
+		ret = chdir(info->argv[1]);
+	if (ret == -1)
 	{
 		err_print(info, "can't cd to ");
 		err_puts(info->argv[1]), err_putc('\n');
@@ -114,7 +114,7 @@ int _hshcd(info_t *info)
 	else
 	{
 		_setenv(info, "OLDPWD", get_env(info, "PWD="));
-		_setenv(info, "PWD", getcwd(buffer, 1024));
+		_setenv(info, "PWD", getcwd(buff, 1024));
 	}
 	return (0);
 }
@@ -126,11 +126,11 @@ int _hshcd(info_t *info)
  */
 int _hshhelp(info_t *info)
 {
-	char **arg_array;
+	char **ptr;
 
-	arg_array = info->argv;
+	ptr = info->argv;
 	_puts("help call works. Function not yet implemented \n");
 	if (0)
-		_puts(*arg_array);
+		_puts(*ptr);
 	return (0);
 }
