@@ -18,12 +18,12 @@ int _strlen(char *s)
 }
 
 /**
- * starts_with - checks if a string starts with a prefix string
+ * _strstart - checks if a string starts with a prefix string
  * @haystack: string to search
  * @needle: prefix string
  * Return: pointer to the next char of string or NULL
  */
-char *starts_with(const char *haystack, const char *needle)
+char *_strstart(const char *haystack, const char *needle)
 {
 	while (*needle)
 		if (*needle++ != *haystack++)

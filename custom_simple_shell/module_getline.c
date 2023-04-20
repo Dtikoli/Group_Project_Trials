@@ -65,7 +65,7 @@ ssize_t _getinput(info_t *info)
 		p = buf + i; /* get pointer for return */
 
 		_chain_check(info, buf, &j, i, len);
-		while (j < len) /* iterate till semicolon or end */
+		while (j < len)
 		{
 			if (_ischain(info, buf, &j))
 				break;
@@ -79,8 +79,8 @@ ssize_t _getinput(info_t *info)
 			info->cmd_buf_type = CMD_NORM;
 		}
 
-		*buf_p = p; /* return pointer to current command position */
-		return (_strlen(p)); /* return current command length */
+		*buf_p = p;
+		return (_strlen(p));
 	}
 
 	*buf_p = buf;
