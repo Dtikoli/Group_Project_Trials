@@ -36,25 +36,25 @@ char **_get_hshenv(info_t *info)
  */
 int _unsetenv(info_t *info, char *var)
 {
-	list_t *node = info->env;
-	size_t i = 0;
-	char *p;
+	list_t *current = info->env;
+	size_t index = 0;
+	char *ptr;
 
-	if (!node || !var)
+	if (!current || !var)
 		return (0);
 
-	while (node)
+	while (current)
 	{
-		p = _strstart(node->str, var);
-		if (p && *p == '=')
+		ptr = _strstart(current->str, var);
+		if (ptr && *ptr == '=')
 		{
-			info->env_changed = delete_node_index(&(info->env), i);
-			i = 0;
-			node = info->env;
+			info->env_changed = delete_node_index(&(info->env), index);
+			index = 0;
+			current = info->env;
 			continue;
 		}
-		node = node->next;
-		i++;
+		current = current->next;
+		index++;
 	}
 	return (info->env_changed);
 }
@@ -63,39 +63,39 @@ int _unsetenv(info_t *info, char *var)
  * _setenv - sets an environmental variable
  * @info: Struct containing potential arguments.
  * @var: string property of environmental variable
- * @value: string value of environmental  variable
+ * @val: string value of environmental  variable
  *  Return: Always 0
  */
-int _setenv(info_t *info, char *var, char *value)
+int _setenv(info_t *info, char *var, char *val)
 {
-	char *buf = NULL;
-	list_t *node;
-	char *p;
+	char *buff = NULL;
+	list_t *current;
+	char *ptr;
 
-	if (!var || !value)
+	if (!var || !val)
 		return (0);
 
-	buf = malloc(_strlen(var) + _strlen(value) + 2);
-	if (!buf)
+	buff = malloc(_strlen(var) + _strlen(val) + 2);
+	if (!buff)
 		return (1);
-	_strcpy(buf, var);
-	_strcat(buf, "=");
-	_strcat(buf, value);
-	node = info->env;
-	while (node)
+	_strcpy(buff, var);
+	_strcat(buff, "=");
+	_strcat(buff, val);
+	current = info->env;
+	while (current)
 	{
-		p = _strstart(node->str, var);
-		if (p && *p == '=')
+		ptr = _strstart(current->str, var);
+		if (ptr && *ptr == '=')
 		{
-			free(node->str);
-			node->str = buf;
+			free(current->str);
+			current->str = buff;
 			info->env_changed = 1;
 			return (0);
 		}
-		node = node->next;
+		current = current->next;
 	}
-	add_node_end(&(info->env), buf, 0);
-	free(buf);
+	add_node_end(&(info->env), buff, 0);
+	free(buff);
 	info->env_changed = 1;
 	return (0);
 }
