@@ -47,14 +47,14 @@ void _info_set(info_t *info, char **av)
 /**
  * _info_free - frees linked list
  * @info: struct containing potental arguments
- * @all: true if freeing fields
+ * @t: true if freeing fields
  */
-void _info_free(info_t *info, int all)
+void _info_free(info_t *info, int t)
 {
 	free_str(info->argv);
 	info->argv = NULL;
 	info->path = NULL;
-	if (all)
+	if (t)
 	{
 		if (!info->cmd_buf)
 			free(info->arg);
