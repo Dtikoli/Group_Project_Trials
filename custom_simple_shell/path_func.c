@@ -23,36 +23,36 @@ int _iscmd(info_t *info, char *path)
 
 /**
  * _chars_dup - duplicates chars
- * @pathstr: PATH list
+ * @path: PATH list
  * @start: start index
  * @stop: stop index
  * Return: pointer to duplicated chars
  */
-char *_chars_dup(char *pathstr, int start, int stop)
+char *_chars_dup(char *path, int start, int stop)
 {
-	static char buf[1024];
+	static char buff[1024];
 	int i = 0, k = 0;
 
 	for (k = 0, i = start; i < stop; i++)
-		if (pathstr[i] != ':')
-			buf[k++] = pathstr[i];
-	buf[k] = 0;
-	return (buf);
+		if (path[i] != ':')
+			buff[k++] = path[i];
+	buff[k] = 0;
+	return (buff);
 }
 
 /**
  * _path_trace - searches for cmd in the PATH list
  * @info: struct containing potential arguments
- * @pathstr: PATH list
+ * @path: PATH list
  * @cmd: command to find
- * Return: path of cmd if found, NULL otherwise
+ * Return: path of command if found, NULL otherwise
  */
-char *_path_trace(info_t *info, char *pathstr, char *cmd)
+char *_path_trace(info_t *info, char *path, char *cmd)
 {
-	int i = 0, curr_pos = 0;
-	char *path;
+	int i = 0, pos = 0;
+	char *p;
 
-	if (!pathstr)
+	if (!path)
 		return (NULL);
 	if ((_strlen(cmd) > 2) && _strstart(cmd, "./"))
 	{
@@ -61,21 +61,21 @@ char *_path_trace(info_t *info, char *pathstr, char *cmd)
 	}
 	while (1)
 	{
-		if (!pathstr[i] || pathstr[i] == ':')
+		if (!path[i] || path[i] == ':')
 		{
-			path = _chars_dup(pathstr, curr_pos, i);
-			if (!*path)
-				_strcat(path, cmd);
+			p = _chars_dup(path, pos, i);
+			if (!*p)
+				_strcat(p, cmd);
 			else
 			{
-				_strcat(path, "/");
-				_strcat(path, cmd);
+				_strcat(p, "/");
+				_strcat(p, cmd);
 			}
-			if (_iscmd(info, path))
-				return (path);
-			if (!pathstr[i])
+			if (_iscmd(info, p))
+				return (p);
+			if (!path[i])
 				break;
-			curr_pos = i;
+			pos = i;
 		}
 		i++;
 	}
