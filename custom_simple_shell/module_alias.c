@@ -8,17 +8,17 @@
  */
 int _alias_unset(info_t *info, char *str)
 {
-	char *p, c;
 	int ret;
+	char *ptr, c;
 
-	p = _strchr(str, '=');
-	if (!p)
+	ptr = _strchr(str, '=');
+	if (!ptr)
 		return (1);
-	c = *p;
-	*p = 0;
+	c = *ptr;
+	*ptr = 0;
 	ret = delete_node_index(&(info->alias),
 		get_node_index(info->alias, node_strstart(info->alias, str, -1)));
-	*p = c;
+	*ptr = c;
 	return (ret);
 }
 
@@ -30,12 +30,12 @@ int _alias_unset(info_t *info, char *str)
  */
 int _alias_set(info_t *info, char *str)
 {
-	char *p;
+	char *ptr;
 
-	p = _strchr(str, '=');
-	if (!p)
+	ptr = _strchr(str, '=');
+	if (!ptr)
 		return (1);
-	if (!*++p)
+	if (!*++ptr)
 		return (_alias_unset(info, str));
 
 	_alias_unset(info, str);
@@ -44,20 +44,20 @@ int _alias_set(info_t *info, char *str)
 
 /**
  * _alias_print - prints an alias string
- * @node: the alias node
+ * @current: the alias node
  * Return: Always 0 on success, 1 on error
  */
-int _alias_print(list_t *node)
+int _alias_print(list_t *current)
 {
-	char *p = NULL, *a = NULL;
+	char *ptr = NULL, *s = NULL;
 
-	if (node)
+	if (current)
 	{
-		p = _strchr(node->str, '=');
-		for (a = node->str; a <= p; a++)
-			_putchar(*a);
+		ptr = _strchr(current->str, '=');
+		for (s = current->str; s <= ptr; s++)
+			_putchar(*s);
 		_putchar('\'');
-		_puts(p + 1);
+		_puts(ptr + 1);
 		_puts("'\n");
 		return (0);
 	}
