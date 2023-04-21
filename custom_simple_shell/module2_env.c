@@ -3,20 +3,20 @@
 /**
  * get_env - returns the value of an environmental variable
  * @info: Struct containing potential arguments.
- * @name: name of environmental variable
+ * @var: name of environmental variable
  * Return: value of environmental variable
  */
-char *get_env(info_t *info, const char *name)
+char *get_env(info_t *info, const char *var)
 {
-	list_t *node = info->env;
-	char *p;
+	list_t *current = info->env;
+	char *ptr;
 
-	while (node)
+	while (current)
 	{
-		p = _strstart(node->str, name);
-		if (p && *p)
-			return (p);
-		node = node->next;
+		ptr = _strstart(current->str, var);
+		if (ptr && *ptr)
+			return (ptr);
+		current = current->next;
 	}
 	return (NULL);
 }
@@ -65,11 +65,11 @@ int _hshunsetenv(info_t *info)
  */
 int fill_env_list(info_t *info)
 {
-	list_t *node = NULL;
+	list_t *current = NULL;
 	size_t i;
 
 	for (i = 0; environ[i]; i++)
-		add_node_end(&node, environ[i], 0);
-	info->env = node;
+		add_node_end(&current, environ[i], 0);
+	info->env = current;
 	return (0);
 }
