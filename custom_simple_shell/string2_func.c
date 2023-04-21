@@ -30,10 +30,9 @@ int _strcmp(char *s1, char *s2)
  */
 char *_strncpy(char *dest, char *src, int n)
 {
-	int i, j;
-	char *s = dest;
+	int i = 0, j;
+	char *str = dest;
 
-	i = 0;
 	while (src[i] != '\0' && i < n - 1)
 	{
 		dest[i] = src[i];
@@ -48,7 +47,7 @@ char *_strncpy(char *dest, char *src, int n)
 			j++;
 		}
 	}
-	return (s);
+	return (str);
 }
 
 /**
@@ -60,11 +59,9 @@ char *_strncpy(char *dest, char *src, int n)
  */
 char *_strncat(char *dest, char *src, int n)
 {
-	int i, j;
-	char *s = dest;
+	int i = 0, j = 0;
+	char *str = dest;
 
-	i = 0;
-	j = 0;
 	while (dest[i] != '\0')
 		i++;
 	while (src[j] != '\0' && j < n)
@@ -75,21 +72,21 @@ char *_strncat(char *dest, char *src, int n)
 	}
 	if (j < n)
 		dest[i] = '\0';
-	return (s);
+	return (str);
 }
 
 /**
  **_strchr - locates a char in a string
- *@s: string to be parsed
+ *@str: string to be parsed
  *@c: char to look for
  *Return: a pointer to the located char
  */
-char *_strchr(char *s, char c)
+char *_strchr(char *str, char c)
 {
 	do {
-		if (*s == c)
-			return (s);
-	} while (*s++ != '\0');
+		if (*str == c)
+			return (str);
+	} while (*str++ != '\0');
 
 	return (NULL);
 }

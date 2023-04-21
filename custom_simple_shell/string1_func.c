@@ -2,19 +2,19 @@
 
 /**
  * _strlen - finds the length of a string
- * @s: string
+ * @str: string
  * Return: length of the string
  */
-int _strlen(char *s)
+int _strlen(char *str)
 {
-	int i = 0;
+	int len = 0;
 
-	if (!s)
+	if (!str)
 		return (0);
 
-	while (*s++)
-		i++;
-	return (i);
+	while (*str++)
+		len++;
+	return (len);
 }
 
 /**
@@ -39,14 +39,14 @@ char *_strstart(const char *haystack, const char *needle)
  */
 char *_strcat(char *dest, char *src)
 {
-	char *ret = dest;
+	char *str = dest;
 
 	while (*dest)
 		dest++;
 	while (*src)
 		*dest++ = *src++;
 	*dest = *src;
-	return (ret);
+	return (str);
 }
 
 /**
@@ -57,16 +57,16 @@ char *_strcat(char *dest, char *src)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i = 0;
+	int j = 0;
 
 	if (dest == src || src == 0)
 		return (dest);
-	while (src[i])
+	while (src[j])
 	{
-		dest[i] = src[i];
-		i++;
+		dest[j] = src[j];
+		j++;
 	}
-	dest[i] = 0;
+	dest[j] = 0;
 	return (dest);
 }
 
@@ -77,18 +77,18 @@ char *_strcpy(char *dest, char *src)
  */
 char *_strdup(const char *str)
 {
-	int length = 0;
-	char *ret;
+	int len = 0;
+	char *dest;
 
 	if (str == NULL)
 		return (NULL);
 	while (*str++)
-		length++;
-	ret = malloc(sizeof(char) * (length + 1));
-	if (!ret)
+		len++;
+	dest = malloc(sizeof(char) * (len + 1));
+	if (!dest)
 		return (NULL);
-	for (length++; length--;)
-		ret[length] = *--str;
-	return (ret);
+	for (len++; len--;)
+		dest[len] = *--str;
+	return (dest);
 }
 
