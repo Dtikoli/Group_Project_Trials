@@ -41,7 +41,7 @@ int _ischain(info_t *info, char *buff, size_t *ptr)
  * @ptr: pointer to current buffer position
  * @st: starting position in buffer
  * @len: buffer length
- * Return: Void
+ * Return: Nothing
  */
 void _chain_check(info_t *info, char *buff, size_t *ptr, size_t st, size_t len)
 {
