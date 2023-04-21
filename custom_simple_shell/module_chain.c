@@ -3,68 +3,68 @@
 /**
  * _ischain - checks for chain delim in buffer
  * @info: struct containing potential arguments
- * @buf: char buffer
- * @p: address of current position in buf
+ * @buff: char buffer
+ * @ptr: address of current position in buffer
  * Return: 1 if success, 0 otherwise
  */
-int _ischain(info_t *info, char *buf, size_t *p)
+int _ischain(info_t *info, char *buff, size_t *ptr)
 {
-	size_t j = *p;
+	size_t index = *ptr;
 
-	if (buf[j] == '|' && buf[j + 1] == '|')
+	if (buff[index] == '|' && buff[index + 1] == '|')
 	{
-		buf[j] = 0;
-		j++;
+		buff[index] = 0;
+		index++;
 		info->cmd_buf_type = CMD_OR;
 	}
-	else if (buf[j] == '&' && buf[j + 1] == '&')
+	else if (buff[index] == '&' && buff[index + 1] == '&')
 	{
-		buf[j] = 0;
-		j++;
+		buff[index] = 0;
+		index++;
 		info->cmd_buf_type = CMD_AND;
 	}
-	else if (buf[j] == ';')
+	else if (buff[index] == ';')
 	{
-		buf[j] = 0;
+		buff[index] = 0;
 		info->cmd_buf_type = CMD_CHAIN;
 	}
 	else
 		return (0);
-	*p = j;
+	*ptr = index;
 	return (1);
 }
 
 /**
  * _chain_check - check for chaining continuation based on last status
  * @info: struct containing potential arguments
- * @buf: char buffer
- * @p: pointer to current buffer position
- * @i: starting position in buffer
+ * @buff: char buffer
+ * @ptr: pointer to current buffer position
+ * @st: starting position in buffer
  * @len: buffer length
  * Return: Void
  */
-void _chain_check(info_t *info, char *buf, size_t *p, size_t i, size_t len)
+void _chain_check(info_t *info, char *buff, size_t *ptr, size_t st, size_t len)
 {
-	size_t j = *p;
+	size_t index = *ptr;
 
 	if (info->cmd_buf_type == CMD_AND)
 	{
 		if (info->status)
 		{
-			buf[i] = 0;
-			j = len;
+			buff[st] = 0;
+			index = len;
 		}
 	}
 	if (info->cmd_buf_type == CMD_OR)
 	{
 		if (!info->status)
 		{
-			buf[i] = 0;
-			j = len;
+			buff[st] = 0;
+			index = len;
 		}
 	}
 
-	*p = j;
+	*ptr = index;
 }
 
 /**
@@ -74,23 +74,23 @@ void _chain_check(info_t *info, char *buf, size_t *p, size_t i, size_t len)
  */
 int _alias_tr(info_t *info)
 {
-	int i;
-	list_t *node;
-	char *p;
+	int j;
+	list_t *current;
+	char *ptr;
 
-	for (i = 0; i < 10; i++)
+	for (j = 0; j < 10; j++)
 	{
-		node = node_strstart(info->alias, info->argv[0], '=');
-		if (!node)
+		current = node_strstart(info->alias, info->argv[0], '=');
+		if (!current)
 			return (0);
 		free(info->argv[0]);
-		p = _strchr(node->str, '=');
-		if (!p)
+		ptr = _strchr(current->str, '=');
+		if (!ptr)
 			return (0);
-		p = _strdup(p + 1);
-		if (!p)
+		ptr = _strdup(ptr + 1);
+		if (!ptr)
 			return (0);
-		info->argv[0] = p;
+		info->argv[0] = ptr;
 	}
 	return (1);
 }
@@ -102,34 +102,34 @@ int _alias_tr(info_t *info)
  */
 int _var_tr(info_t *info)
 {
-	int i = 0;
-	list_t *node;
+	int j;
+	list_t *current;
 
-	for (i = 0; info->argv[i]; i++)
+	for (j = 0; info->argv[j]; j++)
 	{
-		if (info->argv[i][0] != '$' || !info->argv[i][1])
+		if (info->argv[j][0] != '$' || !info->argv[j][1])
 			continue;
 
-		if (!_strcmp(info->argv[i], "$?"))
+		if (!_strcmp(info->argv[j], "$?"))
 		{
-			_str_tr(&(info->argv[i]),
+			_str_tr(&(info->argv[j]),
 				_strdup(_convert_num(info->status, 10, 0)));
 			continue;
 		}
-		if (!_strcmp(info->argv[i], "$$"))
+		if (!_strcmp(info->argv[j], "$$"))
 		{
-			_str_tr(&(info->argv[i]),
+			_str_tr(&(info->argv[j]),
 				_strdup(_convert_num(getpid(), 10, 0)));
 			continue;
 		}
-		node = node_strstart(info->env, &info->argv[i][1], '=');
-		if (node)
+		current = node_strstart(info->env, &info->argv[j][1], '=');
+		if (current)
 		{
-			_str_tr(&(info->argv[i]),
-				_strdup(_strchr(node->str, '=') + 1));
+			_str_tr(&(info->argv[j]),
+				_strdup(_strchr(current->str, '=') + 1));
 			continue;
 		}
-		_str_tr(&info->argv[i], _strdup(""));
+		_str_tr(&info->argv[j], _strdup(""));
 
 	}
 	return (0);
@@ -138,12 +138,12 @@ int _var_tr(info_t *info)
 /**
  * _str_tr - replaces an old string
  * @old: pointer to old string
- * @new: new string
+ * @new_str: new string
  * Return: 1 if succesful, 0 otherwise
  */
-int _str_tr(char **old, char *new)
+int _str_tr(char **old, char *new_str)
 {
 	free(*old);
-	*old = new;
+	*old = new_str;
 	return (1);
 }
