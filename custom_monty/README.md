@@ -10,13 +10,17 @@ The goal of this project is to create an interpreter for Monty ByteCode files, u
 <u>Monty</u>:
 
 Simply Compile: `$ gcc *.c -o monty`
+
 Then Run: `$ ./monty filename.m`
+
 A sample bytecode file is located at `/bytecodes/test.txt`.
 
 <u>BrainFuck</u>:
 
 Install the interpreter: `$ sudo apt-get install bf`
+
 Then Run: `$ bf filename.bf`
+
 Sample BrainFuck files are located at `/brainfuck`
 
 
