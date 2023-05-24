@@ -13,14 +13,14 @@ void pchar_handler(stack_t **stack, unsigned int line_number)
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_PCHAR, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
 	if (node->n < 0 || node->n > 127)
 	{
 		fprintf(stderr, ERROR_PCHAR, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 

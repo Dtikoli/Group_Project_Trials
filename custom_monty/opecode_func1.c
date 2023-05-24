@@ -14,7 +14,7 @@ void push_handler(stack_t **stack, unsigned int line_number)
 	if (data.words[1] == NULL)
 	{
 		fprintf(stderr, FAILURE_PUSH, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -23,7 +23,7 @@ void push_handler(stack_t **stack, unsigned int line_number)
 		if (isalpha(data.words[1][i]) != 0)
 		{
 			fprintf(stderr, FAILURE_PUSH, line_number);
-			free_all(1);
+			free_handle(1);
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -36,7 +36,7 @@ void push_handler(stack_t **stack, unsigned int line_number)
 	if (!new)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -65,7 +65,7 @@ void pint_handler(stack_t **stack, unsigned int line_number)
 	if (!head)
 	{
 		fprintf(stderr, FAILURE_PINT, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -84,7 +84,7 @@ void pop_handler(stack_t **stack, unsigned int line_number)
 	if (!temp)
 	{
 		fprintf(stderr, FAILURE_POP, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -106,7 +106,7 @@ void add_handler(stack_t **stack, unsigned int line_number)
 	if (dlistint_len(*stack) < 2)
 	{
 		fprintf(stderr, FAILURE_ADD, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -117,7 +117,7 @@ void add_handler(stack_t **stack, unsigned int line_number)
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 }

@@ -16,7 +16,7 @@ void sub_handler(stack_t **stack, unsigned int line_number)
 	if (dlistint_len(*stack) < 2)
 	{
 		fprintf(stderr, FAILURE_SUB, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -27,7 +27,7 @@ void sub_handler(stack_t **stack, unsigned int line_number)
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -47,14 +47,14 @@ void div_handler(stack_t **stack, unsigned int line_number)
 	if (dlistint_len(*stack) < 2)
 	{
 		fprintf(stderr, FAILURE_DIV, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
 	if (node_0->n == 0)
 	{
 		fprintf(stderr, ERROR_DIV, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -65,7 +65,7 @@ void div_handler(stack_t **stack, unsigned int line_number)
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -85,7 +85,7 @@ void mul_handler(stack_t **stack, unsigned int line_number)
 	if (dlistint_len(*stack) < 2)
 	{
 		fprintf(stderr, FAILURE_MUL, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -96,7 +96,7 @@ void mul_handler(stack_t **stack, unsigned int line_number)
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -116,14 +116,14 @@ void mod_handler(stack_t **stack, unsigned int line_number)
 	if (dlistint_len(*stack) < 2)
 	{
 		fprintf(stderr, FAILURE_MOD, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
 	if (node_0->n == 0)
 	{
 		fprintf(stderr, ERROR_DIV, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -134,7 +134,7 @@ void mod_handler(stack_t **stack, unsigned int line_number)
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 }
@@ -152,7 +152,7 @@ void swap_handler(stack_t **stack, unsigned int line_number)
 	if (dlistint_len(*stack) < 2)
 	{
 		fprintf(stderr, FAILURE_SWAP, line_number);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -163,7 +163,7 @@ void swap_handler(stack_t **stack, unsigned int line_number)
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_MALLOC);
-		free_all(1);
+		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 }

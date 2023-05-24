@@ -94,43 +94,37 @@ extern data_t data;
 
 #define DATA_INIT {NULL, NULL, NULL, NULL, 0}
 
-/* main.c */
+/* Monty parser */
 void monty(args_t *args);
 
-/* get_func.c */
+/* get function */
 void (*get_func(char **parsed))(stack_t **, unsigned int);
+
+/* OPCODE operation functions */
+void pint_handler(stack_t **stack, unsigned int line_number);
 void push_handler(stack_t **stack, unsigned int line_number);
 void pall_handler(stack_t **stack, unsigned int line_number);
-
-/* handler_funcs1.c */
-void pint_handler(stack_t **stack, unsigned int line_number);
 void pop_handler(stack_t **stack, unsigned int line_number);
 void swap_handler(stack_t **stack, unsigned int line_number);
 void add_handler(stack_t **stack, unsigned int line_number);
 void nop_handler(stack_t **stack, unsigned int line_number);
-
-/* handler_funcs2.c */
 void sub_handler(stack_t **stack, unsigned int line_number);
 void div_handler(stack_t **stack, unsigned int line_number);
 void mul_handler(stack_t **stack, unsigned int line_number);
 void mod_handler(stack_t **stack, unsigned int line_number);
-
-/* handler_funcs3.c */
 void rotl_handler(stack_t **stack, unsigned int line_number);
 void rotr_handler(stack_t **stack, unsigned int line_number);
 void stack_handler(stack_t **stack, unsigned int line_number);
 void queue_handler(stack_t **stack, unsigned int line_number);
-
-/* char.c */
 void pchar_handler(stack_t **stack, unsigned int line_number);
 void pstr_handler(stack_t **stack, unsigned int line_number);
 
-/* strtow.c */
+/* tokenizer */
 int count_word(char *s);
 char **strtow(char *str);
-void free_everything(char **args);
 
-/* free.c */
-void free_all(int all);
+/* memory functions */
+void free_handle(int);
+void free_str(char **);
 
-#endif
+#endif /* _MONTY_H_ */

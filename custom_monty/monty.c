@@ -57,20 +57,20 @@ void monty(args_t *args)
 		data.words = strtow(data.line);
 		if (data.words[0] == NULL || data.words[0][0] == '#')
 		{
-			free_all(0);
+			free_handle(0);
 			continue;
 		}
 		code_func = get_func(data.words);
 		if (!code_func)
 		{
 			fprintf(stderr, ERROR_UNKNOWN, args->line_number, data.words[0]);
-			free_all(1);
+			free_handle(1);
 			exit(EXIT_FAILURE);
 		}
 		code_func(&(data.stack), args->line_number);
-		free_all(0);
+		free_handle(0);
 	}
-	free_all(1);
+	free_handle(1);
 }
 
 /**
