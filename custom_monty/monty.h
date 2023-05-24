@@ -95,7 +95,7 @@ extern data_t data;
 #define DATA_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* Monty parser */
-void monty(args_t *args);
+void parse_monty(args_t *args);
 
 /* get function */
 void (*get_func(char **parsed))(stack_t **, unsigned int);

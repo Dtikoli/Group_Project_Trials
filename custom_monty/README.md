@@ -52,4 +52,4 @@ Potential failures and their messages will be mentioned for each operation. Fail
 
 ## Author
 
-D.Tikoli
+D. Tikoli

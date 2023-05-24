@@ -25,14 +25,14 @@ void errormalloc_print(void)
 }
 
 /**
- * monty - helper function for main function
+ * parse_monty - helper function for main function
  * @args: pointer to struct of arguments from main
  *
  * Description: opens and reads from the file
  * containing the opcodes, and calls the function
  * that will find the corresponding executing function
  */
-void monty(args_t *args)
+void parse_monty(args_t *args)
 {
 	char *_gets = NULL;
 	void (*code_func)(stack_t **, unsigned int);
@@ -88,7 +88,7 @@ int main(int argc, char *argv[])
 	args.ac = argc;
 	args.line_number = 0;
 
-	monty(&args);
+	parse_monty(&args);
 
 	return (EXIT_SUCCESS);
 }
