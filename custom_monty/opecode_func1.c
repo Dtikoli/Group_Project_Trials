@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * push_handler - handles the push instruction
+ * _push - handles the push instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void push_handler(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new;
 	int num = 0, i;
@@ -41,11 +41,11 @@ void push_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pall_handler - handles the pall instruction
+ * _pall - handles the pall instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void pall_handler(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, unsigned int line_number)
 {
 	(void)line_number;
 	if (*stack)
@@ -53,11 +53,11 @@ void pall_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pint_handler - handles the pint instruction
+ * _pint - handles the pint instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void pint_handler(stack_t **stack, unsigned int line_number)
+void _pint(stack_t **stack, unsigned int line_number)
 {
 	stack_t *head = *stack;
 
@@ -72,11 +72,11 @@ void pint_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pop_handler - handles the pop instruction
+ * _pop - handles the pop instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void pop_handler(stack_t **stack, unsigned int line_number)
+void _pop(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 
@@ -91,11 +91,11 @@ void pop_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * add_handler - handles the add instruction
+ * _add - handles the add instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void add_handler(stack_t **stack, unsigned int line_number)
+void _add(stack_t **stack, unsigned int line_number)
 {
 	int sum = 0;
 	stack_t *node = NULL;

@@ -1,22 +1,22 @@
 #include "monty.h"
 
 /**
- * nop_handler - handles the nop instruction
+ * _nop - handles the nop instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void nop_handler(stack_t **stack, unsigned int line_number)
+void _nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
 }
 
 /**
- * rotl_handler - handles the rotl instruction
+ * _rotl - handles the rotl instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void rotl_handler(stack_t **stack, unsigned int line_number)
+void _rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int num  = 0;
@@ -32,11 +32,11 @@ void rotl_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * rotr_handler - handles the rotr instruction
+ * _rotr - handles the rotr instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void rotr_handler(stack_t **stack, unsigned int line_number)
+void _rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int num = 0, len = dlistint_len(*stack);
@@ -52,11 +52,11 @@ void rotr_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * stack_handler - handles the stack instruction
+ * _stack - handles the stack instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void stack_handler(stack_t **stack, unsigned int line_number)
+void _stack(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
@@ -65,11 +65,11 @@ void stack_handler(stack_t **stack, unsigned int line_number)
 
 
 /**
- * queue_handler - handles the queue instruction
+ * _queue - handles the queue instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void queue_handler(stack_t **stack, unsigned int line_number)
+void _queue(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;

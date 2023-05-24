@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * sub_handler - handles the sub instruction
+ * _sub - handles the sub instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void sub_handler(stack_t **stack, unsigned int line_number)
+void _sub(stack_t **stack, unsigned int line_number)
 {
 	int sub = 0;
 	stack_t *node = NULL;
@@ -32,11 +32,11 @@ void sub_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * div_handler - handles the div instruction
+ * _div - handles the div instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void div_handler(stack_t **stack, unsigned int line_number)
+void _div(stack_t **stack, unsigned int line_number)
 {
 	int div = 0;
 	stack_t *node = NULL;
@@ -70,11 +70,11 @@ void div_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * mul_handler - handles the mul instruction
+ * _mul - handles the mul instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void mul_handler(stack_t **stack, unsigned int line_number)
+void _mul(stack_t **stack, unsigned int line_number)
 {
 	int mul = 0;
 	stack_t *node = NULL;
@@ -101,11 +101,11 @@ void mul_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * mod_handler - handles the mod instruction
+ * _mod - handles the mod instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void mod_handler(stack_t **stack, unsigned int line_number)
+void _mod(stack_t **stack, unsigned int line_number)
 {
 	int mod = 0;
 	stack_t *node = NULL;
@@ -139,11 +139,11 @@ void mod_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * swap_handler - handles the swap instruction
+ * _swap - handles the swap instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void swap_handler(stack_t **stack, unsigned int line_number)
+void _swap(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack, *node = NULL;
 	int num;

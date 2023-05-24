@@ -1,11 +1,11 @@
 #include "monty.h"
 
 /**
- * pchar_handler - handles the pchar instruction
+ * _pchar - handles the pchar instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void pchar_handler(stack_t **stack, unsigned int line_number)
+void _pchar(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
 
@@ -28,11 +28,11 @@ void pchar_handler(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * pstr_handler - handles the pstr instruction
+ * _pstr - handles the pstr instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void pstr_handler(stack_t **stack, unsigned int line_number)
+void _pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
 

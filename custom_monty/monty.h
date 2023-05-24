@@ -99,23 +99,23 @@ void parse_monty(args_t *args);
 void (*get_func(char **parsed))(stack_t **, unsigned int);
 
 /* OPCODE operation functions */
-void pint_handler(stack_t **stack, unsigned int line_number);
-void push_handler(stack_t **stack, unsigned int line_number);
-void pall_handler(stack_t **stack, unsigned int line_number);
-void pop_handler(stack_t **stack, unsigned int line_number);
-void swap_handler(stack_t **stack, unsigned int line_number);
-void add_handler(stack_t **stack, unsigned int line_number);
-void nop_handler(stack_t **stack, unsigned int line_number);
-void sub_handler(stack_t **stack, unsigned int line_number);
-void div_handler(stack_t **stack, unsigned int line_number);
-void mul_handler(stack_t **stack, unsigned int line_number);
-void mod_handler(stack_t **stack, unsigned int line_number);
-void rotl_handler(stack_t **stack, unsigned int line_number);
-void rotr_handler(stack_t **stack, unsigned int line_number);
-void stack_handler(stack_t **stack, unsigned int line_number);
-void queue_handler(stack_t **stack, unsigned int line_number);
-void pchar_handler(stack_t **stack, unsigned int line_number);
-void pstr_handler(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **stack, unsigned int line_number);
+void _push(stack_t **stack, unsigned int line_number);
+void _pall(stack_t **stack, unsigned int line_number);
+void _pop(stack_t **stack, unsigned int line_number);
+void _swap(stack_t **stack, unsigned int line_number);
+void _add(stack_t **stack, unsigned int line_number);
+void _nop(stack_t **stack, unsigned int line_number);
+void _sub(stack_t **stack, unsigned int line_number);
+void _div(stack_t **stack, unsigned int line_number);
+void _mul(stack_t **stack, unsigned int line_number);
+void _mod(stack_t **stack, unsigned int line_number);
+void _rotl(stack_t **stack, unsigned int line_number);
+void _rotr(stack_t **stack, unsigned int line_number);
+void _stack(stack_t **stack, unsigned int line_number);
+void _queue(stack_t **stack, unsigned int line_number);
+void _pchar(stack_t **stack, unsigned int line_number);
+void _pstr(stack_t **stack, unsigned int line_number);
 
 /* tokenizer */
 int count_word(char *s);
