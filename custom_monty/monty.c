@@ -19,13 +19,13 @@ void monty(args_t *args)
 
 	if (args->ac != 2)
 	{
-		fprintf(stderr, USAGE);
+		fprintf(stderr, ERROR_USAGE);
 		exit(EXIT_FAILURE);
 	}
 	data.fptr = fopen(args->av, "r");
 	if (!data.fptr)
 	{
-		fprintf(stderr, FILE_ERROR, args->av);
+		fprintf(stderr, ERROR_FILE, args->av);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
@@ -34,7 +34,7 @@ void monty(args_t *args)
 		data.line = malloc(len);
 		if (!data.line)
 		{
-			fprintf(stderr, MALLOC_FAIL);
+			fprintf(stderr, FAILURE_MALLOC);
 			exit(EXIT_FAILURE);
 		}
 		_gets = fgets(data.line, len, data.fptr);
@@ -49,7 +49,7 @@ void monty(args_t *args)
 		code_func = get_func(data.words);
 		if (!code_func)
 		{
-			fprintf(stderr, UNKNOWN, args->line_number, data.words[0]);
+			fprintf(stderr, ERROR_UNKNOWN, args->line_number, data.words[0]);
 			free_all(1);
 			exit(EXIT_FAILURE);
 		}
