@@ -1,11 +1,29 @@
-#ifndef MONTY_H
-#define MONTY_H
+#ifndef _MONTY_H_
+#define _MONTY_H_
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
+
+#define ERROR_USAGE "USAGE: monty file\n"
+#define ERROR_FILE "Error: Can't open file %s\n"
+#define ERROR_UNKNOWN "L%u: unknown instruction %s\n"
+#define FAILURE_MALLOC "Error: malloc failed\n"
+#define FAILURE_PUSH "L%u: usage: push integer\n"
+#define FAILURE_PINT "L%u: can't pint, stack empty\n"
+#define FAILURE_POP "L%u: can't pop an empty stack\n"
+#define FAILURE_SWAP "L%u: can't swap, stack too short\n"
+#define FAILURE_ADD "L%u: can't add, stack too short\n"
+#define FAILURE_SUB "L%u: can't sub, stack too short\n"
+#define FAILURE_DIV "L%u: can't div, stack too short\n"
+#define ERROR_DIV "L%u: division by zero\n"
+#define FAILURE_MUL "L%u: can't mul, stack too short\n"
+#define FAILURE_MOD "L%u: can't mod, stack too short\n"
+#define FAILURE_PCHAR "L%u: can't pchar, stack empty\n"
+#define ERROR_PCHAR "L%u: can't pchar, value out of range\n"
+
 
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
@@ -75,23 +93,6 @@ typedef stack_t dlistint_t;
 extern data_t data;
 
 #define DATA_INIT {NULL, NULL, NULL, NULL, 0}
-
-#define USAGE "USAGE: monty file\n"
-#define FILE_ERROR "Error: Can't open file %s\n"
-#define UNKNOWN "L%u: unknown instruction %s\n"
-#define MALLOC_FAIL "Error: malloc failed\n"
-#define PUSH_FAIL "L%u: usage: push integer\n"
-#define PINT_FAIL "L%u: can't pint, stack empty\n"
-#define POP_FAIL "L%u: can't pop an empty stack\n"
-#define SWAP_FAIL "L%u: can't swap, stack too short\n"
-#define ADD_FAIL "L%u: can't add, stack too short\n"
-#define SUB_FAIL "L%u: can't sub, stack too short\n"
-#define DIV_FAIL "L%u: can't div, stack too short\n"
-#define DIV_ZERO "L%u: division by zero\n"
-#define MUL_FAIL "L%u: can't mul, stack too short\n"
-#define MOD_FAIL "L%u: can't mod, stack too short\n"
-#define PCHAR_FAIL "L%u: can't pchar, stack empty\n"
-#define PCHAR_RANGE "L%u: can't pchar, value out of range\n"
 
 /* main.c */
 void monty(args_t *args);
