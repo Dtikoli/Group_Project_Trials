@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "lists.h"
 
 /**
  * nop_handler - handles the nop instruction

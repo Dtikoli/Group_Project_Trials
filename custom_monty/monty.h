@@ -88,8 +88,6 @@ typedef struct data_s
 	int qflag;
 } data_t;
 
-typedef stack_t dlistint_t;
-
 extern data_t data;
 
 #define DATA_INIT {NULL, NULL, NULL, NULL, 0}
@@ -126,5 +124,15 @@ char **strtow(char *str);
 /* memory functions */
 void free_handle(int);
 void free_str(char **);
+
+/* double linked functions */
+size_t dlistint_len(const stack_t *h);
+stack_t *add_dnodeint(stack_t **head, const int n);
+size_t print_dlistint(const stack_t *h);
+int delete_dnodeint_at_index(stack_t **head, unsigned int index);
+stack_t *get_dnodeint_at_index(stack_t *head, unsigned int index);
+stack_t *insert_dnodeint_at_index(stack_t **h, unsigned int idx, int n);
+stack_t *add_dnodeint_end(stack_t **head, const int n);
+void free_dlistint(stack_t *head);
 
 #endif /* _MONTY_H_ */

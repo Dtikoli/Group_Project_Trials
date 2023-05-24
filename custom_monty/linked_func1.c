@@ -6,20 +6,20 @@
  *
  * Return: number of nodes
  */
-size_t dlistint_len(const dlistint_t *h)
+size_t dlistint_len(const stack_t *h)
 {
-	size_t nodes = 0;
+	size_t size = 0;
 
 	if (!h)
 		return (0);
 
 	while (h)
 	{
-		nodes++;
+		size++;
 		h = h->next;
 	}
 
-	return (nodes);
+	return (size);
 }
 
 /**
@@ -29,14 +29,14 @@ size_t dlistint_len(const dlistint_t *h)
  *
  * Return: the address of the new element, or NULL if it failed
  */
-dlistint_t *add_dnodeint(dlistint_t **head, const int n)
+stack_t *add_dnodeint(stack_t **head, const int n)
 {
-	dlistint_t *new;
+	stack_t *new;
 
 	if (!head)
 		return (NULL);
 
-	new = malloc(sizeof(dlistint_t));
+	new = malloc(sizeof(stack_t));
 	if (!new)
 		return (NULL);
 
@@ -59,9 +59,9 @@ dlistint_t *add_dnodeint(dlistint_t **head, const int n)
  *
  * Return: number of nodes in the list
  */
-size_t print_dlistint(const dlistint_t *h)
+size_t print_dlistint(const stack_t *h)
 {
-	size_t nodes = 0;
+	size_t size = 0;
 
 	if (!h)
 		return (0);
@@ -70,10 +70,10 @@ size_t print_dlistint(const dlistint_t *h)
 	{
 		printf("%d\n", h->n);
 		h = h->next;
-		nodes++;
+		size++;
 	}
 
-	return (nodes);
+	return (size);
 }
 
 /**
@@ -84,9 +84,9 @@ size_t print_dlistint(const dlistint_t *h)
  *
  * Return: 1 on success, -1 on failure
  */
-int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
+int delete_dnodeint_at_index(stack_t **head, unsigned int index)
 {
-	dlistint_t *temp = *head;
+	stack_t *temp = *head;
 	unsigned int i = 0;
 
 	if (!index)
@@ -122,17 +122,17 @@ int delete_dnodeint_at_index(dlistint_t **head, unsigned int index)
  *
  * Return: address of the node, or if it does not exist, NULL
  */
-dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
+stack_t *get_dnodeint_at_index(stack_t *head, unsigned int index)
 {
-	unsigned int i = 0;
+	unsigned int idx = 0;
 
 	if (!head)
 		return (NULL);
 
-	while (head && i < index)
+	while (head && idx < index)
 	{
 		head = head->next;
-		i++;
+		idx++;
 	}
 
 	return (head ? head : NULL);

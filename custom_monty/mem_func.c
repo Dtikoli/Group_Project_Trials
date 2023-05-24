@@ -1,5 +1,4 @@
 #include "monty.h"
-#include "lists.h"
 
 /**
  * free_handle - memory handling and FILE ptr closure function
