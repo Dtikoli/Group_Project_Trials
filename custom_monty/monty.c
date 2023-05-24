@@ -25,28 +25,28 @@ void errormalloc_print(void)
 
 /**
  * parse_monty - helper function for main function
- * @args: pointer to struct of arguments from main
+ * @clargs: pointer to struct of arguments from main
  *
  * Description: opens and reads from the file
  * containing the opcodes, and calls the function
  * that will find the corresponding executing function
  */
-void parse_monty(args_t *args)
+void parse_monty(cmd_t *clargs)
 {
 	char *_gets = NULL;
 	void (*code_func)(stack_t **, unsigned int);
 
-	if (args->ac != 2)
+	if (clargs->ac != 2)
 		errorusage_print();
-	data.fptr = fopen(args->av, "r");
+	data.fptr = fopen(clargs->av, "r");
 	if (!data.fptr)
 	{
-		fprintf(stderr, ERROR_FILE, args->av);
+		fprintf(stderr, ERROR_FILE, clargs->av);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
 	{
-		args->line_number++;
+		clargs->nline++;
 		data.line = malloc(1024);
 		if (!data.line)
 			errormalloc_print();
@@ -62,11 +62,11 @@ void parse_monty(args_t *args)
 		code_func = get_func(data.words);
 		if (!code_func)
 		{
-			fprintf(stderr, ERROR_UNKNOWN, args->line_number, data.words[0]);
+			fprintf(stderr, ERROR_UNKNOWN, clargs->nline, data.words[0]);
 			free_handle(1);
 			exit(EXIT_FAILURE);
 		}
-		code_func(&(data.stack), args->line_number);
+		code_func(&(data.stack), clargs->nline);
 		free_handle(0);
 	}
 	free_handle(1);
@@ -81,13 +81,13 @@ void parse_monty(args_t *args)
  */
 int main(int argc, char *argv[])
 {
-	args_t args;
+	cmd_t clargs;
 
-	args.av = argv[1];
-	args.ac = argc;
-	args.line_number = 0;
+	clargs.av = argv[1];
+	clargs.ac = argc;
+	clargs.nline = 0;
 
-	parse_monty(&args);
+	parse_monty(&clargs);
 
 	return (EXIT_SUCCESS);
 }

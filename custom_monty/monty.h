@@ -56,20 +56,20 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct args_s - structure of arguments from main
+ * struct cmd_s - structure of arguments from main
  * @av: name of the file from the command line
  * @ac: number of arguments from main
- * @line_number: number of the current line in the file
+ * @nline: number of the current line in the file
  *
  * Description: arguments passed to main from the command line
  * used in different functions, organized in a struct for clarity
  */
-typedef struct args_s
+typedef struct cmd_s
 {
 	char *av;
 	int ac;
-	unsigned int line_number;
-} args_t;
+	unsigned int nline;
+} cmd_t;
 
 /**
  * struct data_s - extern data to access inside functions
@@ -93,7 +93,7 @@ extern data_t data;
 #define DATA_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* Monty parser */
-void parse_monty(args_t *args);
+void parse_monty(cmd_t *args);
 
 /* get function */
 void (*get_func(char **parsed))(stack_t **, unsigned int);
