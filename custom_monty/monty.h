@@ -1,12 +1,14 @@
 #ifndef _MONTY_H_
 #define _MONTY_H_
 
+/* library functions */
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <unistd.h>
 
+/* error and failure messages */
 #define ERROR_USAGE "USAGE: monty file\n"
 #define ERROR_FILE "Error: Can't open file %s\n"
 #define ERROR_UNKNOWN "L%u: unknown instruction %s\n"
@@ -56,13 +58,13 @@ typedef struct instruction_s
 } instruction_t;
 
 /**
- * struct cmd_s - structure of arguments from main
- * @av: name of the file from the command line
- * @ac: number of arguments from main
+ * struct cmd_s - structure of arguments passed from CL
+ * @av: name of file passed as CL arg
+ * @ac: number of arguments from CL
  * @nline: number of the current line in the file
  *
- * Description: arguments passed to main from the command line
- * used in different functions, organized in a struct for clarity
+ * Description: command line arguments passed to main used
+ * in different functions, organized in a struct for clarity
  */
 typedef struct cmd_s
 {
@@ -73,11 +75,11 @@ typedef struct cmd_s
 
 /**
  * struct info_s - extern data to access inside functions
- * @line: line from the file
- * @words: parsed line
+ * @line: line from the opcode file
+ * @words: tokenized content of opcode file
  * @stack: pointer to the stack
- * @fptr: file pointer
- * @qflag: flag for queue or stack
+ * @fp: file pointer
+ * @sflag: flag for stack or queue
  */
 typedef struct info_s
 {
@@ -98,7 +100,7 @@ void parse_monty(cmd_t *args);
 /* get function */
 void (*get_func(char **parsed))(stack_t **, unsigned int);
 
-/* OPCODE operation functions */
+/* OPCODE instruction functions */
 void _pint(stack_t **stack, unsigned int line_number);
 void _push(stack_t **stack, unsigned int line_number);
 void _pall(stack_t **stack, unsigned int line_number);
@@ -125,7 +127,7 @@ char **strtow(char *str);
 void free_handle(int);
 void free_str(char **);
 
-/* double linked functions */
+/* double linked list functions */
 size_t dlistint_len(const stack_t *h);
 stack_t *add_dnodeint(stack_t **head, const int n);
 size_t print_dlistint(const stack_t *h);
