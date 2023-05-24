@@ -95,46 +95,46 @@ extern info_t info;
 #define INFO_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* Monty parser */
-void parse_monty(cmd_t *args);
+void parse_monty(cmd_t *);
 
 /* get function */
-void (*get_func(char **parsed))(stack_t **, unsigned int);
+void (*get_func(char **))(stack_t **, unsigned int);
 
 /* OPCODE instruction functions */
-void _pint(stack_t **stack, unsigned int line_number);
-void _push(stack_t **stack, unsigned int line_number);
-void _pall(stack_t **stack, unsigned int line_number);
-void _pop(stack_t **stack, unsigned int line_number);
-void _swap(stack_t **stack, unsigned int line_number);
-void _add(stack_t **stack, unsigned int line_number);
-void _nop(stack_t **stack, unsigned int line_number);
-void _sub(stack_t **stack, unsigned int line_number);
-void _div(stack_t **stack, unsigned int line_number);
-void _mul(stack_t **stack, unsigned int line_number);
-void _mod(stack_t **stack, unsigned int line_number);
-void _rotl(stack_t **stack, unsigned int line_number);
-void _rotr(stack_t **stack, unsigned int line_number);
-void _stack(stack_t **stack, unsigned int line_number);
-void _queue(stack_t **stack, unsigned int line_number);
-void _pchar(stack_t **stack, unsigned int line_number);
-void _pstr(stack_t **stack, unsigned int line_number);
+void _pint(stack_t **, unsigned int);
+void _push(stack_t **, unsigned int);
+void _pall(stack_t **, unsigned int);
+void _pop(stack_t **, unsigned int);
+void _swap(stack_t **, unsigned int);
+void _add(stack_t **, unsigned int);
+void _nop(stack_t **, unsigned int);
+void _sub(stack_t **, unsigned int);
+void _div(stack_t **, unsigned int);
+void _mul(stack_t **, unsigned int);
+void _mod(stack_t **, unsigned int);
+void _rotl(stack_t **, unsigned int);
+void _rotr(stack_t **, unsigned int);
+void _stack(stack_t **, unsigned int);
+void _queue(stack_t **, unsigned int);
+void _pchar(stack_t **, unsigned int);
+void _pstr(stack_t **, unsigned int);
 
 /* tokenizer */
-int count_word(char *s);
-char **strtow(char *str);
+int count_word(char *);
+char **strtow(char *);
 
 /* memory functions */
 void free_handle(int);
 void free_str(char **);
 
 /* double linked list functions */
-size_t dlistint_len(const stack_t *h);
-stack_t *add_dnodeint(stack_t **head, const int n);
-size_t print_dlistint(const stack_t *h);
-int delete_dnodeint_at_index(stack_t **head, unsigned int index);
-stack_t *get_dnodeint_at_index(stack_t *head, unsigned int index);
-stack_t *insert_dnodeint_at_index(stack_t **h, unsigned int idx, int n);
-stack_t *add_dnodeint_end(stack_t **head, const int n);
-void free_dlistint(stack_t *head);
+size_t dlistint_len(const stack_t *);
+stack_t *add_dnodeint(stack_t **, const int);
+size_t print_dlistint(const stack_t *);
+int delete_dnodeint_at_index(stack_t **, unsigned in);
+stack_t *get_dnodeint_at_index(stack_t *, unsigned int);
+stack_t *insert_dnodeint_at_index(stack_t **, unsigned int, int);
+stack_t *add_dnodeint_end(stack_t **, const int);
+void free_dlistint(stack_t *);
 
 #endif /* _MONTY_H_ */
