@@ -4,6 +4,27 @@
 data_t data = DATA_INIT;
 
 /**
+  * errorusage_print - prints error messeages upon usage failure
+  * Return: Nothing
+  */
+void errorusage_print(void)
+{
+	fprintf(stderr, ERROR_USAGE);
+	exit(EXIT_FAILURE);
+}
+
+
+/**
+  * errormalloc_print - prints error messeages if malloc fails
+  * Return: Nothing
+  */
+void errormalloc_print(void)
+{
+	fprintf(stderr, FAILURE_MALLOC);
+	exit(EXIT_FAILURE);
+}
+
+/**
  * monty - helper function for main function
  * @args: pointer to struct of arguments from main
  *
@@ -17,10 +38,7 @@ void monty(args_t *args)
 	void (*code_func)(stack_t **, unsigned int);
 
 	if (args->ac != 2)
-	{
-		fprintf(stderr, ERROR_USAGE);
-		exit(EXIT_FAILURE);
-	}
+		errorusage_print();
 	data.fptr = fopen(args->av, "r");
 	if (!data.fptr)
 	{
@@ -32,10 +50,7 @@ void monty(args_t *args)
 		args->line_number++;
 		data.line = malloc(1024);
 		if (!data.line)
-		{
-			fprintf(stderr, FAILURE_MALLOC);
-			exit(EXIT_FAILURE);
-		}
+			errormalloc_print();
 		_gets = fgets(data.line, 1024, data.fptr);
 		if (!_gets)
 			break;
