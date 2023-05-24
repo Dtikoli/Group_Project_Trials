@@ -13,7 +13,6 @@ data_t data = DATA_INIT;
  */
 void monty(args_t *args)
 {
-	int len = 1024;
 	char *_gets = NULL;
 	void (*code_func)(stack_t **, unsigned int);
 
@@ -31,13 +30,13 @@ void monty(args_t *args)
 	while (1)
 	{
 		args->line_number++;
-		data.line = malloc(len);
+		data.line = malloc(1024);
 		if (!data.line)
 		{
 			fprintf(stderr, FAILURE_MALLOC);
 			exit(EXIT_FAILURE);
 		}
-		_gets = fgets(data.line, len, data.fptr);
+		_gets = fgets(data.line, 1024, data.fptr);
 		if (!_gets)
 			break;
 		data.words = strtow(data.line);
