@@ -72,25 +72,25 @@ typedef struct cmd_s
 } cmd_t;
 
 /**
- * struct data_s - extern data to access inside functions
+ * struct info_s - extern data to access inside functions
  * @line: line from the file
  * @words: parsed line
  * @stack: pointer to the stack
  * @fptr: file pointer
  * @qflag: flag for queue or stack
  */
-typedef struct data_s
+typedef struct info_s
 {
 	char *line;
 	char **words;
 	stack_t *stack;
-	FILE *fptr;
-	int qflag;
-} data_t;
+	FILE *fp;
+	int sflag;
+} info_t;
 
-extern data_t data;
+extern info_t info;
 
-#define DATA_INIT {NULL, NULL, NULL, NULL, 0}
+#define INFO_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* Monty parser */
 void parse_monty(cmd_t *args);

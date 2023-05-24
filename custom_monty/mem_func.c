@@ -6,25 +6,25 @@
  */
 void free_handle(int flag)
 {
-	if (data.line)
+	if (info.line)
 	{
-		free(data.line);
-		data.line = NULL;
-		free_str(data.words);
-		data.words = NULL;
+		free(info.line);
+		info.line = NULL;
+		free_str(info.words);
+		info.words = NULL;
 	}
 
 	if (flag)
 	{
-		if (data.stack)
+		if (info.stack)
 		{
-			free_dlistint(data.stack);
-			data.stack = NULL;
+			free_dlistint(info.stack);
+			info.stack = NULL;
 		}
-		if (data.fptr)
+		if (info.fp)
 		{
-			fclose(data.fptr);
-			data.fptr = NULL;
+			fclose(info.fp);
+			info.fp = NULL;
 		}
 	}
 }

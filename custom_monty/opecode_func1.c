@@ -3,34 +3,34 @@
 /**
  * _push - handles the push instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _push(stack_t **stack, unsigned int line_number)
+void _push(stack_t **stack, unsigned int nline)
 {
 	stack_t *new;
 	int num = 0, i;
 
-	if (data.words[1] == NULL)
+	if (info.words[1] == NULL)
 	{
-		fprintf(stderr, FAILURE_PUSH, line_number);
+		fprintf(stderr, FAILURE_PUSH, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
 
-	for (i = 0; data.words[1][i]; i++)
+	for (i = 0; info.words[1][i]; i++)
 	{
-		if (isalpha(data.words[1][i]) != 0)
+		if (isalpha(info.words[1][i]) != 0)
 		{
-			fprintf(stderr, FAILURE_PUSH, line_number);
+			fprintf(stderr, FAILURE_PUSH, nline);
 			free_handle(1);
 			exit(EXIT_FAILURE);
 		}
 	}
-	num = atoi(data.words[1]);
+	num = atoi(info.words[1]);
 
-	if (data.qflag == 0)
+	if (info.sflag == 0)
 		new = add_dnodeint(stack, num);
-	else if (data.qflag == 1)
+	else if (info.sflag == 1)
 		new = add_dnodeint_end(stack, num);
 	if (!new)
 	{
@@ -43,11 +43,11 @@ void _push(stack_t **stack, unsigned int line_number)
 /**
  * _pall - handles the pall instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _pall(stack_t **stack, unsigned int line_number)
+void _pall(stack_t **stack, unsigned int nline)
 {
-	(void)line_number;
+	(void)nline;
 	if (*stack)
 		print_dlistint(*stack);
 }
@@ -55,15 +55,15 @@ void _pall(stack_t **stack, unsigned int line_number)
 /**
  * _pint - handles the pint instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _pint(stack_t **stack, unsigned int line_number)
+void _pint(stack_t **stack, unsigned int nline)
 {
 	stack_t *head = *stack;
 
 	if (!head)
 	{
-		fprintf(stderr, FAILURE_PINT, line_number);
+		fprintf(stderr, FAILURE_PINT, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
@@ -74,15 +74,15 @@ void _pint(stack_t **stack, unsigned int line_number)
 /**
  * _pop - handles the pop instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _pop(stack_t **stack, unsigned int line_number)
+void _pop(stack_t **stack, unsigned int nline)
 {
 	stack_t *temp = *stack;
 
 	if (!temp)
 	{
-		fprintf(stderr, FAILURE_POP, line_number);
+		fprintf(stderr, FAILURE_POP, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}
@@ -93,9 +93,9 @@ void _pop(stack_t **stack, unsigned int line_number)
 /**
  * _add - handles the add instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _add(stack_t **stack, unsigned int line_number)
+void _add(stack_t **stack, unsigned int nline)
 {
 	int sum = 0;
 	stack_t *node = NULL;
@@ -104,7 +104,7 @@ void _add(stack_t **stack, unsigned int line_number)
 
 	if (dlistint_len(*stack) < 2)
 	{
-		fprintf(stderr, FAILURE_ADD, line_number);
+		fprintf(stderr, FAILURE_ADD, nline);
 		free_handle(1);
 		exit(EXIT_FAILURE);
 	}

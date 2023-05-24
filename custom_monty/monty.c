@@ -1,6 +1,6 @@
 #include "monty.h"
 
-data_t data = DATA_INIT;
+info_t info = INFO_INIT;
 
 /**
   * errorusage_print - prints error messeages upon usage failure
@@ -34,12 +34,12 @@ void errormalloc_print(void)
 void parse_monty(cmd_t *clargs)
 {
 	char *_gets = NULL;
-	void (*code_func)(stack_t **, unsigned int);
+	void (*opcode_func)(stack_t **, unsigned int);
 
 	if (clargs->ac != 2)
 		errorusage_print();
-	data.fptr = fopen(clargs->av, "r");
-	if (!data.fptr)
+	info.fp = fopen(clargs->av, "r");
+	if (!info.fp)
 	{
 		fprintf(stderr, ERROR_FILE, clargs->av);
 		exit(EXIT_FAILURE);
@@ -47,26 +47,26 @@ void parse_monty(cmd_t *clargs)
 	while (1)
 	{
 		clargs->nline++;
-		data.line = malloc(1024);
-		if (!data.line)
+		info.line = malloc(1024);
+		if (!info.line)
 			errormalloc_print();
-		_gets = fgets(data.line, 1024, data.fptr);
+		_gets = fgets(info.line, 1024, info.fp);
 		if (!_gets)
 			break;
-		data.words = strtow(data.line);
-		if (data.words[0] == NULL || data.words[0][0] == '#')
+		info.words = strtow(info.line);
+		if (info.words[0] == NULL || info.words[0][0] == '#')
 		{
 			free_handle(0);
 			continue;
 		}
-		code_func = get_func(data.words);
-		if (!code_func)
+		opcode_func = get_func(info.words);
+		if (!opcode_func)
 		{
-			fprintf(stderr, ERROR_UNKNOWN, clargs->nline, data.words[0]);
+			fprintf(stderr, ERROR_UNKNOWN, clargs->nline, info.words[0]);
 			free_handle(1);
 			exit(EXIT_FAILURE);
 		}
-		code_func(&(data.stack), clargs->nline);
+		opcode_func(&(info.stack), clargs->nline);
 		free_handle(0);
 	}
 	free_handle(1);

@@ -3,25 +3,25 @@
 /**
  * _nop - handles the nop instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _nop(stack_t **stack, unsigned int line_number)
+void _nop(stack_t **stack, unsigned int nline)
 {
 	(void)stack;
-	(void)line_number;
+	(void)nline;
 }
 
 /**
  * _rotl - handles the rotl instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _rotl(stack_t **stack, unsigned int line_number)
+void _rotl(stack_t **stack, unsigned int nline)
 {
 	stack_t *temp = *stack;
 	int num  = 0;
 
-	(void)line_number;
+	(void)nline;
 
 	if (*stack == NULL)
 		return;
@@ -34,14 +34,14 @@ void _rotl(stack_t **stack, unsigned int line_number)
 /**
  * _rotr - handles the rotr instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _rotr(stack_t **stack, unsigned int line_number)
+void _rotr(stack_t **stack, unsigned int nline)
 {
 	stack_t *temp = *stack;
 	int num = 0, len = dlistint_len(*stack);
 
-	(void)line_number;
+	(void)nline;
 
 	if (*stack == NULL)
 		return;
@@ -54,24 +54,24 @@ void _rotr(stack_t **stack, unsigned int line_number)
 /**
  * _stack - handles the stack instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _stack(stack_t **stack, unsigned int line_number)
+void _stack(stack_t **stack, unsigned int nline)
 {
 	(void)stack;
-	(void)line_number;
-	data.qflag = 0;
+	(void)nline;
+	info.sflag = 0;
 }
 
 
 /**
  * _queue - handles the queue instruction
  * @stack: double pointer to the stack to push to
- * @line_number: number of the line in the file
+ * @nline: number of the line in the file
  */
-void _queue(stack_t **stack, unsigned int line_number)
+void _queue(stack_t **stack, unsigned int nline)
 {
 	(void)stack;
-	(void)line_number;
-	data.qflag = 1;
+	(void)nline;
+	info.sflag = 1;
 }
