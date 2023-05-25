@@ -1,27 +1,27 @@
 #include "monty.h"
 
 /**
- * _nop - handles the nop instruction
+ * handle_nop - handles the nop instruction
  * @stack: double pointer to the stack to push to
- * @nline: number of the line in the file
+ * @line_number: number of the line in the file
  */
-void _nop(stack_t **stack, unsigned int nline)
+void handle_nop(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
-	(void)nline;
+	(void)line_number;
 }
 
 /**
- * _rotl - handles the rotl instruction
+ * handle_rotl - handles the rotl instruction
  * @stack: double pointer to the stack to push to
- * @nline: number of the line in the file
+ * @line_number: number of the line in the file
  */
-void _rotl(stack_t **stack, unsigned int nline)
+void handle_rotl(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int num  = 0;
 
-	(void)nline;
+	(void)line_number;
 
 	if (*stack == NULL)
 		return;
@@ -32,16 +32,16 @@ void _rotl(stack_t **stack, unsigned int nline)
 }
 
 /**
- * _rotr - handles the rotr instruction
+ * handle_rotr - handles the rotr instruction
  * @stack: double pointer to the stack to push to
- * @nline: number of the line in the file
+ * @line_number: number of the line in the file
  */
-void _rotr(stack_t **stack, unsigned int nline)
+void handle_rotr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *temp = *stack;
 	int num = 0, len = dlistint_len(*stack);
 
-	(void)nline;
+	(void)line_number;
 
 	if (*stack == NULL)
 		return;
@@ -52,26 +52,26 @@ void _rotr(stack_t **stack, unsigned int nline)
 }
 
 /**
- * _stack - handles the stack instruction
+ * handle_stack - handles the stack instruction
  * @stack: double pointer to the stack to push to
- * @nline: number of the line in the file
+ * @line_number: number of the line in the file
  */
-void _stack(stack_t **stack, unsigned int nline)
+void handle_stack(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
-	(void)nline;
+	(void)line_number;
 	info.sflag = 0;
 }
 
 
 /**
- * _queue - handles the queue instruction
+ * handle_queue - handles the queue instruction
  * @stack: double pointer to the stack to push to
- * @nline: number of the line in the file
+ * @line_number: number of the line in the file
  */
-void _queue(stack_t **stack, unsigned int nline)
+void handle_queue(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
-	(void)nline;
+	(void)line_number;
 	info.sflag = 1;
 }

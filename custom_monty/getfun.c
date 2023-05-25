@@ -2,40 +2,40 @@
 
 /**
  * get_func - selects the right function
- * @opc: line from the bytecode file passed to main
+ * @code: line from the bytecode file passed to main
  *
  * Return: pointer to the selected function, or NULL on failure
  */
-void (*get_func(char **opc))(stack_t **, unsigned int)
+void (*get_func(char **code))(stack_t **, unsigned int)
 {
-	instruction_t opc_func[] = {
-		{"push", _push},
-		{"pall", _pall},
-		{"pint", _pint},
-		{"pop", _pop},
-		{"swap", _swap},
-		{"add", _add},
-		{"nop", _nop},
-		{"sub", _sub},
-		{"div", _div},
-		{"mul", _mul},
-		{"mod", _mod},
-		{"pchar", _pchar},
-		{"pstr", _pstr},
-		{"rotl", _rotl},
-		{"rotr", _rotr},
-		{"stack", _stack},
-		{"queue", _queue},
+	instruction_t func[] = {
+		{"push", handle_push},
+		{"pall", handle_pall},
+		{"pint", handle_pint},
+		{"pop", handle_pop},
+		{"swap", handle_swap},
+		{"add", handle_add},
+		{"nop", handle_nop},
+		{"sub", handle_sub},
+		{"div", handle_div},
+		{"mul", handle_mul},
+		{"mod", handle_mod},
+		{"pchar", handle_pchar},
+		{"pstr", handle_pstr},
+		{"rotl", handle_rotl},
+		{"rotr", handle_rotr},
+		{"stack", handle_stack},
+		{"queue", handle_queue},
 		{NULL, NULL}
 	};
 
-	int i, n_opcs = 17;
+	int i, num = 17;
 
-	for (i = 0; i < n_opcs; i++)
+	for (i = 0; i < num; i++)
 	{
-		if (strcmp(opc_func[i].opcode, opc[0]) == 0)
+		if (strcmp(func[i].opcode, code[0]) == 0)
 		{
-			return (opc_func[i].f);
+			return (func[i].f);
 		}
 	}
 	return (NULL);

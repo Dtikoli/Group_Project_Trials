@@ -1,25 +1,25 @@
 #include "monty.h"
 
 /**
- * _pchar - handles the pchar instruction
+ * handle_pchar - handles the pchar instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void _pchar(stack_t **stack, unsigned int line_number)
+void handle_pchar(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
 
 	if (!node)
 	{
 		fprintf(stderr, FAILURE_PCHAR, line_number);
-		free_handle(1);
+		free_content(1);
 		exit(EXIT_FAILURE);
 	}
 
 	if (node->n < 0 || node->n > 127)
 	{
 		fprintf(stderr, ERROR_PCHAR, line_number);
-		free_handle(1);
+		free_content(1);
 		exit(EXIT_FAILURE);
 	}
 
@@ -28,11 +28,11 @@ void _pchar(stack_t **stack, unsigned int line_number)
 }
 
 /**
- * _pstr - handles the pstr instruction
+ * handle_pstr - handles the pstr instruction
  * @stack: double pointer to the stack to push to
  * @line_number: number of the line in the file
  */
-void _pstr(stack_t **stack, unsigned int line_number)
+void handle_pstr(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
 

@@ -1,20 +1,20 @@
 #include "monty.h"
 
 /**
- * free_handle - memory handling and FILE ptr closure function
- * @flag: gives indication of the content to free
+ * free_content - memory handling and FILE ptr closure function
+ * @f: gives indication of the content to free
  */
-void free_handle(int flag)
+void free_content(int f)
 {
 	if (info.line)
 	{
 		free(info.line);
 		info.line = NULL;
-		free_str(info.words);
+		free_array(info.words);
 		info.words = NULL;
 	}
 
-	if (flag)
+	if (f)
 	{
 		if (info.stack)
 		{
@@ -31,10 +31,10 @@ void free_handle(int flag)
 
 
 /**
- * free_str - frees arrays of strings
+ * free_array - frees arrays of strings
  * @args: array of strings to free
  */
-void free_str(char **args)
+void free_array(char **args)
 {
 	int j;
 
