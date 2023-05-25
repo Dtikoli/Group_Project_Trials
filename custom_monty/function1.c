@@ -10,27 +10,27 @@ void handle_push(stack_t **stack, unsigned int line_number)
 	stack_t *new;
 	int num = 0, i;
 
-	if (info.words[1] == NULL)
+	if (content.words[1] == NULL)
 	{
 		fprintf(stderr, FAILURE_PUSH, line_number);
 		free_content(1);
 		exit(EXIT_FAILURE);
 	}
 
-	for (i = 0; info.words[1][i]; i++)
+	for (i = 0; content.words[1][i]; i++)
 	{
-		if (isalpha(info.words[1][i]) != 0)
+		if (isalpha(content.words[1][i]) != 0)
 		{
 			fprintf(stderr, FAILURE_PUSH, line_number);
 			free_content(1);
 			exit(EXIT_FAILURE);
 		}
 	}
-	num = atoi(info.words[1]);
+	num = atoi(content.words[1]);
 
-	if (info.sflag == 0)
+	if (content.qflag == 0)
 		new = add_dnodeint(stack, num);
-	else if (info.sflag == 1)
+	else if (content.qflag == 1)
 		new = add_dnodeint_end(stack, num);
 	if (!new)
 	{

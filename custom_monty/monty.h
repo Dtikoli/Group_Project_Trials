@@ -55,25 +55,25 @@ typedef struct cmd_s
 } cmd_t;
 
 /**
- * struct info_s - extern data to access inside functions
+ * struct mont_s - extern data to access inside functions
  * @line: line from the opcode file
  * @words: tokenized content of opcode file
  * @stack: pointer to the stack
  * @fp: file pointer
  * @sflag: flag for stack or queue
  */
-typedef struct info_s
+typedef struct mont_s
 {
 	char *line;
 	char **words;
 	stack_t *stack;
 	FILE *fp;
-	int sflag;
-} info_t;
+	int qflag;
+} mon_t;
 
-extern info_t info;
+extern mon_t content;
 
-#define INFO_INIT {NULL, NULL, NULL, NULL, 0}
+#define CONTENT_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* error and failure messages */
 #define ERROR_USAGE "USAGE: monty file\n"

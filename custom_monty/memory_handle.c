@@ -6,25 +6,25 @@
  */
 void free_content(int f)
 {
-	if (info.line)
+	if (content.line)
 	{
-		free(info.line);
-		info.line = NULL;
-		free_array(info.words);
-		info.words = NULL;
+		free(content.line);
+		content.line = NULL;
+		free_array(content.words);
+		content.words = NULL;
 	}
 
 	if (f)
 	{
-		if (info.stack)
+		if (content.stack)
 		{
-			free_dlistint(info.stack);
-			info.stack = NULL;
+			free_dlistint(content.stack);
+			content.stack = NULL;
 		}
-		if (info.fp)
+		if (content.fp)
 		{
-			fclose(info.fp);
-			info.fp = NULL;
+			fclose(content.fp);
+			content.fp = NULL;
 		}
 	}
 }

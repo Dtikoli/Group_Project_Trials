@@ -1,6 +1,6 @@
 #include "monty.h"
 
-info_t info = INFO_INIT;
+mon_t content = CONTENT_INIT;
 
 /**
   * errorusage_print - prints error messeages upon usage failure
@@ -38,8 +38,8 @@ void monty(cmd_t *clargs)
 
 	if (clargs->ac != 2)
 		errorusage_print();
-	info.fp = fopen(clargs->av, "r");
-	if (!info.fp)
+	content.fp = fopen(clargs->av, "r");
+	if (!content.fp)
 	{
 		fprintf(stderr, ERROR_FILE, clargs->av);
 		exit(EXIT_FAILURE);
@@ -47,26 +47,26 @@ void monty(cmd_t *clargs)
 	while (1)
 	{
 		clargs->nline++;
-		info.line = malloc(1024);
-		if (!info.line)
+		content.line = malloc(1024);
+		if (!content.line)
 			errormalloc_print();
-		line_gets = fgets(info.line, 1024, info.fp);
+		line_gets = fgets(content.line, 1024, content.fp);
 		if (line_gets == NULL)
 			break;
-		info.words = strtow(info.line);
-		if (info.words[0] == NULL || info.words[0][0] == '#')
+		content.words = strtow(content.line);
+		if (content.words[0] == NULL || content.words[0][0] == '#')
 		{
 			free_content(0);
 			continue;
 		}
-		opfunc = get_func(info.words);
+		opfunc = get_func(content.words);
 		if (!opfunc)
 		{
-			fprintf(stderr, ERROR_UNKNOWN, clargs->nline, info.words[0]);
+			fprintf(stderr, ERROR_UNKNOWN, clargs->nline, content.words[0]);
 			free_content(1);
 			exit(EXIT_FAILURE);
 		}
-		opfunc(&(info.stack), clargs->nline);
+		opfunc(&(content.stack), clargs->nline);
 		free_content(0);
 	}
 	free_content(1);

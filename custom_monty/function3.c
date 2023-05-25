@@ -60,7 +60,7 @@ void handle_stack(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-	info.sflag = 0;
+	content.qflag = 0;
 }
 
 
@@ -73,5 +73,5 @@ void handle_queue(stack_t **stack, unsigned int line_number)
 {
 	(void)stack;
 	(void)line_number;
-	info.sflag = 1;
+	content.qflag = 1;
 }
