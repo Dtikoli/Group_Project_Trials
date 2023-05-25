@@ -12,7 +12,7 @@ void handle_push(stack_t **stack, unsigned int line_number)
 
 	if (content.words[1] == NULL)
 	{
-		fprintf(stderr, FAILURE_PUSH, line_number);
+		fprintf(stderr, FAIL_PUSH, line_number);
 		free_content(1);
 		exit(EXIT_FAILURE);
 	}
@@ -21,7 +21,7 @@ void handle_push(stack_t **stack, unsigned int line_number)
 	{
 		if (isalpha(content.words[1][i]) != 0)
 		{
-			fprintf(stderr, FAILURE_PUSH, line_number);
+			fprintf(stderr, FAIL_PUSH, line_number);
 			free_content(1);
 			exit(EXIT_FAILURE);
 		}
@@ -34,7 +34,7 @@ void handle_push(stack_t **stack, unsigned int line_number)
 		new = add_dnodeint_end(stack, num);
 	if (!new)
 	{
-		fprintf(stderr, FAILURE_MALLOC);
+		fprintf(stderr, FAIL_MALLOC);
 		free_content(1);
 		exit(EXIT_FAILURE);
 	}
@@ -63,7 +63,7 @@ void handle_pint(stack_t **stack, unsigned int line_number)
 
 	if (!head)
 	{
-		fprintf(stderr, FAILURE_PINT, line_number);
+		fprintf(stderr, FAIL_PINT, line_number);
 		free_content(1);
 		exit(EXIT_FAILURE);
 	}
@@ -82,7 +82,7 @@ void handle_pop(stack_t **stack, unsigned int line_number)
 
 	if (!temp)
 	{
-		fprintf(stderr, FAILURE_POP, line_number);
+		fprintf(stderr, FAIL_POP, line_number);
 		free_content(1);
 		exit(EXIT_FAILURE);
 	}
@@ -104,7 +104,7 @@ void handle_add(stack_t **stack, unsigned int line_number)
 
 	if (dlistint_len(*stack) < 2)
 	{
-		fprintf(stderr, FAILURE_ADD, line_number);
+		fprintf(stderr, FAIL_ADD, line_number);
 		free_content(1);
 		exit(EXIT_FAILURE);
 	}
@@ -115,7 +115,7 @@ void handle_add(stack_t **stack, unsigned int line_number)
 	node = add_dnodeint(stack, sum);
 	if (!node)
 	{
-		fprintf(stderr, FAILURE_MALLOC);
+		fprintf(stderr, FAIL_MALLOC);
 		free_content(1);
 		exit(EXIT_FAILURE);
 	}

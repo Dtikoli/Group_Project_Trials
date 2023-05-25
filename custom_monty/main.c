@@ -8,7 +8,7 @@ mon_t content = CONTENT_INIT;
   */
 void errorusage_print(void)
 {
-	fprintf(stderr, ERROR_USAGE);
+	fprintf(stderr, ERR_USAGE);
 	exit(EXIT_FAILURE);
 }
 
@@ -19,7 +19,7 @@ void errorusage_print(void)
   */
 void errormalloc_print(void)
 {
-	fprintf(stderr, FAILURE_MALLOC);
+	fprintf(stderr, FAIL_MALLOC);
 	exit(EXIT_FAILURE);
 }
 
@@ -41,7 +41,7 @@ void monty(cmd_t *clargs)
 	content.fp = fopen(clargs->av, "r");
 	if (!content.fp)
 	{
-		fprintf(stderr, ERROR_FILE, clargs->av);
+		fprintf(stderr, ERR_FILE, clargs->av);
 		exit(EXIT_FAILURE);
 	}
 	while (1)
@@ -62,7 +62,7 @@ void monty(cmd_t *clargs)
 		opfunc = get_func(content.words);
 		if (!opfunc)
 		{
-			fprintf(stderr, ERROR_UNKNOWN, clargs->nline, content.words[0]);
+			fprintf(stderr, ERR_UNKNOWN, clargs->nline, content.words[0]);
 			free_content(1);
 			exit(EXIT_FAILURE);
 		}

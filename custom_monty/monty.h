@@ -76,22 +76,22 @@ extern mon_t content;
 #define CONTENT_INIT {NULL, NULL, NULL, NULL, 0}
 
 /* error and failure messages */
-#define ERROR_USAGE "USAGE: monty file\n"
-#define ERROR_FILE "Error: Can't open file %s\n"
-#define ERROR_UNKNOWN "L%u: unknown instruction %s\n"
-#define FAILURE_MALLOC "Error: malloc failed\n"
-#define FAILURE_PUSH "L%u: usage: push integer\n"
-#define FAILURE_PINT "L%u: can't pint, stack empty\n"
-#define FAILURE_POP "L%u: can't pop an empty stack\n"
-#define FAILURE_SWAP "L%u: can't swap, stack too short\n"
-#define FAILURE_ADD "L%u: can't add, stack too short\n"
-#define FAILURE_SUB "L%u: can't sub, stack too short\n"
-#define FAILURE_DIV "L%u: can't div, stack too short\n"
-#define ERROR_DIV "L%u: division by zero\n"
-#define FAILURE_MUL "L%u: can't mul, stack too short\n"
-#define FAILURE_MOD "L%u: can't mod, stack too short\n"
-#define FAILURE_PCHAR "L%u: can't pchar, stack empty\n"
-#define ERROR_PCHAR "L%u: can't pchar, value out of range\n"
+#define ERR_USAGE "USAGE: monty file\n"
+#define ERR_FILE "Error: Can't open file %s\n"
+#define ERR_UNKNOWN "L%u: unknown instruction %s\n"
+#define FAIL_MALLOC "Error: malloc failed\n"
+#define FAIL_PUSH "L%u: usage: push integer\n"
+#define FAIL_PINT "L%u: can't pint, stack empty\n"
+#define FAIL_POP "L%u: can't pop an empty stack\n"
+#define FAIL_SWAP "L%u: can't swap, stack too short\n"
+#define FAIL_ADD "L%u: can't add, stack too short\n"
+#define FAIL_SUB "L%u: can't sub, stack too short\n"
+#define FAIL_DIV "L%u: can't div, stack too short\n"
+#define ERR_DIV "L%u: division by zero\n"
+#define FAIL_MUL "L%u: can't mul, stack too short\n"
+#define FAIL_MOD "L%u: can't mod, stack too short\n"
+#define FAIL_PCHAR "L%u: can't pchar, stack empty\n"
+#define ERR_PCHAR "L%u: can't pchar, value out of range\n"
 
 /* Monty parser */
 void monty(cmd_t *);
