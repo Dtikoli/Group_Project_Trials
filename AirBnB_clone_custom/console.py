@@ -106,7 +106,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
         elif arg_list[0] not in HBNBCommand.__class_set:
             print("** class doesn't exist **")
-        elif len(arg_listl) == 1:
+        elif len(arg_list) == 1:
             print("** instance id missing **")
         elif "{}.{}".format(arg_list[0], arg_list[1]) not in obj_dict:
             print("** no instance found **")
@@ -132,10 +132,10 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
-        Displays the string representations of all instances of a given class.
+        Displays string representations of all instances of a given class.
         If no class is specified, displays all instantiated objects."""
         arg_list = HBnB_parse(arg)
-        if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__classes:
+        if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__class_set:
             print("** class doesn't exist **")
         else:
             obj_list = []
