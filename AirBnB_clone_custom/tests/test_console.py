@@ -1,7 +1,7 @@
 #!/usr/bin/python3
-"""Defines unittests for console.py.
+""" A module that defines unittests for console.py.
 Unittest classes:
-    TestHBNBCommand_prompting
+    TestHBNBCommand_prompt
     TestHBNBCommand_help
     TestHBNBCommand_exit
     TestHBNBCommand_create
@@ -20,10 +20,10 @@ from io import StringIO
 from unittest.mock import patch
 
 
-class TestHBNBCommand_prompting(unittest.TestCase):
-    """Unittests for testing prompting of the HBNB command interpreter."""
+class TestHBNBCommand_prompt(unittest.TestCase):
+    """Testing the command prompt of the HBNB command interpreter."""
 
-    def test_prompt_string(self):
+    def test_prompt_str(self):
         self.assertEqual("(hbnb) ", HBNBCommand.prompt)
 
     def test_empty_line(self):
@@ -33,96 +33,96 @@ class TestHBNBCommand_prompting(unittest.TestCase):
 
 
 class TestHBNBCommand_help(unittest.TestCase):
-    """Unittests for testing help messages of the HBNB command interpreter."""
+    """Testing help messages of the HBNB command interpreter."""
 
-    def test_help_quit(self):
-        h = "Quit command for exiting the program."
+    def test_quit_help(self):
+        message = "Quit command for exiting the program."
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help quit"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
-    def test_help_create(self):
-        h = ("Usage: create <class>\n        "
+    def test_create_help(self):
+        message = ("Usage: create <class>\n        "
              "Create a new instance of a class and print its id.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help create"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
-    def test_help_EOF(self):
-        h = "EOF signal for exiting the program."
+    def test_EOF_help(self):
+        message = "EOF signal for exiting the program."
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help EOF"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
-    def test_help_show(self):
-        h = ("Usage: show <class> <id> or <class>.show(<id>)\n        "
+    def test_show_help(self):
+        message = ("Usage: show <class> <id> or <class>.show(<id>)\n        "
              "Displays string representation of an instance with"
              " a given id.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help show"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
-    def test_help_destroy(self):
-        h = ("Usage: destroy <class> <id> or <class>.destroy(<id>)\n        "
+    def test_destroy_help(self):
+        message = ("Usage: destroy <class> <id> or <class>.destroy(<id>)\n        "
              "Deletes a class instance with a given id.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help destroy"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
-    def test_help_all(self):
-        h = ("Usage: all or all <class> or <class>.all()\n        "
+    def test_all_help(self):
+        message = ("Usage: all or all <class> or <class>.all()\n        "
              "Displays string representations of all instances of a given class"
              ".\n        If no class is specified, displays all instantiated "
              "objects.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help all"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
-    def test_help_count(self):
-        h = ("Usage: count <class> or <class>.count()\n        "
+    def test_count_help(self):
+        message = ("Usage: count <class> or <class>.count()\n        "
              "Retrieves the number of instances of a given class.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help count"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
-    def test_help_update(self):
-        h = ("Usage: update <class> <id> <attribute_name> <attribute_value> or"
+    def test_update_help(self):
+        message = ("Usage: update <class> <id> <attribute_name> <attribute_value> or"
              "\n       <class>.update(<id>, <attribute_name>, <attribute_value"
              ">) or\n       <class>.update(<id>, <dictionary>)\n        "
              "Updates a class instance with a given id by adding or updating\n   "
              "     a given attribute key/value pair or dictionary.")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help update"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
     def test_help(self):
-        h = ("Documented commands (type help <topic>):\n"
+        message = ("Documented commands (type help <topic>):\n"
              "========================================\n"
              "EOF  all  count  create  destroy  help  quit  show  update")
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertFalse(HBNBCommand().onecmd("help"))
-            self.assertEqual(h, output.getvalue().strip())
+            self.assertEqual(message, output.getvalue().strip())
 
 
 class TestHBNBCommand_exit(unittest.TestCase):
-    """Unittests for testing exiting from the HBNB command interpreter."""
+    """Testing exiting from the HBNB command interpreter."""
 
-    def test_quit_exits(self):
+    def test_quit_exit(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(HBNBCommand().onecmd("quit"))
 
-    def test_EOF_exits(self):
+    def test_EOF_exit(self):
         with patch("sys.stdout", new=StringIO()) as output:
             self.assertTrue(HBNBCommand().onecmd("EOF"))
 
 
 class TestHBNBCommand_create(unittest.TestCase):
-    """Unittests for testing create from the HBNB command interpreter."""
+    """Testing create from the HBNB command interpreter."""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
         FileStorage.__objects = {}
@@ -134,7 +134,7 @@ class TestHBNBCommand_create(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
 
@@ -199,12 +199,12 @@ class TestHBNBCommand_create(unittest.TestCase):
 
 
 class TestHBNBCommand_show(unittest.TestCase):
-    """Unittests for testing show from the HBNB command interpreter"""
+    """Testing show from the HBNB command interpreter"""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
         FileStorage.__objects = {}
@@ -216,7 +216,7 @@ class TestHBNBCommand_show(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
 
@@ -452,12 +452,12 @@ class TestHBNBCommand_show(unittest.TestCase):
 
 
 class TestHBNBCommand_destroy(unittest.TestCase):
-    """Unittests for testing destroy from the HBNB command interpreter."""
+    """Testing destroy from the HBNB command interpreter."""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
         FileStorage.__objects = {}
@@ -469,7 +469,7 @@ class TestHBNBCommand_destroy(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
         storage.reload()
@@ -706,12 +706,12 @@ class TestHBNBCommand_destroy(unittest.TestCase):
 
 
 class TestHBNBCommand_all(unittest.TestCase):
-    """Unittests for testing all of the HBNB command interpreter."""
+    """Testing all of the HBNB command interpreter."""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
         FileStorage.__objects = {}
@@ -723,7 +723,7 @@ class TestHBNBCommand_all(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
 
@@ -852,12 +852,12 @@ class TestHBNBCommand_all(unittest.TestCase):
 
 
 class TestHBNBCommand_update(unittest.TestCase):
-    """Unittests for testing update from the HBNB command interpreter."""
+    """Testing update from the HBNB command interpreter."""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
         FileStorage.__objects = {}
@@ -869,7 +869,7 @@ class TestHBNBCommand_update(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
 
@@ -1501,12 +1501,12 @@ class TestHBNBCommand_update(unittest.TestCase):
 
 
 class TestHBNBCommand_count(unittest.TestCase):
-    """Unittests for testing count method of HBNB comand interpreter."""
+    """Testing count method of HBNB comand interpreter."""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
         FileStorage._FileStorage__objects = {}
@@ -1518,7 +1518,7 @@ class TestHBNBCommand_count(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
 
