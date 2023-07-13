@@ -1,5 +1,4 @@
 # AirBnB clone - The console
- <img src="image/hbnb_logo.png" alt="cover" />
 
 ## Description
 
