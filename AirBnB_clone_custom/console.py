@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_all(self, arg):
         """Usage: all or all <class> or <class>.all()
-        Displays string representations of all instances of a given class.
+        Displays string representations of all instances of given class.
         If no class is specified, displays all instantiated objects."""
         arg_list = HBnB_parse(arg)
         if len(arg_list) > 0 and arg_list[0] not in HBNBCommand.__class_set:
@@ -160,7 +160,7 @@ class HBNBCommand(cmd.Cmd):
         """Usage: update <class> <id> <attribute_name> <attribute_value> or
        <class>.update(<id>, <attribute_name>, <attribute_value>) or
        <class>.update(<id>, <dictionary>)
-        Updates a class instance with a given id by adding or updating
+        Updates class instance with given id by adding or updating
         a given attribute key/value pair or dictionary."""
         arg_list = HBnB_parse(arg)
         obj_dict = storage.all()
