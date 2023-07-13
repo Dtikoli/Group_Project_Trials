@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines unittests for models/base_model.py.
+"""A module that defines unittests for models/base_model.py.
 Unittest classes:
     TestBaseModel_instantiation
     TestBaseModel_save
@@ -14,7 +14,7 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel_instantiation(unittest.TestCase):
-    """Unittests for testing instantiation of the BaseModel class."""
+    """Testing instantiation of the BaseModel class."""
 
     def test_no_args_instantiates(self):
         self.assertEqual(BaseModel, type(BaseModel()))
@@ -86,12 +86,12 @@ class TestBaseModel_instantiation(unittest.TestCase):
 
 
 class TestBaseModel_save(unittest.TestCase):
-    """Unittests for testing save method of the BaseModel class."""
+    """Testing save method of the BaseModel class."""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
 
@@ -102,7 +102,7 @@ class TestBaseModel_save(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
 
@@ -138,7 +138,7 @@ class TestBaseModel_save(unittest.TestCase):
 
 
 class TestBaseModel_to_dict(unittest.TestCase):
-    """Unittests for testing to_dict method of the BaseModel class."""
+    """Testing to_dict method of the BaseModel class."""
 
     def test_to_dict_type(self):
         bm = BaseModel()
@@ -153,7 +153,7 @@ class TestBaseModel_to_dict(unittest.TestCase):
 
     def test_to_dict_contains_added_attributes(self):
         bm = BaseModel()
-        bm.name = "Holberton"
+        bm.name = "ALX"
         bm.my_number = 98
         self.assertIn("name", bm.to_dict())
         self.assertIn("my_number", bm.to_dict())

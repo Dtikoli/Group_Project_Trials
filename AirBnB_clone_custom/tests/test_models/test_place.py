@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines unittests for models/place.py.
+"""A modue that defines unittests for models/place.py.
 Unittest classes:
     TestPlace_instantiation
     TestPlace_save
@@ -14,7 +14,7 @@ from models.place import Place
 
 
 class TestPlace_instantiation(unittest.TestCase):
-    """Unittests for testing instantiation of the Place class."""
+    """Testing instantiation of the Place class."""
 
     def test_no_args_instantiates(self):
         self.assertEqual(Place, type(Place()))
@@ -144,12 +144,12 @@ class TestPlace_instantiation(unittest.TestCase):
 
 
 class TestPlace_save(unittest.TestCase):
-    """Unittests for testing save method of the Place class."""
+    """Testing save method of the Place class."""
 
     @classmethod
     def setUp(self):
         try:
-            os.rename("file.json", "tmp")
+            os.rename("file.json", "temp")
         except IOError:
             pass
 
@@ -159,7 +159,7 @@ class TestPlace_save(unittest.TestCase):
         except IOError:
             pass
         try:
-            os.rename("tmp", "file.json")
+            os.rename("temp", "file.json")
         except IOError:
             pass
 
@@ -195,7 +195,7 @@ class TestPlace_save(unittest.TestCase):
 
 
 class TestPlace_to_dict(unittest.TestCase):
-    """Unittests for testing to_dict method of the Place class."""
+    """Testing to_dict method of the Place class."""
 
     def test_to_dict_type(self):
         self.assertTrue(dict, type(Place().to_dict()))
@@ -209,9 +209,9 @@ class TestPlace_to_dict(unittest.TestCase):
 
     def test_to_dict_contains_added_attributes(self):
         pl = Place()
-        pl.middle_name = "Holberton"
+        pl.middle_name = "ALX"
         pl.my_number = 98
-        self.assertEqual("Holberton", pl.middle_name)
+        self.assertEqual("ALX", pl.middle_name)
         self.assertIn("my_number", pl.to_dict())
 
     def test_to_dict_datetime_attributes_are_strs(self):
