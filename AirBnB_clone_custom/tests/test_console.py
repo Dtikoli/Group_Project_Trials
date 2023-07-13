@@ -21,7 +21,7 @@ from unittest.mock import patch
 
 
 class TestHBNBCommand_prompt(unittest.TestCase):
-    """Testing the command prompt of the HBNB command interpreter."""
+    """Testing the command prompt for the HBNB command interpreter."""
 
     def test_prompt_str(self):
         self.assertEqual("(hbnb) ", HBNBCommand.prompt)
