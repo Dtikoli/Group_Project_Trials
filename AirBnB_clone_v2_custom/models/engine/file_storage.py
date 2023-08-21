@@ -49,10 +49,10 @@ class FileStorage:
                     'Review': Review
                   }
         try:
-            temp = {}
+            tmp = {}
             with open(FileStorage.__file_path, 'r') as f:
-                temp = json.load(f)
-                for key, val in temp.items():
+                tmp = json.load(f)
+                for key, val in tmp.items():
                     self.all()[key] = classes[val['__class__']](**val)
         except FileNotFoundError:
             pass
@@ -60,7 +60,7 @@ class FileStorage:
     def delete(self, obj=None):
         """Deletes and object from __objects"""
         if (obj):
-            key = "{}.{}".format(type(obj).__name__, obj.id)
+            key = f"{type(obj).__name__}.{obj.id}"
             del self.__objects[key]
 
     def close(self):

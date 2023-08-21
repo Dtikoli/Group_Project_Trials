@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Database storage"""
+"""Module for Database storage"""
 from models.base_model import BaseModel, Base
 from models.amenity import Amenity
 from models.city import City
@@ -13,7 +13,7 @@ from os import getenv
 
 
 class DBStorage:
-    """Database storage class
+    """Defines Database storage class
     Attributes: __engine, __session
     """
     __engine = None
@@ -31,7 +31,7 @@ class DBStorage:
             Base.metadata.drop_all(bind=self.__engine)
 
     def all(self, cls=None):
-        """Method that queries on the currect database session"""
+        """Queries the current database session"""
         objects_dictionary = {}
 
         if cls is None:
@@ -47,29 +47,28 @@ class DBStorage:
             objects_list = self.__session.query(cls).all()
 
         for obj in objects_list:
-            key = "{}.{}".format(type(obj).__name__, obj.id)
+            key = f"{type(obj).__name__}.{obj.id}"
             objects_dictionary[key] = obj
 
         return objects_dictionary
 
     def new(self, obj):
-        """Method that adds the object to the current database session"""
+        """Adds the object to the current database session"""
         self.__session.add(obj)
 
     def save(self):
-        """Method that commits all changes of the current database session"""
+        """Commits all changes of the current database session"""
 
         self.__session.commit()
 
     def delete(self, obj=None):
-        """Method that deletes from the current database
-        session obj if not None"""
+        """Deletes from the current database session obj if not None"""
 
         if obj:
             self.__session.delete(obj)
 
     def reload(self):
-        """Method that creates all tables in the database"""
+        """Creates all tables in the database"""
 
         Base.metadata.create_all(self.__engine)
         my_session = sessionmaker(bind=self.__engine,
@@ -78,5 +77,5 @@ class DBStorage:
         self.__session = Session()
 
     def close(self):
-        """Method that closes the session"""
+        """Closes the session"""
         self.__session.close()
